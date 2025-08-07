@@ -1,25 +1,14 @@
 {
   "name": "Codespace Dev Container",
   "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "features": {
-    "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.10"
-    }
-  },
-  "postCreateCommand": "python -m venv .venv && . .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt || true",
+  "postCreateCommand": "python3 -m venv .venv && . .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt || true",
   "customizations": {
     "vscode": {
-      "settings": {
-        "python.defaultInterpreterPath": ".venv/bin/python"
-      },
       "extensions": [
-        "ms-python.python",
-        "dbaeumer.vscode-eslint",
-        "ms-azuretools.vscode-docker",
-        "esbenp.prettier-vscode"
+        "ms-python.python"
       ]
     }
   },
-  "forwardPorts": [3000, 8000],
+  "forwardPorts": [],
   "remoteUser": "vscode"
 }
