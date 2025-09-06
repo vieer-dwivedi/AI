@@ -1,0 +1,52 @@
+name: SageMaker MLOps
+
+on:
+  push:
+    branches:
+      - learn
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::480848351389:role/Github
+          aws-region: us-west-2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install -U pip
+          pip install -r requirements.txt
+          pip install sagemaker boto3
+
+      - name: Update pipeline
+        run: |
+          python pipeline/pipeline.py --update
+
+      - name: Start pipeline execution
+        run: |
+          EXECUTION_ARN=$(aws sagemaker start-pipeline-execution \
+            --pipeline-name my-ml-pipeline \
+            --query PipelineExecutionArn --output text)
+          echo "ExecutionArn=$EXECUTION_ARN"
+          aws sagemaker wait pipeline-execution-completed \
+            --pipeline-execution-arn $EXECUTION_ARN
+
+      - name: Deploy latest approved model
+        run: |
+          python deployment/deploy.py
