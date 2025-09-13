@@ -1,0 +1,8 @@
+stages:
+  preprocess:
+    cmd: python scripts/preprocess.py
+    deps:
+    - data/raw/geeta_dataset.csv
+    - scripts/preprocess.py
+    outs:
+    - processed/
