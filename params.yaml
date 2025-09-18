@@ -1,0 +1,10 @@
+train:
+  test_size: 0.2
+  val_size: 0.1
+  random_state: 42
+
+model:
+  n_trials: 20
+
+mlflow:
+  tracking_uri: "http://54.172.80.91:8080"
