@@ -8,8 +8,8 @@ import joblib
 MLFLOW_URI = "http://54.172.80.91:8080"
 EXPERIMENT_NAME = "bank_marketing_remote"
 REGISTERED_MODEL_NAME = "BankMarketing_RF"
-LOCAL_MODEL_PATH = "models/best_model.pkl"  # your local model path
-ARTIFACT_PATH = "best_model"  # path inside MLflow run
+LOCAL_MODEL_PATH = "models/best_model.pkl"
+ARTIFACT_PATH = "best_model"
 
 mlflow.set_tracking_uri(MLFLOW_URI)
 mlflow.set_experiment(EXPERIMENT_NAME)
