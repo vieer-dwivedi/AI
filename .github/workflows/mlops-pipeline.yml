@@ -2,9 +2,7 @@ name: MLOps Pipeline with OIDC
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ final ]
   workflow_dispatch:
 
 permissions:
