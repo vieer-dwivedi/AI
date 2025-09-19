@@ -3,8 +3,6 @@ stages:
     cmd: dvc pull
   convert_notebooks:
     cmd: jupyter nbconvert --to script src/*.ipynb --output-dir src/
-    outs:
-      - src/
 
   preprocess:
     cmd: python src/preprocess.py
@@ -12,8 +10,6 @@ stages:
       - src/preprocess.py
       - params.yaml
       - data/raw/bank-full.csv
-    # No outs here, because CSVs are already tracked by .dvc files
-
   train:
     cmd: python src/train.py
     deps:
@@ -22,8 +18,6 @@ stages:
       - data/processed/train.csv
       - data/processed/val.csv
       - data/processed/test.csv
-    metrics:
-      - metrics.json
     params:
       - model
       - mlflow

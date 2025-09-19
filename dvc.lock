@@ -1,0 +1,58 @@
+schema: '2.0'
+stages:
+  data_download:
+    cmd: dvc pull
+  convert_notebooks:
+    cmd: jupyter nbconvert --to script src/*.ipynb --output-dir src/
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - path: data/raw/bank-full.csv
+      hash: md5
+      md5: e6b0ca77f3f200ec5428e04dd104da53
+      size: 4610348
+    - path: params.yaml
+      hash: md5
+      md5: e4b0dc812b77c430fea4b9fb77e98b81
+      size: 268
+    - path: src/preprocess.py
+      hash: md5
+      md5: e6eb624191e4a7f7f26b095a75a3a76f
+      size: 1941
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: ee050d2ffc3d07932d6e369c689ff90e
+      size: 277208
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 8b2e63b82fc82e6269ae8b4570caf3aa
+      size: 1292893
+    - path: data/processed/val.csv
+      hash: md5
+      md5: cd5f9d0764112f633d13b66b3691cdbd
+      size: 277148
+    - path: params.yaml
+      hash: md5
+      md5: e4b0dc812b77c430fea4b9fb77e98b81
+      size: 268
+    - path: src/train.py
+      hash: md5
+      md5: 1b92caf40d8b17511451acb677ba01f3
+      size: 1847
+    params:
+      params.yaml:
+        mlflow:
+          uri: http://100.26.108.135:8080
+          experiment: bank_marketing_remote
+        model:
+          n_estimators_list:
+          - 50
+          - 100
+          - 200
+          max_depth_list:
+          - 5
+          - 10
+          - 
