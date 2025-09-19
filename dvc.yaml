@@ -1,8 +1,29 @@
-python ./src/experiments.py \
-  --train data/processed/train.csv \
-  --val data/processed/val.csv \
-  --test data/processed/test.csv \
-  --mlflow_uri http://100.26.108.135:8080 \
-  --experiment bank_marketing_remote
+stages:
+  data_download:
+    cmd: dvc pull
+  convert_notebooks:
+    cmd: jupyter nbconvert --to script src/*.ipynb --output-dir src/
+    outs:
+      - src/
 
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+      - src/preprocess.py
+      - params.yaml
+      - data/raw/bank-full.csv
+    # No outs here, because CSVs are already tracked by .dvc files
 
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - params.yaml
+      - data/processed/train.csv
+      - data/processed/val.csv
+      - data/processed/test.csv
+    metrics:
+      - metrics.json
+    params:
+      - model
+      - mlflow
