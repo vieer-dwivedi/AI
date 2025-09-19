@@ -4,7 +4,7 @@ data:
   test: "data/processed/test.csv"
 
 mlflow:
-  uri: "http://100.26.108.135:8080"
+  uri: "http://3.90.104.11:8080"
   experiment: "bank_marketing_remote"
 
 model:
