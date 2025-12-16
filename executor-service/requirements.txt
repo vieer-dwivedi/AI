@@ -1,0 +1,2 @@
+azure-storage-queue==12.9.0
+requests==2.31.0

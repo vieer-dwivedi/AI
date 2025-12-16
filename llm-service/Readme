@@ -4,10 +4,10 @@ docker build -t llm-service .
 
 ```bash
 docker run -d \
-  --network ai-net \
   --name llm-service \
+  --network ai-net \
   -v /home/cloud_user/ai/llm-service/app:/app \
   -p 8000:8000 \
-  -e GEMINI_API_KEY=\
+  -e GEMINI_API_KEY=AIzaSyDdmKa_bfr76XqVgyp9n9lyRuZjIppi2fg \
   llm-service
 ```

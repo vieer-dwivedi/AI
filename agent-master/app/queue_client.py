@@ -30,7 +30,6 @@ def push_job(job: dict):
     """
     try:
         payload = json.dumps(job)
-
         queue_client.send_message(payload)
 
         logger.info(
