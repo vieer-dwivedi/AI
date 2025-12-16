@@ -4,7 +4,7 @@ from azure.storage.queue import QueueClient
 
 
 def main():
-    connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING", "DefaultEndpointsProtocol=https;AccountName=vieer;AccountKey=cQue4sULZpolxNpkQmddjQgfgfsvwTHxE63zVR2YV7grEy6hpx8mxVyglOI+ebTKrLDRLBcA2pAi+AStI3LQyA==;EndpointSuffix=core.windows.net")
+    connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING", "")
     queue_name = os.getenv("AZURE_QUEUE_NAME", "test")
 
     if not connection_string:
