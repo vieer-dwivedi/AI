@@ -1,0 +1,14 @@
+# Web
+fastapi==0.115.5
+uvicorn==0.30.6
+pydantic==2.9.2
+
+# Metrics
+prometheus-client==0.20.0
+
+# HTTP client
+requests==2.32.3
+
+# Utilities
+typing-extensions==4.12.2
+azure-storage-queue==12.9.0
