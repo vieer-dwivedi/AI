@@ -1,0 +1,383 @@
+
+
+======================================================================
+                 RESUME SCREENING REPORT
+======================================================================
+Date: 2026-11-14 14:47:55
+Resume: resume.pdf
+Experience: 3 years
+Match Score: 0/100
+Decision: Rejected
+
+----------------------------------------------------------------------
+EXTRACTED SKILLS
+----------------------------------------------------------------------
+- Jenkins
+- GitHub Actions
+- GitLab CI/CD
+- Azure DevOps
+- CircleCI
+- AWS CodePipeline
+- AWS CodeBuild
+- Bitbucket Pipelines
+- TeamCity
+- Bamboo
+- Travis CI
+- Argo Workflows
+- Tekton
+- Drone CI
+- Harness
+- Spinnaker
+- Git
+- GitFlow
+- GitHub
+- GitLab
+- Bitbucket
+- Azure Repos
+- Gerrit
+- SVN
+- Argo CD
+- EC2
+- S3
+- IAM
+- VPC
+- Route 53
+- CloudFront
+- AWS Lambda
+- API Gateway
+- RDS
+- Aurora
+- DynamoDB
+- ElastiCache
+- EBS
+- EFS
+- FSx
+- AWS Backup
+- ECR
+- ECS
+- EKS
+- Fargate
+- AWS Batch
+- Auto Scaling
+- ALB
+- NLB
+- ELB
+- CloudWatch
+- CloudTrail
+- AWS Config
+- Systems Manager (SSM)
+- Secrets Manager
+- KMS
+- ACM
+- AWS WAF
+- AWS Shield
+- GuardDuty
+- Inspector
+- Security Hub
+- Macie
+- Detective
+- AWS Organizations
+- Control Tower
+- CloudFormation
+- AWS CDK
+- EventBridge
+- SNS
+- SQS
+- Step Functions
+- Amazon MQ
+- Kinesis
+- Glue
+- Athena
+- Redshift
+- OpenSearch
+- EMR
+- SageMaker
+- Amazon Bedrock
+- Amazon Q
+- AWS App Runner
+- AppSync
+- Cognito
+- X-Ray
+- Azure
+- Virtual Machines
+- Blob Storage
+- Azure Files
+- VNet
+- VPN Gateway
+- ExpressRoute
+- Azure Firewall
+- DDoS Protection
+- Application Gateway
+- Front Door
+- Traffic Manager
+- API Management
+- Bastion
+- AKS
+- ACR
+- Azure Container Apps
+- Azure Functions
+- App Service
+- Azure SQL
+- Cosmos DB
+- Key Vault
+- Microsoft Entra ID
+- Azure RBAC
+- Managed Identities
+- Azure Policy
+- Defender for Cloud
+- Azure Monitor
+- Application Insights
+- Log Analytics
+- Azure Backup
+- Site Recovery
+- ARM Templates
+- Bicep
+- Azure AI Foundry
+- Azure OpenAI
+- Azure AI Search
+- Docker
+- Docker Compose
+- Docker Swarm
+- Kubernetes (K8s)
+- Google GKE
+- OpenShift
+- Rancher
+- K3s
+- Kops
+- Minikube
+- Kind
+- containerd
+- Podman
+- Helm
+- Kustomize
+- Istio
+- Linkerd
+- Consul
+- Flux CD
+- Karpenter
+- Terraform
+- Terragrunt
+- Ansible
+- Python
+- Bash
+- Linux
+- Ubuntu
+- RHEL
+- SonarQube
+- Snyk
+- Trivy
+- Checkov
+- Prometheus
+- Grafana
+- Grafana Loki
+- ELK Stack
+- EFK Stack
+- Fluent Bit
+- Fluentd
+- Vector
+- Datadog
+- Dynatrace
+- New Relic
+- Splunk
+- AppDynamics
+- Nagios
+- Zabbix
+- Sensu
+- Jaeger
+- Zipkin
+- OpenTelemetry
+- PagerDuty
+- Opsgenie
+
+----------------------------------------------------------------------
+MATCH REASON
+----------------------------------------------------------------------
+The candidate is a DevOps and MLOps Engineer with extensive experience in AWS, Azure, CI/CD, and Kubernetes, but has no experience as a Flutter developer with Dart and Android development as required by the job description.
+
+REJECTION MESSAGE
+----------------------------------------------------------------------
+[{'type': 'text', 'text': 'Subject: Application Update - Flutter / Android Developer\n\nDear [Candidate Name],\n\nThank you for taking the time to apply for the Flutter / Android Developer position at [Company Name]. We truly appreciate the interest you have shown in joining our team. \n\nWhile we were very impressed by your extensive background and strong expertise in DevOps, MLOps, AWS, Azure, CI/CD, and Kubernetes, this particular role requires hands-on experience in Flutter, Dart, and native Android development. Because your professional background is heavily focused on cloud infrastructure and operations rather than mobile application development, we have decided not to move forward with your candidacy at this time.\n\nGiven your robust technical skill set, we would love to keep your resume on file in case a DevOps or MLOps engineering opportunity opens up in the future that aligns more closely with your experience. \n\nThank you once again for your time and consideration. We wish you the very best in your job search and in your future professional endeavors.\n\nSincerely,\n\n[Your Name/Title]  \n[Company Name]', 'extras': {'signature': 'EmAKXgFpFH0TYS2gdeWW6OLm7Y7n1NoBJ3FGgeuHB7i1/ER1shei7pxwIhveCB+zniVcU0JgiFqEAPrcIMXli++hrnRYnalF14Z6/9PLQ4dsMnbcJNbJs/npo3yN80pEuj0='}}]
+======================================================================
+
+
+======================================================================
+                 RESUME SCREENING REPORT
+======================================================================
+Date: 2026-11-14 14:49:23
+Resume: resume.pdf
+Experience: 5 years
+Match Score: 50/100
+Decision: Feedback
+
+----------------------------------------------------------------------
+EXTRACTED SKILLS
+----------------------------------------------------------------------
+- Jenkins
+- GitHub Actions
+- GitLab CI/CD
+- Azure DevOps
+- CircleCI
+- AWS CodePipeline
+- AWS CodeBuild
+- Bitbucket Pipelines
+- TeamCity
+- Bamboo
+- Travis CI
+- Argo Workflows
+- Tekton
+- Drone CI
+- Harness
+- Spinnaker
+- Git
+- GitFlow
+- GitHub
+- GitLab
+- Bitbucket
+- Azure Repos
+- Gerrit
+- SVN
+- Argo CD
+- EC2
+- S3
+- IAM
+- VPC
+- Route 53
+- CloudFront
+- AWS Lambda
+- API Gateway
+- RDS
+- Aurora
+- DynamoDB
+- ElastiCache
+- EBS
+- EFS
+- FSx
+- AWS Backup
+- ECR
+- ECS
+- EKS
+- Fargate
+- AWS Batch
+- Auto Scaling
+- ALB
+- NLB
+- ELB
+- CloudWatch
+- CloudTrail
+- AWS Config
+- Systems Manager
+- Secrets Manager
+- KMS
+- ACM
+- AWS WAF
+- AWS Shield
+- GuardDuty
+- Inspector
+- Security Hub
+- Macie
+- Detective
+- AWS Organizations
+- Control Tower
+- CloudFormation
+- AWS CDK
+- EventBridge
+- SNS
+- SQS
+- Step Functions
+- Amazon MQ
+- Kinesis
+- Glue
+- Athena
+- Redshift
+- OpenSearch
+- EMR
+- SageMaker
+- Amazon Bedrock
+- Amazon Q
+- Azure
+- Virtual Machines
+- Blob Storage
+- Azure Files
+- VNet
+- VPN Gateway
+- ExpressRoute
+- Azure Firewall
+- Load Balancer
+- Application Gateway
+- Front Door
+- Traffic Manager
+- AKS
+- ACR
+- Azure Container Apps
+- Azure Functions
+- App Service
+- Azure SQL
+- Cosmos DB
+- Key Vault
+- Microsoft Entra ID
+- Azure RBAC
+- Azure Policy
+- Defender for Cloud
+- Azure Monitor
+- Application Insights
+- Log Analytics
+- Azure Backup
+- Site Recovery
+- ARM Templates
+- Bicep
+- Azure AI Foundry
+- Azure OpenAI
+- Azure AI Search
+- Docker
+- Docker Compose
+- Docker Swarm
+- Kubernetes
+- OpenShift
+- Rancher
+- Helm
+- Kustomize
+- Istio
+- Linkerd
+- Consul
+- Flux CD
+- Karpenter
+- Terraform
+- Terragrunt
+- Ansible
+- Python
+- Bash
+- Linux
+- Ubuntu
+- RHEL
+- SonarQube
+- Snyk
+- Trivy
+- Checkov
+- Prometheus
+- Grafana
+- Grafana Loki
+- ELK Stack
+- EFK Stack
+- Fluent Bit
+- Fluentd
+- Vector
+- Datadog
+- Dynatrace
+- New Relic
+- Splunk
+- AppDynamics
+- Nagios
+- Zabbix
+- OpenTelemetry
+- Jaeger
+- Zipkin
+
+----------------------------------------------------------------------
+MATCH REASON
+----------------------------------------------------------------------
+The candidate has strong DevOps and Kubernetes experience matching part of the job description, but completely lacks Flutter, Dart, and Android development experience requested in the job description.
+
+FEEDBACK
+----------------------------------------------------------------------
+[{'type': 'text', 'text': 'Based on your skills list and the match feedback, here is actionable resume improvement feedback to help bridge the gap between your strong DevOps/Cloud background and the specific requirements of the target role (which asks for **Flutter, Dart, and Android development**).\n\n---\n\n### 1. Highlight Mobile CI/CD and Build Pipelines (The "Bridge")\nSince you lack direct mobile development experience (Flutter, Dart, Android), you need to emphasize that while you may not write the mobile code, **you build and manage the pipelines that test, build, and deploy mobile applications.**\n\n*   **Action:** Add bullet points in your experience section specifically highlighting mobile CI/CD pipelines.\n*   **Keywords to integrate:** Mobile CI/CD, Fastlane, App Store Connect, Google Play Console, Android SDK, Gradle builds, Code Signing, provisioning profiles.\n*   **Example Bullet:** \n    > *"Architected and maintained automated CI/CD pipelines using GitHub Actions and Jenkins for cross-platform mobile applications, integrating automated testing, code signing, and deployment to Google Play and Apple App Store."*\n\n### 2. Tailor Your Skills Section for Relevance\nYour current skills list is massive and unfocused (over 100 tools). Listing everything dilutes your core profile. For this specific job description, you should group your skills to highlight infrastructure and deployment pipelines that support mobile/software developers.\n\n*   **Action:** Create a targeted "Core Competencies" or "Technical Summary" at the top of your resume.\n*   **Categorization Strategy:**\n    *   **CI/CD & Automation:**'}, {'type': 'text', 'text': ' Jenkins, GitHub Actions, GitLab CI/CD, Fastlane (if applicable).\n    *   **Cloud & Containers:** AWS, Azure, Kubernetes, Docker.\n    *   **DevSecOps & Monitoring:** SonarQube, Snyk, Prometheus, Datadog.\n    *   **Scripting:** Python, Bash.\n\n### 3. Emphasize Collaboration with Developers\nRoles requesting both mobile development and DevOps usually need someone who can act as a bridge between the development team and infrastructure. \n\n*   **Action:** Rewrite achievement bullets to show how you support developers (specifically application developers working on front-end/mobile platforms).\n*   **Example Bullet:**\n    > *"Collaborated closely with software and mobile engineering teams to containerize applications, optimize build times by 40%, and streamline release management cycles."*\n\n### 4. Address the Flutter/Dart Gap Honestly (If applying anyway)\nIf you decide to apply despite the missing Flutter/Dart experience, you must demonstrate a rapid ability to learn application frameworks or showcase adjacent software engineering skills (e.g., Python scripting) to prove you aren\'t strictly a "pure infrastructure" engineer.\n\n*   **Action:** If you have *any* familiarity with reading application code, debugging build failures (like Gradle or CocoaPods errors), or writing basic scripts in languages other than Python/Bash, make sure that is visible. \n*   **Action:** Add a brief "Continuous Learning" or certification section if you are currently studying mobile technologies or modern software development frameworks.', 'extras': {'signature': 'EmAKXgFpFH0TRcutgbJhCpLeWt8piC+XkDPe9Rktt7NBfdRXHy1yVm5NyKsEBuGvL5Ugx4TNpF4FS0bdqASpXk18oMWdAWz3XLLSLuj4dIbJc1Ods3RC1uVufQLN+6VVKV4='}}]
+======================================================================
