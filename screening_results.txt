@@ -381,3 +381,233 @@ FEEDBACK
 ----------------------------------------------------------------------
 [{'type': 'text', 'text': 'Based on your skills list and the match feedback, here is actionable resume improvement feedback to help bridge the gap between your strong DevOps/Cloud background and the specific requirements of the target role (which asks for **Flutter, Dart, and Android development**).\n\n---\n\n### 1. Highlight Mobile CI/CD and Build Pipelines (The "Bridge")\nSince you lack direct mobile development experience (Flutter, Dart, Android), you need to emphasize that while you may not write the mobile code, **you build and manage the pipelines that test, build, and deploy mobile applications.**\n\n*   **Action:** Add bullet points in your experience section specifically highlighting mobile CI/CD pipelines.\n*   **Keywords to integrate:** Mobile CI/CD, Fastlane, App Store Connect, Google Play Console, Android SDK, Gradle builds, Code Signing, provisioning profiles.\n*   **Example Bullet:** \n    > *"Architected and maintained automated CI/CD pipelines using GitHub Actions and Jenkins for cross-platform mobile applications, integrating automated testing, code signing, and deployment to Google Play and Apple App Store."*\n\n### 2. Tailor Your Skills Section for Relevance\nYour current skills list is massive and unfocused (over 100 tools). Listing everything dilutes your core profile. For this specific job description, you should group your skills to highlight infrastructure and deployment pipelines that support mobile/software developers.\n\n*   **Action:** Create a targeted "Core Competencies" or "Technical Summary" at the top of your resume.\n*   **Categorization Strategy:**\n    *   **CI/CD & Automation:**'}, {'type': 'text', 'text': ' Jenkins, GitHub Actions, GitLab CI/CD, Fastlane (if applicable).\n    *   **Cloud & Containers:** AWS, Azure, Kubernetes, Docker.\n    *   **DevSecOps & Monitoring:** SonarQube, Snyk, Prometheus, Datadog.\n    *   **Scripting:** Python, Bash.\n\n### 3. Emphasize Collaboration with Developers\nRoles requesting both mobile development and DevOps usually need someone who can act as a bridge between the development team and infrastructure. \n\n*   **Action:** Rewrite achievement bullets to show how you support developers (specifically application developers working on front-end/mobile platforms).\n*   **Example Bullet:**\n    > *"Collaborated closely with software and mobile engineering teams to containerize applications, optimize build times by 40%, and streamline release management cycles."*\n\n### 4. Address the Flutter/Dart Gap Honestly (If applying anyway)\nIf you decide to apply despite the missing Flutter/Dart experience, you must demonstrate a rapid ability to learn application frameworks or showcase adjacent software engineering skills (e.g., Python scripting) to prove you aren\'t strictly a "pure infrastructure" engineer.\n\n*   **Action:** If you have *any* familiarity with reading application code, debugging build failures (like Gradle or CocoaPods errors), or writing basic scripts in languages other than Python/Bash, make sure that is visible. \n*   **Action:** Add a brief "Continuous Learning" or certification section if you are currently studying mobile technologies or modern software development frameworks.', 'extras': {'signature': 'EmAKXgFpFH0TRcutgbJhCpLeWt8piC+XkDPe9Rktt7NBfdRXHy1yVm5NyKsEBuGvL5Ugx4TNpF4FS0bdqASpXk18oMWdAWz3XLLSLuj4dIbJc1Ods3RC1uVufQLN+6VVKV4='}}]
 ======================================================================
+
+
+======================================================================
+                 RESUME SCREENING REPORT
+======================================================================
+Date: 2026-11-14 15:03:57
+Resume: resume.pdf
+Experience: 5 years
+Match Score: 50/100
+Decision: Feedback
+
+----------------------------------------------------------------------
+EXTRACTED SKILLS
+----------------------------------------------------------------------
+- Jenkins
+- GitHub Actions
+- GitLab CI/CD
+- Azure DevOps
+- CircleCI
+- AWS CodePipeline
+- AWS CodeBuild
+- Bitbucket Pipelines
+- TeamCity
+- Bamboo
+- Travis CI
+- Argo Workflows
+- Tekton
+- Drone CI
+- Harness
+- Spinnaker
+- Git
+- GitFlow
+- GitHub
+- GitLab
+- Bitbucket
+- Azure Repos
+- Gerrit
+- SVN
+- Argo CD
+- EC2
+- S3
+- IAM
+- VPC
+- Route 53
+- CloudFront
+- AWS Lambda
+- API Gateway
+- RDS
+- Aurora
+- DynamoDB
+- ElastiCache
+- EBS
+- EFS
+- FSx
+- AWS Backup
+- ECR
+- ECS
+- EKS
+- Fargate
+- AWS Batch
+- Auto Scaling
+- ALB
+- NLB
+- ELB
+- CloudWatch
+- CloudTrail
+- AWS Config
+- Systems Manager (SSM)
+- Secrets Manager
+- KMS
+- ACM
+- AWS WAF
+- AWS Shield
+- GuardDuty
+- Inspector
+- Security Hub
+- Macie
+- Detective
+- AWS Organizations
+- Control Tower
+- CloudFormation
+- AWS CDK
+- CodeCommit
+- CodeDeploy
+- EventBridge
+- SNS
+- SQS
+- Step Functions
+- Amazon MQ
+- Kinesis
+- Glue
+- Athena
+- Redshift
+- OpenSearch
+- EMR
+- SageMaker
+- Amazon Bedrock
+- AWS App Runner
+- AppSync
+- Cognito
+- X-Ray
+- Trusted Advisor
+- Cost Explorer
+- AWS Budgets
+- Compute Optimizer
+- Well-Architected Tool
+- Azure
+- Virtual Machines (VMs)
+- Blob Storage
+- Azure Files
+- Storage Accounts
+- Virtual Network (VNet)
+- NAT Gateway
+- VPN Gateway
+- ExpressRoute
+- Azure Firewall
+- WAF
+- DDoS Protection
+- Load Balancer
+- Application Gateway
+- Front Door
+- Traffic Manager
+- Azure DNS
+- CDN
+- API Management
+- Bastion
+- Network Watcher
+- AKS
+- ACR
+- Azure Container Apps
+- Azure Functions
+- App Service
+- Azure SQL
+- Cosmos DB
+- Key Vault
+- Microsoft Entra ID
+- Azure RBAC
+- Managed Identities
+- Azure Policy
+- Defender for Cloud
+- Azure Monitor
+- Application Insights
+- Log Analytics
+- Azure Backup
+- Site Recovery
+- ARM Templates
+- Bicep
+- Azure Pipelines
+- Azure Artifacts
+- Azure AI Foundry
+- Azure OpenAI
+- Azure AI Search
+- Docker
+- Docker Compose
+- Docker Swarm
+- Kubernetes (K8s)
+- Google GKE
+- OpenShift
+- Rancher
+- K3s
+- Kops
+- Minikube
+- Kind
+- containerd
+- Podman
+- Helm
+- Helm Charts
+- Kustomize
+- Istio
+- Linkerd
+- Consul
+- Flux CD
+- Karpenter
+- HPA
+- VPA
+- StatefulSets
+- Deployments
+- DaemonSets
+- ConfigMaps
+- Secrets
+- NGINX Ingress
+- Terraform
+- Terragrunt
+- Ansible
+- Python
+- Bash
+- Linux
+- Ubuntu
+- RHEL
+- Shell Scripting
+- SonarQube
+- Snyk
+- Trivy
+- Checkov
+- Prometheus
+- Grafana
+- Grafana Loki
+- Promtail
+- Alloy
+- ELK Stack
+- EFK Stack
+- Fluent Bit
+- Fluentd
+- Vector
+- Datadog
+- Dynatrace
+- New Relic
+- Splunk
+- AppDynamics
+- Nagios
+- Zabbix
+- Sensu
+- VictoriaMetrics
+- Thanos
+- Jaeger
+- Zipkin
+- OpenTelemetry
+- PagerDuty
+- Opsgenie
+- Alertmanager
+
+----------------------------------------------------------------------
+MATCH REASON
+----------------------------------------------------------------------
+The candidate has strong DevOps and Kubernetes experience, matching part of the job description, but completely lacks Flutter, Dart, and Android development experience required by the role.
+
+FEEDBACK
+----------------------------------------------------------------------
+[{'type': 'text', 'text': 'Based on your Match Score (50) and the specific feedback provided, your resume is heavily skewed toward **DevOps, Cloud, and Kubernetes**, but it is missing the **Mobile Development (Flutter, Dart, Android)** stack required for the target role. \n\nHere is actionable feedback to help you bridge this gap, depending on your goals:\n\n---\n\n### Strategy 1: If you are pivoting into Mobile DevOps / Platform Engineering\n*If the job actually requires a DevOps engineer to support a mobile development team, you need to highlight how your infrastructure skills apply to mobile apps (e.g., CI/CD for mobile, fastlane, app store deployment).*\n\n1. **Add Mobile CI/CD & Tooling:** \n   * If you have experience building pipelines for mobile apps, explicitly mention tools like **fastlane, Bitrise, Xcode Cloud, or App Center**, alongside your existing CI/CD tools (GitHub Actions, GitLab CI).\n2. **Highlight Cross-Platform Infrastructure Support:**\n   * If you\'ve managed backend APIs, authentication (Cognito/Entra ID), or databases that power mobile applications, rephrase those bullet points to explicitly mention **"supporting mobile and web clients."**\n3. **Address the Missing Skills Honestly:**\n   * If you understand Dart/Flutter conceptually or have dabbled in building basic apps, add a "Familiarity" or "Learning" section, but only if you can speak to it in an interview.\n\n---\n\n### Strategy 2: If this job is a mismatch (Full-Stack/Mobile Dev role)\n*If the job description is primarily for a Flutter/Android Developer who occasionally touches CI/CD, a pure DevOps resume will struggle to pass Applicant Tracking Systems (ATS), even with a 50% match.*\n\n1. **Re-evaluate Job Targeting:**\n   * Your skills list is exceptionally strong in **Cloud Architecture (AWS/Azure), Kubernetes, Terraform, CI/CD, and Observability**. You look like a Senior DevOps/Platform Engineer. Applying for roles that require heavy Flutter/Android development may be a mismatch for your core profile. Look for titles like **DevOps Engineer, SRE, Platform Engineer, or Cloud Architect**.\n2. **Tailor for Hybrid Roles (if applicable):**\n   * If you *do* have hidden software engineering experience involving Flutter or Android, you must bring it to the very top of your resume in a dedicated "Programming Languages & Frameworks" section and write specific bullet points detailing mobile apps you\'ve built or deployed.\n\n---\n\n### Resume Bullet Point Makeover (Example)\n\n**Before (Pure DevOps):**\n> *"Built CI/CD pipelines using GitHub Actions and Argo CD for microservices deployed on EKS."*\n\n**After (Positioned for a Mobile-Adjacent or Hybrid Role):**\n> *"Architected end-to-end CI/CD pipelines using GitHub Actions and Argo CD for both cloud-native microservices and mobile application backends, reducing release cycles by 40%."*', 'extras': {'signature': 'EmAKXgFpFH0TncKhqmbx/akV6yciRdsk42ZzjwhuKZrmo9K23nyAbHGhURhIERapImVRZHYTRO0y5UUjbRiAlRosThkHV8r799JLPVhP1j13KkN8coXa1m341jf4/F40yDA='}}]
+======================================================================
