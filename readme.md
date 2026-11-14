@@ -1,6 +1,6 @@
 # 🤖 Job Application Screener Agent
 
-An AI-powered resume screening system built with **LangGraph** and **LangChain** that automatically evaluates candidates against job descriptions and routes them through intelligent decision pipelines.
+An AI-powered resume screening system built with **LangGraph** and **LangChain** that automatically validates inputs, evaluates candidates against job descriptions, and routes them through intelligent decision pipelines.
 
 ---
 
@@ -8,11 +8,12 @@ An AI-powered resume screening system built with **LangGraph** and **LangChain**
 
 This agent takes a **resume file** (PDF, DOCX, or TXT) and a **job description** as input, then:
 
-1. Extracts text from the resume file
-2. Uses an LLM to identify skills and years of experience
-3. Scores the candidate against the job description (0–100)
-4. Routes to one of three outcomes based on the score
-5. Saves a structured screening report to a file
+1. **Validates** the inputs before any processing begins
+2. Extracts text from the resume file
+3. Uses an LLM to identify skills and years of experience
+4. Scores the candidate against the job description (0–100)
+5. Routes to one of three outcomes based on the score
+6. Saves a structured screening report to a file
 
 ---
 
@@ -22,6 +23,16 @@ This agent takes a **resume file** (PDF, DOCX, or TXT) and a **job description**
 ┌─────────────────────────────────────────────────────────────┐
 │                        INPUT                                │
 │         resume_file + job_description                       │
+└─────────────────────┬───────────────────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────────────────┐
+│                   validate_input           ← NEW            │
+│   Checks before anything runs:                              │
+│     • resume_file path exists                               │
+│     • file format is PDF / DOCX / TXT                       │
+│     • job_description is not empty                          │
+│   Raises ValueError with all errors if invalid              │
 └─────────────────────┬───────────────────────────────────────┘
                       │
                       ▼
@@ -87,11 +98,13 @@ Job Application Screener Agent/
 ├── resume.pdf               # Sample resume for testing
 ├── screening_results.txt    # Output — appended after each run
 ├── .env                     # API keys (MODEL, GOOGLE_API_KEY)
+├── .gitignore
 │
 └── core/
-    ├── state.py             # AgentState (TypedDict)
+    ├── state.py             # ScreenerState (TypedDict)
     ├── graph.py             # Node registration + edge wiring
     ├── node.py              # All node functions + save logic
+    ├── middleware.py        # validate_input node (NEW)
     ├── llm.py               # LLM initialization
     └── __init__.py
 ```
@@ -106,7 +119,7 @@ Job Application Screener Agent/
 | `StateGraph` | Core graph definition in `graph.py` |
 | `TypedDict` state | `ScreenerState` in `state.py` |
 | `NotRequired` fields | Optional state fields that only populate on certain branches |
-| `set_entry_point` | Graph starts at `input` node |
+| `set_entry_point` | Graph now starts at `validate_input` node |
 | `add_edge` | Linear edges between sequential nodes |
 | `add_conditional_edges` | 3-way routing from `match_score` node |
 | `END` | Terminal node after `save_result` |
@@ -115,11 +128,50 @@ Job Application Screener Agent/
 ### Node Design
 | Concept | Where Used |
 |---|---|
+| **Guard / middleware node** | `validate_input` in `middleware.py` — runs before anything else |
 | LLM inside a node | `extract_info`, `match_score`, all output nodes |
 | File I/O in a node | `input_node` (read resume), `save_result` (write report) |
 | JSON parsing helper | `parse_json()` strips markdown fences before parsing |
 | State passing | Each node returns a dict that merges into global state |
 | Multi-format file support | PDF via PyMuPDF, DOCX via python-docx, TXT native |
+| Raising errors from a node | `validate_input` raises `ValueError` with collected error messages |
+
+---
+
+## 🛡️ Validation Logic (`middleware.py`)
+
+The `validate_input` node runs **before any LLM calls or file reads**, catching bad input early:
+
+```python
+def validate_input(state):
+    errors = []
+
+    resume_file = state.get("resume_file")
+    job_description = state.get("job_description", "").strip()
+
+    if not resume_file:
+        errors.append("Resume file path is missing.")
+    elif not os.path.exists(resume_file):
+        errors.append(f"Resume file not found: {resume_file}")
+    else:
+        ext = os.path.splitext(resume_file)[1].lower()
+        if ext not in [".pdf", ".docx", ".txt"]:
+            errors.append("Unsupported format. Use PDF, DOCX, or TXT.")
+
+    if not job_description:
+        errors.append("Job description cannot be empty.")
+
+    if errors:
+        raise ValueError("\n".join(errors))
+
+    return state
+```
+
+**What this protects against:**
+- Missing resume path
+- File not found on disk
+- Unsupported file format (e.g. `.png`, `.csv`)
+- Empty job description
 
 ---
 
@@ -143,11 +195,11 @@ Job Application Screener Agent/
 def screening_decision(state: ScreenerState):
     score = state["match_score"]
     if score >= 80:
-        return "high"    →  generate_interview_questions
+        return "high"    # → generate_interview_questions
     elif score >= 50:
-        return "medium"  →  generate_feedback
+        return "medium"  # → generate_feedback
     else:
-        return "low"     →  rejection_message
+        return "low"     # → rejection_message
 ```
 
 ---
@@ -159,6 +211,18 @@ def screening_decision(state: ScreenerState):
   "resume_file": "resume.pdf",
   "job_description": "DevOps engineer with Kubernetes and AWS experience"
 }
+```
+
+**Validation error example** (bad input):
+```json
+{
+  "resume_file": "",
+  "job_description": ""
+}
+```
+```
+ValueError: Resume file path is missing.
+           Job description cannot be empty.
 ```
 
 ---
@@ -214,7 +278,7 @@ python main.py
 
 ## 🔮 Planned Improvements
 
-- [ ] Add `validate_input` node before extraction
+- [x] ~~Add `validate_input` node before extraction~~ ✅ Done
 - [ ] Add `human_review` node using `interrupt()` for borderline scores (65–75)
 - [ ] Add retry loop if LLM returns invalid JSON
 - [ ] Add `decision` field to state
@@ -226,4 +290,4 @@ python main.py
 ## 👤 Author
 
 Built by **Vieer** as an intermediate LangGraph learning project.  
-Focus: mastering nodes, conditional edges, state design, and multi-branch graph routing.
+Focus: mastering nodes, conditional edges, state design, middleware/guard nodes, and multi-branch graph routing.
