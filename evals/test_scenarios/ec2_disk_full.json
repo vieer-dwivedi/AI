@@ -1,0 +1,11 @@
+{
+  "scenario": "ec2_disk_full",
+  "expect": {
+    "severity_in": ["P2", "P3"],
+    "root_cause_category": "disk_exhaustion",
+    "trigger_contains": "cfg-OPS-5521",
+    "root_cause_keywords_any": ["disk", "full", "log"],
+    "runbook": "disk-full-ec2.md",
+    "action_types_include": ["reduce_log_level", "extend_volume"]
+  }
+}

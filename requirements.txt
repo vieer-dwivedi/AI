@@ -1,0 +1,43 @@
+# ── Core agent stack ──────────────────────────────────────────
+langchain>=1.5.0
+langchain-core>=1.8.0
+langgraph>=1.2.0
+deepagents>=0.7.39
+
+# ── LLM providers (init_chat_model needs the matching package) ─
+# Pick whichever you set in LLM_MODEL (.env). Install extras as needed.
+langchain-anthropic>=1.7.0
+langchain-openai>=1.8.0
+langchain-google-genai>=4.5.0
+# langchain-ollama
+# langchain-groq
+# langchain-mistralai
+# langchain-aws          # Bedrock models
+
+# ── Memory / RAG ──────────────────────────────────────────────
+chromadb>=1.5.0
+langchain-chroma>=1.1.0
+
+# ── MCP integration ───────────────────────────────────────────
+mcp>=1.30.0
+langchain-mcp-adapters>=0.3.2
+
+# ── API / webhook ─────────────────────────────────────────────
+fastapi>=0.163.0
+uvicorn[standard]>=0.54.0
+httpx>=0.28.0
+
+# ── Config / utils ────────────────────────────────────────────
+python-dotenv>=1.0.0
+pydantic>=2.14.0
+pydantic-settings>=2.16.0
+pyyaml>=6.0
+
+# ── Cloud SDKs (only used when CLOUD_BACKEND=aws / azure) ─────
+boto3>=1.44.0
+# azure-monitor-query
+# azure-identity
+
+# ── Testing ───────────────────────────────────────────────────
+pytest>=9.0.0
+pytest-asyncio>=1.5.0

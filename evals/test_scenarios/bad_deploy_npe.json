@@ -1,0 +1,11 @@
+{
+  "scenario": "bad_deploy_npe",
+  "expect": {
+    "severity_in": ["P1", "P2"],
+    "root_cause_category": "bad_deployment",
+    "trigger_contains": "d-PAY380XQ",
+    "root_cause_keywords_any": ["nullpointer", "release", "deploy"],
+    "runbook": "bad-deployment-rollback.md",
+    "action_types_include": ["rollback_deployment"]
+  }
+}

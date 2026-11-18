@@ -1,0 +1,11 @@
+{
+  "scenario": "rds_connections",
+  "expect": {
+    "severity_in": ["P1", "P2"],
+    "root_cause_category": "connection_exhaustion",
+    "trigger_contains": "reporting-job",
+    "root_cause_keywords_any": ["connection", "pool"],
+    "runbook": "rds-connection-exhaustion.md",
+    "action_types_include": ["stop_job", "add_connection_pooling"]
+  }
+}

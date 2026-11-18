@@ -1,0 +1,3288 @@
+{
+ "name": "bad_deploy_npe",
+ "anchor_ms": 1794992400000,
+ "description": "payments-service release v3.8.0 throws NullPointerException on every charge request.",
+ "alarms": [
+  {
+   "AlarmName": "payments-service-5xx-high",
+   "AlarmArn": "arn:aws:cloudwatch:us-east-1:123456789012:alarm:payments-service-5xx-high",
+   "AlarmDescription": "Payments 5xx errors",
+   "StateValue": "ALARM",
+   "StateReason": "Threshold Crossed: 3 datapoints [181.0, 205.0, 222.0] were greater than the threshold (50.0).",
+   "StateUpdatedTimestamp": "2026-11-18T08:51:00.000Z",
+   "MetricName": "HTTPCode_Target_5XX_Count",
+   "Namespace": "AWS/ApplicationELB",
+   "Statistic": "Sum",
+   "Dimensions": [
+    {
+     "Name": "LoadBalancer",
+     "Value": "app/prod-alb/50dc6c495c0c9188"
+    }
+   ],
+   "Period": 60,
+   "EvaluationPeriods": 3,
+   "Threshold": 50,
+   "ComparisonOperator": "GreaterThanThreshold"
+  },
+  {
+   "AlarmName": "payments-service-cpu-high",
+   "AlarmArn": "arn:aws:cloudwatch:us-east-1:123456789012:alarm:payments-service-cpu-high",
+   "AlarmDescription": "",
+   "StateValue": "OK",
+   "StateReason": "Threshold not crossed.",
+   "StateUpdatedTimestamp": "2026-11-17T21:20:00.000Z",
+   "MetricName": "CPUUtilization",
+   "Namespace": "AWS/ECS",
+   "Statistic": "Average",
+   "Dimensions": [
+    {
+     "Name": "ClusterName",
+     "Value": "prod-cluster"
+    },
+    {
+     "Name": "ServiceName",
+     "Value": "payments-service"
+    }
+   ],
+   "Period": 60,
+   "EvaluationPeriods": 3,
+   "Threshold": 90,
+   "ComparisonOperator": "GreaterThanThreshold"
+  }
+ ],
+ "log_groups": {
+  "/ecs/payments-service": [
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987045700,
+    "message": "{\"time\": \"2026-11-18T07:30:45.700Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 51ms\", \"trace_id\": \"4b8cbe3e9e56635a\"}",
+    "ingestionTime": 1794987045923,
+    "eventId": "31582584127762101723609403381305311672016758062184987932"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987020769,
+    "message": "{\"time\": \"2026-11-18T07:30:20.769Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 50ms\", \"trace_id\": \"ff93ed2117ffae4c\"}",
+    "ingestionTime": 1794987021604,
+    "eventId": "79631074544358847737240110655510354326434730887914459927"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987052997,
+    "message": "{\"time\": \"2026-11-18T07:30:52.997Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 54ms\", \"trace_id\": \"32f185ba3892a131\"}",
+    "ingestionTime": 1794987053634,
+    "eventId": "71090131443983860831040963401618199977066386862323218871"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987069861,
+    "message": "{\"time\": \"2026-11-18T07:31:09.861Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 58ms\", \"trace_id\": \"6685ecfe1853ddd2\"}",
+    "ingestionTime": 1794987070330,
+    "eventId": "35310304812304577546753771841054219659336023076594589727"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987109488,
+    "message": "{\"time\": \"2026-11-18T07:31:49.488Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 57ms\", \"trace_id\": \"24385ef5d3c61a03\"}",
+    "ingestionTime": 1794987110232,
+    "eventId": "51676164152631813977119312549009129574138483254429459473"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987080320,
+    "message": "{\"time\": \"2026-11-18T07:31:20.320Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 13ms\", \"trace_id\": \"09877672fe3d842b\"}",
+    "ingestionTime": 1794987080834,
+    "eventId": "35291971349098886978348946737293951093981627965149458156"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987171827,
+    "message": "{\"time\": \"2026-11-18T07:32:51.827Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 54ms\", \"trace_id\": \"56de1ee6ac4279b3\"}",
+    "ingestionTime": 1794987172526,
+    "eventId": "74656994530350651832335565680646115435341568362050618881"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987165126,
+    "message": "{\"time\": \"2026-11-18T07:32:45.126Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 14ms\", \"trace_id\": \"6ca1498ccdcb46ca\"}",
+    "ingestionTime": 1794987165832,
+    "eventId": "72199289695228459237779462811564715384243205921619878209"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987178609,
+    "message": "{\"time\": \"2026-11-18T07:32:58.609Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 41ms\", \"trace_id\": \"35dcf10ac6c03d6e\"}",
+    "ingestionTime": 1794987179193,
+    "eventId": "88193579716303859790735431317311347672342126455728029664"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987225564,
+    "message": "{\"time\": \"2026-11-18T07:33:45.564Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 26ms\", \"trace_id\": \"6ef2a880dbe8f9d7\"}",
+    "ingestionTime": 1794987226383,
+    "eventId": "91060049591083924277800185700532568719481969136557283642"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987213943,
+    "message": "{\"time\": \"2026-11-18T07:33:33.943Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 17ms\", \"trace_id\": \"5c91ad20ff6600ba\"}",
+    "ingestionTime": 1794987214557,
+    "eventId": "60680683388545186503061683801551120906844654821580272945"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987187728,
+    "message": "{\"time\": \"2026-11-18T07:33:07.728Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 60ms\", \"trace_id\": \"b8a789eb27e5f408\"}",
+    "ingestionTime": 1794987188150,
+    "eventId": "35704422118514705849929282497344566773364656362983625832"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987291618,
+    "message": "{\"time\": \"2026-11-18T07:34:51.618Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 31ms\", \"trace_id\": \"7c8c58dafb05a452\"}",
+    "ingestionTime": 1794987292459,
+    "eventId": "17401483048308718653217803937711376893694593751729225980"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987255616,
+    "message": "{\"time\": \"2026-11-18T07:34:15.616Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 43ms\", \"trace_id\": \"c39456c398ee0c39\"}",
+    "ingestionTime": 1794987256392,
+    "eventId": "66488034940648041361674607080801605554792258705221021051"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987252782,
+    "message": "{\"time\": \"2026-11-18T07:34:12.782Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 41ms\", \"trace_id\": \"be729af0a4b060e2\"}",
+    "ingestionTime": 1794987253089,
+    "eventId": "02089369895683856718912662712060165406990874629797552283"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987334398,
+    "message": "{\"time\": \"2026-11-18T07:35:34.398Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 18ms\", \"trace_id\": \"c4515219d49b6ed0\"}",
+    "ingestionTime": 1794987335277,
+    "eventId": "43826197780965681373943427351160154614229993568191974243"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987347626,
+    "message": "{\"time\": \"2026-11-18T07:35:47.626Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 55ms\", \"trace_id\": \"49e887516b7ba49d\"}",
+    "ingestionTime": 1794987348201,
+    "eventId": "83154465588581284358775262510463989298853825673522582902"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987343698,
+    "message": "{\"time\": \"2026-11-18T07:35:43.698Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 9ms\", \"trace_id\": \"caf61b56ca648ecf\"}",
+    "ingestionTime": 1794987344470,
+    "eventId": "74995828153255892280252298394411123423061579900691154414"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987368838,
+    "message": "{\"time\": \"2026-11-18T07:36:08.838Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 54ms\", \"trace_id\": \"c397f1893807bea8\"}",
+    "ingestionTime": 1794987369294,
+    "eventId": "43856578176527339565744396913715090355209351758406282305"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987407973,
+    "message": "{\"time\": \"2026-11-18T07:36:47.973Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 52ms\", \"trace_id\": \"b43470755b732e93\"}",
+    "ingestionTime": 1794987408762,
+    "eventId": "31887976698998346459708267329306448805869287967401304101"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987407235,
+    "message": "{\"time\": \"2026-11-18T07:36:47.235Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 51ms\", \"trace_id\": \"5c5dc156fcad05d6\"}",
+    "ingestionTime": 1794987407629,
+    "eventId": "57435709272423756211573889903363925390164784531128630271"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987475235,
+    "message": "{\"time\": \"2026-11-18T07:37:55.235Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 48ms\", \"trace_id\": \"6a23deb4947e30f7\"}",
+    "ingestionTime": 1794987475996,
+    "eventId": "94994530736083085770572108191475198657123352427416724472"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987447497,
+    "message": "{\"time\": \"2026-11-18T07:37:27.497Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 19ms\", \"trace_id\": \"6888174be53c8104\"}",
+    "ingestionTime": 1794987448307,
+    "eventId": "40425037600741248327678152985469535372264047515853147811"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987457608,
+    "message": "{\"time\": \"2026-11-18T07:37:37.608Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 58ms\", \"trace_id\": \"4f825d6b36c686e3\"}",
+    "ingestionTime": 1794987458007,
+    "eventId": "29731548650767562149253896222884673920735843850283984446"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987497550,
+    "message": "{\"time\": \"2026-11-18T07:38:17.550Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 59ms\", \"trace_id\": \"aff2ee48f09900e8\"}",
+    "ingestionTime": 1794987497926,
+    "eventId": "62773652609680047019115607317689295162473604753681818105"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987500746,
+    "message": "{\"time\": \"2026-11-18T07:38:20.746Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 38ms\", \"trace_id\": \"4a8fc7bd267c18f7\"}",
+    "ingestionTime": 1794987500990,
+    "eventId": "13129503878994679356809451966835966666566467168975722830"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987535426,
+    "message": "{\"time\": \"2026-11-18T07:38:55.426Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 46ms\", \"trace_id\": \"10c620e155e581c1\"}",
+    "ingestionTime": 1794987535906,
+    "eventId": "39474189021692072207431949123281824877287228942105242322"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987566838,
+    "message": "{\"time\": \"2026-11-18T07:39:26.838Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 59ms\", \"trace_id\": \"e0aaa3365a14d707\"}",
+    "ingestionTime": 1794987567073,
+    "eventId": "44461539210703368255538621932152966205175542573325697657"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987578285,
+    "message": "{\"time\": \"2026-11-18T07:39:38.285Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 36ms\", \"trace_id\": \"efc13d91a7ebd3c3\"}",
+    "ingestionTime": 1794987578993,
+    "eventId": "29521685325778482965182020810541935524762406164297397261"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987598445,
+    "message": "{\"time\": \"2026-11-18T07:39:58.445Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 47ms\", \"trace_id\": \"f6c6e80d88f804b4\"}",
+    "ingestionTime": 1794987598998,
+    "eventId": "88412511779195424940855154176712170329918741293011775775"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987613765,
+    "message": "{\"time\": \"2026-11-18T07:40:13.765Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 54ms\", \"trace_id\": \"301592ccb9a753dc\"}",
+    "ingestionTime": 1794987614629,
+    "eventId": "58468712581945596659563132068161085874681680670152913279"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987650677,
+    "message": "{\"time\": \"2026-11-18T07:40:50.677Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 43ms\", \"trace_id\": \"a4a5c7757c85c063\"}",
+    "ingestionTime": 1794987651069,
+    "eventId": "21697271852785845095349802068270037419323632722821988567"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987631678,
+    "message": "{\"time\": \"2026-11-18T07:40:31.678Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 23ms\", \"trace_id\": \"540d720bedeaeb7f\"}",
+    "ingestionTime": 1794987632164,
+    "eventId": "71382676418117708846982403993848927273506950996314003628"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987690161,
+    "message": "{\"time\": \"2026-11-18T07:41:30.161Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 53ms\", \"trace_id\": \"871873d364f3f658\"}",
+    "ingestionTime": 1794987690561,
+    "eventId": "47799788549651521772646572018454419669709413694535865991"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987697958,
+    "message": "{\"time\": \"2026-11-18T07:41:37.958Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 48ms\", \"trace_id\": \"8395d5aea276cb0a\"}",
+    "ingestionTime": 1794987698565,
+    "eventId": "87602209003504535828274249187670365450182083274751836795"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987677220,
+    "message": "{\"time\": \"2026-11-18T07:41:17.220Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 22ms\", \"trace_id\": \"bc7c71279906240f\"}",
+    "ingestionTime": 1794987677470,
+    "eventId": "48399446654491064386350533439669736979815902756491404351"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987777038,
+    "message": "{\"time\": \"2026-11-18T07:42:57.038Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 39ms\", \"trace_id\": \"c5e7ddade0dcdb38\"}",
+    "ingestionTime": 1794987777312,
+    "eventId": "93697857484889914316979720283357026105936146056386880071"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987750796,
+    "message": "{\"time\": \"2026-11-18T07:42:30.796Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 10ms\", \"trace_id\": \"9c50a31fdf644105\"}",
+    "ingestionTime": 1794987751325,
+    "eventId": "44177961783450233114860844774856570330681852502177666681"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987777140,
+    "message": "{\"time\": \"2026-11-18T07:42:57.140Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 20ms\", \"trace_id\": \"813deb6972a7d7eb\"}",
+    "ingestionTime": 1794987777393,
+    "eventId": "22567574407594474461019150289951533381167396334946420893"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987833230,
+    "message": "{\"time\": \"2026-11-18T07:43:53.230Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 56ms\", \"trace_id\": \"171ce1a828b1c10d\"}",
+    "ingestionTime": 1794987833557,
+    "eventId": "21017205759560706606226151790369864033984873001538313740"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987820810,
+    "message": "{\"time\": \"2026-11-18T07:43:40.810Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 25ms\", \"trace_id\": \"29ec1d64eb55c39a\"}",
+    "ingestionTime": 1794987821661,
+    "eventId": "13366831276997470920315917106673173589250009536234414178"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987836118,
+    "message": "{\"time\": \"2026-11-18T07:43:56.118Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 24ms\", \"trace_id\": \"5720c36d74919ca3\"}",
+    "ingestionTime": 1794987836793,
+    "eventId": "24863565329987419026626960210115831240424855700808552447"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987863945,
+    "message": "{\"time\": \"2026-11-18T07:44:23.945Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 4ms\", \"trace_id\": \"d8b894c926a34c9b\"}",
+    "ingestionTime": 1794987864555,
+    "eventId": "16047017317873753714566952807084274523250224865652227687"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987847557,
+    "message": "{\"time\": \"2026-11-18T07:44:07.557Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 8ms\", \"trace_id\": \"f7164d64ecb49be1\"}",
+    "ingestionTime": 1794987847843,
+    "eventId": "47370965193003520760433601041742929946122650370206893078"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987898399,
+    "message": "{\"time\": \"2026-11-18T07:44:58.399Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 50ms\", \"trace_id\": \"e83639738dbaf7d1\"}",
+    "ingestionTime": 1794987898717,
+    "eventId": "03252194002782137949011834177421282587716181704210593171"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987933538,
+    "message": "{\"time\": \"2026-11-18T07:45:33.538Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 28ms\", \"trace_id\": \"4157243d0cecbbda\"}",
+    "ingestionTime": 1794987933839,
+    "eventId": "92064822988327030188495954376789490697449242114644272614"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987911096,
+    "message": "{\"time\": \"2026-11-18T07:45:11.096Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 26ms\", \"trace_id\": \"f97bf8ffa8603547\"}",
+    "ingestionTime": 1794987911531,
+    "eventId": "72950487544551701502520474587124427444000185613832921772"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794987923937,
+    "message": "{\"time\": \"2026-11-18T07:45:23.937Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 52ms\", \"trace_id\": \"24a9df55f2d250f5\"}",
+    "ingestionTime": 1794987924567,
+    "eventId": "04652001504964708153176558440169867953543861865832085487"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794988001256,
+    "message": "{\"time\": \"2026-11-18T07:46:41.256Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 47ms\", \"trace_id\": \"22242ea1c9beecab\"}",
+    "ingestionTime": 1794988002065,
+    "eventId": "42091264357366883352515107068821160093015831053586638815"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794987967740,
+    "message": "{\"time\": \"2026-11-18T07:46:07.740Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 22ms\", \"trace_id\": \"1b312cfef19becf3\"}",
+    "ingestionTime": 1794987968325,
+    "eventId": "64251191849420637931043007212434828509542090400481251983"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794987961521,
+    "message": "{\"time\": \"2026-11-18T07:46:01.521Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 16ms\", \"trace_id\": \"185f45cacd6efc31\"}",
+    "ingestionTime": 1794987962128,
+    "eventId": "30863301903567315254287717380302575469176805686593692688"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988075564,
+    "message": "{\"time\": \"2026-11-18T07:47:55.564Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 17ms\", \"trace_id\": \"c5ceba64feda3b6c\"}",
+    "ingestionTime": 1794988076202,
+    "eventId": "59544837204619913973408470788849480448456903152563867383"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988056455,
+    "message": "{\"time\": \"2026-11-18T07:47:36.455Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 24ms\", \"trace_id\": \"05fdde260bc780fc\"}",
+    "ingestionTime": 1794988057335,
+    "eventId": "78775412730656766861908912379385489414229668796652071336"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988073222,
+    "message": "{\"time\": \"2026-11-18T07:47:53.222Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 56ms\", \"trace_id\": \"200653cf472f1d79\"}",
+    "ingestionTime": 1794988073963,
+    "eventId": "30848863711755542727574373666711586621217159354680101921"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988091040,
+    "message": "{\"time\": \"2026-11-18T07:48:11.040Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 43ms\", \"trace_id\": \"686ae91d476923b3\"}",
+    "ingestionTime": 1794988091737,
+    "eventId": "29803942596270038976283258528929179601746026360515356429"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988132328,
+    "message": "{\"time\": \"2026-11-18T07:48:52.328Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 23ms\", \"trace_id\": \"33d263c9e2359f25\"}",
+    "ingestionTime": 1794988133085,
+    "eventId": "03148685756908896588433787231417638444265940097423801324"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794988122646,
+    "message": "{\"time\": \"2026-11-18T07:48:42.646Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 13ms\", \"trace_id\": \"f85bd800a4a8a68d\"}",
+    "ingestionTime": 1794988123201,
+    "eventId": "82459336232997088781682203718832898459204002654775732619"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988194481,
+    "message": "{\"time\": \"2026-11-18T07:49:54.481Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 36ms\", \"trace_id\": \"1d9fa6c2893c2c60\"}",
+    "ingestionTime": 1794988195380,
+    "eventId": "55399643180943831691743642642678243477259601979579689854"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988189898,
+    "message": "{\"time\": \"2026-11-18T07:49:49.898Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 11ms\", \"trace_id\": \"a8b0d6f9b7bc2967\"}",
+    "ingestionTime": 1794988190467,
+    "eventId": "10935941305969013172166807005629224591791249073610548481"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988150831,
+    "message": "{\"time\": \"2026-11-18T07:49:10.831Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 46ms\", \"trace_id\": \"fb6e49a2b819fd61\"}",
+    "ingestionTime": 1794988151325,
+    "eventId": "41747681644635115354973176019686999888575059181764085305"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988245617,
+    "message": "{\"time\": \"2026-11-18T07:50:45.617Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 27ms\", \"trace_id\": \"b4352b1168b730ea\"}",
+    "ingestionTime": 1794988245949,
+    "eventId": "93443362946559944085737421166329274786924574751717011133"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988209240,
+    "message": "{\"time\": \"2026-11-18T07:50:09.240Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 10ms\", \"trace_id\": \"ba0629b1556c804c\"}",
+    "ingestionTime": 1794988209480,
+    "eventId": "14494704253650378542457923582015966949193381898969814369"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794988241370,
+    "message": "{\"time\": \"2026-11-18T07:50:41.370Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 52ms\", \"trace_id\": \"84cea809a08d047f\"}",
+    "ingestionTime": 1794988242132,
+    "eventId": "46765234063699641173279262898469264837921392725130928921"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988285974,
+    "message": "{\"time\": \"2026-11-18T07:51:25.974Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 28ms\", \"trace_id\": \"dc5dac8be1123d4c\"}",
+    "ingestionTime": 1794988286228,
+    "eventId": "42184375358011162637202087435462235412594718848583919709"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988260173,
+    "message": "{\"time\": \"2026-11-18T07:51:00.173Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 57ms\", \"trace_id\": \"747f9b0dc7bd7936\"}",
+    "ingestionTime": 1794988260671,
+    "eventId": "07970279336149256087715834412504609009165772423528535791"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988318413,
+    "message": "{\"time\": \"2026-11-18T07:51:58.413Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 16ms\", \"trace_id\": \"5147c4caca303bf3\"}",
+    "ingestionTime": 1794988318758,
+    "eventId": "98056297736184460123431627044790197086976152002585741044"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988369328,
+    "message": "{\"time\": \"2026-11-18T07:52:49.328Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 50ms\", \"trace_id\": \"cb25628f91408ee9\"}",
+    "ingestionTime": 1794988369572,
+    "eventId": "12782302802031075991005479149423234339952158084294087420"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988345672,
+    "message": "{\"time\": \"2026-11-18T07:52:25.672Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 7ms\", \"trace_id\": \"feed58ccc24a2c9f\"}",
+    "ingestionTime": 1794988346154,
+    "eventId": "29772141112743168931947563933185883598138874038975234346"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988327763,
+    "message": "{\"time\": \"2026-11-18T07:52:07.763Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 8ms\", \"trace_id\": \"6af392ab5e6b6a5f\"}",
+    "ingestionTime": 1794988328309,
+    "eventId": "90111662028455084985568042207143446162126023175098810453"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794988410241,
+    "message": "{\"time\": \"2026-11-18T07:53:30.241Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 13ms\", \"trace_id\": \"f884c26a5951bec9\"}",
+    "ingestionTime": 1794988411071,
+    "eventId": "67788963978435989720000034256149831145169405756134743767"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794988418463,
+    "message": "{\"time\": \"2026-11-18T07:53:38.463Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 37ms\", \"trace_id\": \"d7272325ebdb9a80\"}",
+    "ingestionTime": 1794988418761,
+    "eventId": "74088617790841966730592729614913290441163447181382279522"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988417937,
+    "message": "{\"time\": \"2026-11-18T07:53:37.937Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 59ms\", \"trace_id\": \"c3457b1526ec30b5\"}",
+    "ingestionTime": 1794988418835,
+    "eventId": "04971604660162354191437132570068638054945007137593105596"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988456022,
+    "message": "{\"time\": \"2026-11-18T07:54:16.022Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 51ms\", \"trace_id\": \"c4c50319e72f80a4\"}",
+    "ingestionTime": 1794988456543,
+    "eventId": "95412769476590653618741059794278936288194958183021707213"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988488238,
+    "message": "{\"time\": \"2026-11-18T07:54:48.238Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 33ms\", \"trace_id\": \"965236e15469a40d\"}",
+    "ingestionTime": 1794988488706,
+    "eventId": "17882340516969745394462327532950292302963519606132165838"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988454204,
+    "message": "{\"time\": \"2026-11-18T07:54:14.204Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 58ms\", \"trace_id\": \"fee44d69252316a3\"}",
+    "ingestionTime": 1794988454578,
+    "eventId": "55885589149813724400841501381795838497449348776864419533"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988554887,
+    "message": "{\"time\": \"2026-11-18T07:55:54.887Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 45ms\", \"trace_id\": \"abcd9025cc35021a\"}",
+    "ingestionTime": 1794988555645,
+    "eventId": "32336667086583363875372536414554154445261460640370626218"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988501388,
+    "message": "{\"time\": \"2026-11-18T07:55:01.388Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 58ms\", \"trace_id\": \"22b0ff5d5bceaed4\"}",
+    "ingestionTime": 1794988501698,
+    "eventId": "47507549821995773425078825979136560807965902612309803296"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988557115,
+    "message": "{\"time\": \"2026-11-18T07:55:57.115Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 16ms\", \"trace_id\": \"5a3b918a6608b583\"}",
+    "ingestionTime": 1794988557813,
+    "eventId": "94767644008196289911330483809488909318442200716843632440"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794988594312,
+    "message": "{\"time\": \"2026-11-18T07:56:34.312Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 20ms\", \"trace_id\": \"98c313a7e4237a52\"}",
+    "ingestionTime": 1794988595198,
+    "eventId": "37423758512020188133716352219419455659392955158784204716"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988600424,
+    "message": "{\"time\": \"2026-11-18T07:56:40.424Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 32ms\", \"trace_id\": \"194bbac47157ecb9\"}",
+    "ingestionTime": 1794988601213,
+    "eventId": "29674251698908454008630975521135776897789735126956066409"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794988572672,
+    "message": "{\"time\": \"2026-11-18T07:56:12.672Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 29ms\", \"trace_id\": \"398a53ce1496479a\"}",
+    "ingestionTime": 1794988572884,
+    "eventId": "05336281521593404345772364040022957460950053526700414151"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988629869,
+    "message": "{\"time\": \"2026-11-18T07:57:09.869Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 22ms\", \"trace_id\": \"e189d68036cdeb67\"}",
+    "ingestionTime": 1794988630331,
+    "eventId": "69498395077057943554438901062298617848398298562070714422"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988631860,
+    "message": "{\"time\": \"2026-11-18T07:57:11.860Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 26ms\", \"trace_id\": \"80f4baa970011c16\"}",
+    "ingestionTime": 1794988632302,
+    "eventId": "49491042897178667994795308428313391083291900647934809262"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794988631986,
+    "message": "{\"time\": \"2026-11-18T07:57:11.986Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 26ms\", \"trace_id\": \"91fb80f1ea1f0c38\"}",
+    "ingestionTime": 1794988632234,
+    "eventId": "03522133535148453397711441643417770092467769033876372387"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794988703881,
+    "message": "{\"time\": \"2026-11-18T07:58:23.881Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 49ms\", \"trace_id\": \"27e7e8d4dffc618b\"}",
+    "ingestionTime": 1794988704148,
+    "eventId": "54333385264746898416947051001779435103590078277061313783"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988715719,
+    "message": "{\"time\": \"2026-11-18T07:58:35.719Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 55ms\", \"trace_id\": \"33a7afa5a03b9806\"}",
+    "ingestionTime": 1794988716245,
+    "eventId": "86151256967117644827537828909945724949038675006142182250"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988719243,
+    "message": "{\"time\": \"2026-11-18T07:58:39.243Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 33ms\", \"trace_id\": \"90a437c752e732a9\"}",
+    "ingestionTime": 1794988720024,
+    "eventId": "33662050198801599253264359590510886823736688052487085327"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988784022,
+    "message": "{\"time\": \"2026-11-18T07:59:44.022Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 54ms\", \"trace_id\": \"1c0930d27408ecab\"}",
+    "ingestionTime": 1794988784876,
+    "eventId": "29164257968663281852908928322648708133223376321574972269"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988772256,
+    "message": "{\"time\": \"2026-11-18T07:59:32.256Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 21ms\", \"trace_id\": \"b93b77468666e992\"}",
+    "ingestionTime": 1794988772865,
+    "eventId": "66758849462207222528865316361325859588229902996594105782"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794988744286,
+    "message": "{\"time\": \"2026-11-18T07:59:04.286Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 20ms\", \"trace_id\": \"b7cabe1dab83ed66\"}",
+    "ingestionTime": 1794988744934,
+    "eventId": "92283821540636030707330471528257855215730780965191086820"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988814867,
+    "message": "{\"time\": \"2026-11-18T08:00:14.867Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 29ms\", \"trace_id\": \"4f49955f75b296c7\"}",
+    "ingestionTime": 1794988815613,
+    "eventId": "39320123578421817825556233701062843266724319253293603740"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794988837195,
+    "message": "{\"time\": \"2026-11-18T08:00:37.195Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 6ms\", \"trace_id\": \"27516f26defdc2d1\"}",
+    "ingestionTime": 1794988837548,
+    "eventId": "37444865290947717394062561983136149990930501411557190870"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988848920,
+    "message": "{\"time\": \"2026-11-18T08:00:48.920Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 32ms\", \"trace_id\": \"70eedd8a2bd72eca\"}",
+    "ingestionTime": 1794988849803,
+    "eventId": "95437367903339827887689031466919179262707896599170010240"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794988887737,
+    "message": "{\"time\": \"2026-11-18T08:01:27.737Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 4ms\", \"trace_id\": \"00fee717480a30ef\"}",
+    "ingestionTime": 1794988888310,
+    "eventId": "09920089016803210227925557853127638401584641688177193933"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988866734,
+    "message": "{\"time\": \"2026-11-18T08:01:06.734Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 56ms\", \"trace_id\": \"8a8f990041efef4f\"}",
+    "ingestionTime": 1794988867297,
+    "eventId": "76192319782203649039020590914301713313958802345533292434"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988866514,
+    "message": "{\"time\": \"2026-11-18T08:01:06.514Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 8ms\", \"trace_id\": \"5b999a61359391c8\"}",
+    "ingestionTime": 1794988866938,
+    "eventId": "71762336821447094824685257846056199201465477032901432066"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794988961866,
+    "message": "{\"time\": \"2026-11-18T08:02:41.866Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 56ms\", \"trace_id\": \"20ac486aa5e6f4e3\"}",
+    "ingestionTime": 1794988962181,
+    "eventId": "25728023921245973208824759831711508202254173705113942456"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988922735,
+    "message": "{\"time\": \"2026-11-18T08:02:02.735Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 47ms\", \"trace_id\": \"68eedaee8d7abce6\"}",
+    "ingestionTime": 1794988923335,
+    "eventId": "67938439426979744069518932664819553181877677942564844392"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794988976976,
+    "message": "{\"time\": \"2026-11-18T08:02:56.976Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 14ms\", \"trace_id\": \"80e054ea77703e5e\"}",
+    "ingestionTime": 1794988977550,
+    "eventId": "66699096347955378285871751638155079153341581280341956396"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989023093,
+    "message": "{\"time\": \"2026-11-18T08:03:43.093Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 38ms\", \"trace_id\": \"450a29887203cb07\"}",
+    "ingestionTime": 1794989023668,
+    "eventId": "33455624752944270911255866696978831336003943608162399076"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794988993176,
+    "message": "{\"time\": \"2026-11-18T08:03:13.176Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 18ms\", \"trace_id\": \"3900f9b4d3033b29\"}",
+    "ingestionTime": 1794988993956,
+    "eventId": "81580263009057403029479682713611563036080826802012302375"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989022326,
+    "message": "{\"time\": \"2026-11-18T08:03:42.326Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 31ms\", \"trace_id\": \"3bae2445c354b5a9\"}",
+    "ingestionTime": 1794989023065,
+    "eventId": "75754932928360245527961220705950714619212970809607984930"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989084487,
+    "message": "{\"time\": \"2026-11-18T08:04:44.487Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 7ms\", \"trace_id\": \"5417681e6279fafe\"}",
+    "ingestionTime": 1794989084702,
+    "eventId": "58707888576865623960636149728996010947858840638269299589"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794989072809,
+    "message": "{\"time\": \"2026-11-18T08:04:32.809Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 27ms\", \"trace_id\": \"34ca84a1e39c1053\"}",
+    "ingestionTime": 1794989073363,
+    "eventId": "13080721436986774063694374579970258378981885920264524375"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989041396,
+    "message": "{\"time\": \"2026-11-18T08:04:01.396Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 20ms\", \"trace_id\": \"9ba4844e6eb9ecda\"}",
+    "ingestionTime": 1794989042228,
+    "eventId": "39609077930937525888627733849840030139952424616278382662"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794989126912,
+    "message": "{\"time\": \"2026-11-18T08:05:26.912Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 12ms\", \"trace_id\": \"71f3132103588f3e\"}",
+    "ingestionTime": 1794989127600,
+    "eventId": "90994905707540278236813977347199997243178427001854443227"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989106756,
+    "message": "{\"time\": \"2026-11-18T08:05:06.756Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 52ms\", \"trace_id\": \"7d7121560c20f46e\"}",
+    "ingestionTime": 1794989107285,
+    "eventId": "21803203935924303165828991794875148132506630228008305909"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989148740,
+    "message": "{\"time\": \"2026-11-18T08:05:48.740Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 19ms\", \"trace_id\": \"6e79e50cfc19da32\"}",
+    "ingestionTime": 1794989149035,
+    "eventId": "28407164116156977404084145869487786774161520716195453489"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794989175251,
+    "message": "{\"time\": \"2026-11-18T08:06:15.251Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 47ms\", \"trace_id\": \"47de91fccea65bee\"}",
+    "ingestionTime": 1794989175732,
+    "eventId": "78096192291299953406385780249743215879315781978644693466"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989209534,
+    "message": "{\"time\": \"2026-11-18T08:06:49.534Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 41ms\", \"trace_id\": \"d9e665990dc5b596\"}",
+    "ingestionTime": 1794989210208,
+    "eventId": "10501616252403943199626316101732092310399883381221084194"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989213910,
+    "message": "{\"time\": \"2026-11-18T08:06:53.910Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 8ms\", \"trace_id\": \"5395eacc5a13a6b1\"}",
+    "ingestionTime": 1794989214617,
+    "eventId": "65977244950162416809716628814852757543805869948871967592"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989225471,
+    "message": "{\"time\": \"2026-11-18T08:07:05.471Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 5ms\", \"trace_id\": \"2d191f6202a86ece\"}",
+    "ingestionTime": 1794989226085,
+    "eventId": "49573533159463461997526437696315083155725509697206966089"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989250250,
+    "message": "{\"time\": \"2026-11-18T08:07:30.250Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 13ms\", \"trace_id\": \"d97a9ebf045932bd\"}",
+    "ingestionTime": 1794989250635,
+    "eventId": "28408763128942002808616972813471747697813042423624259099"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989267375,
+    "message": "{\"time\": \"2026-11-18T08:07:47.375Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 6ms\", \"trace_id\": \"54fa5ca6bf7ab082\"}",
+    "ingestionTime": 1794989267763,
+    "eventId": "68671867054955793979953621482743658805554972953349764483"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989286169,
+    "message": "{\"time\": \"2026-11-18T08:08:06.169Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 56ms\", \"trace_id\": \"cb687819f2917ab4\"}",
+    "ingestionTime": 1794989286817,
+    "eventId": "14849389820390150693427072189814483489597557391711631412"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989327965,
+    "message": "{\"time\": \"2026-11-18T08:08:47.965Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 49ms\", \"trace_id\": \"38b3341de3313706\"}",
+    "ingestionTime": 1794989328313,
+    "eventId": "23602630945666205247513683953492370271592851930096254113"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794989292482,
+    "message": "{\"time\": \"2026-11-18T08:08:12.482Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 16ms\", \"trace_id\": \"b967f789b3375008\"}",
+    "ingestionTime": 1794989292751,
+    "eventId": "61903289665990123605734773397357424998673609190086304828"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989345336,
+    "message": "{\"time\": \"2026-11-18T08:09:05.336Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 21ms\", \"trace_id\": \"6ddffe5f8c113050\"}",
+    "ingestionTime": 1794989345597,
+    "eventId": "90872599646928412432778128930415772292910627344402772547"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989373261,
+    "message": "{\"time\": \"2026-11-18T08:09:33.261Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 40ms\", \"trace_id\": \"74177b750fb1bec6\"}",
+    "ingestionTime": 1794989374142,
+    "eventId": "44638119990114197450353127139880855957817231934436202709"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794989362586,
+    "message": "{\"time\": \"2026-11-18T08:09:22.586Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 12ms\", \"trace_id\": \"f38545c5c8c43a8d\"}",
+    "ingestionTime": 1794989363094,
+    "eventId": "63498390927882337988489161040790201183546626402773980391"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989432292,
+    "message": "{\"time\": \"2026-11-18T08:10:32.292Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 54ms\", \"trace_id\": \"f0f4df15632f2b1f\"}",
+    "ingestionTime": 1794989432785,
+    "eventId": "20402012181131985368158692392639656990539904302752813834"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989418604,
+    "message": "{\"time\": \"2026-11-18T08:10:18.604Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 18ms\", \"trace_id\": \"b99430694efb997a\"}",
+    "ingestionTime": 1794989419084,
+    "eventId": "24179528804376923890315867338116703557989657247523840410"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989421118,
+    "message": "{\"time\": \"2026-11-18T08:10:21.118Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 14ms\", \"trace_id\": \"06975d3670690361\"}",
+    "ingestionTime": 1794989422001,
+    "eventId": "79397436444104517068789998568858119980436338764160218195"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989494579,
+    "message": "{\"time\": \"2026-11-18T08:11:34.579Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 20ms\", \"trace_id\": \"66d219948a109fb3\"}",
+    "ingestionTime": 1794989495023,
+    "eventId": "34048581358783968506115417837506707561996122992099242079"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989480725,
+    "message": "{\"time\": \"2026-11-18T08:11:20.725Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 33ms\", \"trace_id\": \"f52bb6bbe562538a\"}",
+    "ingestionTime": 1794989481586,
+    "eventId": "22469668779066063420420561699938582544933858048545925867"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989470160,
+    "message": "{\"time\": \"2026-11-18T08:11:10.160Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 32ms\", \"trace_id\": \"e0aa64f1c29c45db\"}",
+    "ingestionTime": 1794989470494,
+    "eventId": "10482243397645250605455163901164692550003708955358921615"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989540088,
+    "message": "{\"time\": \"2026-11-18T08:12:20.088Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 51ms\", \"trace_id\": \"222a748955b967a3\"}",
+    "ingestionTime": 1794989540932,
+    "eventId": "54606010730470951773408876993960335392616396277596440290"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794989544988,
+    "message": "{\"time\": \"2026-11-18T08:12:24.988Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 13ms\", \"trace_id\": \"5d136e6250c92e96\"}",
+    "ingestionTime": 1794989545645,
+    "eventId": "45471742488405866663463478366769847648927030818790069636"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794989554390,
+    "message": "{\"time\": \"2026-11-18T08:12:34.390Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 49ms\", \"trace_id\": \"11053a0505474ea9\"}",
+    "ingestionTime": 1794989555157,
+    "eventId": "71750368072974724595951404639310942301009906625818526647"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989636948,
+    "message": "{\"time\": \"2026-11-18T08:13:56.948Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 31ms\", \"trace_id\": \"510a615cf78b83d1\"}",
+    "ingestionTime": 1794989637340,
+    "eventId": "35739856896870733873801108777593937583797052197897221488"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989630421,
+    "message": "{\"time\": \"2026-11-18T08:13:50.421Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 44ms\", \"trace_id\": \"845d7c80b85748a8\"}",
+    "ingestionTime": 1794989630645,
+    "eventId": "52699709870572759658739820045028186277608554141593106415"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989612374,
+    "message": "{\"time\": \"2026-11-18T08:13:32.374Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 33ms\", \"trace_id\": \"f3940bafef74b6bd\"}",
+    "ingestionTime": 1794989613155,
+    "eventId": "55462241702790191654349054457447315334816587084800349951"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794989684334,
+    "message": "{\"time\": \"2026-11-18T08:14:44.334Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 20ms\", \"trace_id\": \"b6b70cd2a80f420e\"}",
+    "ingestionTime": 1794989684822,
+    "eventId": "03166777007799501151189413061441170553821006560709540186"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989641473,
+    "message": "{\"time\": \"2026-11-18T08:14:01.473Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 42ms\", \"trace_id\": \"4f6a15f33e821ef1\"}",
+    "ingestionTime": 1794989641987,
+    "eventId": "17465645365650007499955047125823675950336077845246516424"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794989666941,
+    "message": "{\"time\": \"2026-11-18T08:14:26.941Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 18ms\", \"trace_id\": \"a268f133d7107da5\"}",
+    "ingestionTime": 1794989667498,
+    "eventId": "73738502367436397091067068858660728814478414050979925572"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794989724103,
+    "message": "{\"time\": \"2026-11-18T08:15:24.103Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 31ms\", \"trace_id\": \"3af683c09bff281d\"}",
+    "ingestionTime": 1794989724965,
+    "eventId": "13602584847826197948228247738061424242792395448985547406"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989700892,
+    "message": "{\"time\": \"2026-11-18T08:15:00.892Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 46ms\", \"trace_id\": \"36efad9a7b52df77\"}",
+    "ingestionTime": 1794989701328,
+    "eventId": "10192701505602173948776816008911628468534863660798555403"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989745407,
+    "message": "{\"time\": \"2026-11-18T08:15:45.407Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 54ms\", \"trace_id\": \"52ab7aaae8d9bd12\"}",
+    "ingestionTime": 1794989746051,
+    "eventId": "33790224072874613519672719395454206823104940149642900459"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989792227,
+    "message": "{\"time\": \"2026-11-18T08:16:32.227Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 19ms\", \"trace_id\": \"7d5b9ed32e36a120\"}",
+    "ingestionTime": 1794989792879,
+    "eventId": "68649100608160121354887863011560487777290141240053639414"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989761222,
+    "message": "{\"time\": \"2026-11-18T08:16:01.222Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 17ms\", \"trace_id\": \"fc8bd2b4686c0107\"}",
+    "ingestionTime": 1794989761835,
+    "eventId": "13987430343437765866825412951873700731821869169186364403"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989761033,
+    "message": "{\"time\": \"2026-11-18T08:16:01.033Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 27ms\", \"trace_id\": \"4b9018ebc3c2dbe7\"}",
+    "ingestionTime": 1794989761670,
+    "eventId": "06931243334090898250810140386869569712639530885313426536"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989846982,
+    "message": "{\"time\": \"2026-11-18T08:17:26.982Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 18ms\", \"trace_id\": \"0d6ecdbd315712e2\"}",
+    "ingestionTime": 1794989847413,
+    "eventId": "52042299839826937537898455293227673106075253120645069839"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989844197,
+    "message": "{\"time\": \"2026-11-18T08:17:24.197Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 5ms\", \"trace_id\": \"895eba54384dd635\"}",
+    "ingestionTime": 1794989845019,
+    "eventId": "76072789268114850015455678364197776343338580668911630869"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989831145,
+    "message": "{\"time\": \"2026-11-18T08:17:11.145Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 55ms\", \"trace_id\": \"c2dbeb9a2bb93d2a\"}",
+    "ingestionTime": 1794989831902,
+    "eventId": "58483850270542066772139924586572682546578776858688127655"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794989889136,
+    "message": "{\"time\": \"2026-11-18T08:18:09.136Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 33ms\", \"trace_id\": \"078697d65eec37d8\"}",
+    "ingestionTime": 1794989889912,
+    "eventId": "15989079892768002710305087423540539608729747701550981986"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989887849,
+    "message": "{\"time\": \"2026-11-18T08:18:07.849Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 45ms\", \"trace_id\": \"07e0c82427103970\"}",
+    "ingestionTime": 1794989888206,
+    "eventId": "54885568406396239330728711886775436055781138432985710767"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794989910625,
+    "message": "{\"time\": \"2026-11-18T08:18:30.625Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 15ms\", \"trace_id\": \"b739a101ecc460e1\"}",
+    "ingestionTime": 1794989911386,
+    "eventId": "32618729541473320453587203482491203557372098841355153885"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989946152,
+    "message": "{\"time\": \"2026-11-18T08:19:06.152Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 44ms\", \"trace_id\": \"37506a3adef00572\"}",
+    "ingestionTime": 1794989946643,
+    "eventId": "90294626620705848927728112536372243985229578247751749549"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794989984397,
+    "message": "{\"time\": \"2026-11-18T08:19:44.397Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 15ms\", \"trace_id\": \"c230bd9ad567882e\"}",
+    "ingestionTime": 1794989984915,
+    "eventId": "52320474709184473786593545334569802164007853686166496602"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794989987723,
+    "message": "{\"time\": \"2026-11-18T08:19:47.723Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 30ms\", \"trace_id\": \"ccace0e5424f246d\"}",
+    "ingestionTime": 1794989988571,
+    "eventId": "85548341352070398546071988855922810011641416780976293403"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794990021900,
+    "message": "{\"time\": \"2026-11-18T08:20:21.900Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 35ms\", \"trace_id\": \"b4004c5b921b0c9a\"}",
+    "ingestionTime": 1794990022402,
+    "eventId": "54855290217273438015303973457225512752049271902710010061"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794990025954,
+    "message": "{\"time\": \"2026-11-18T08:20:25.954Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 19ms\", \"trace_id\": \"b94ee1eca5ee2515\"}",
+    "ingestionTime": 1794990026579,
+    "eventId": "64281272676896433509353853269235763954468489645788290939"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990014464,
+    "message": "{\"time\": \"2026-11-18T08:20:14.464Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 6ms\", \"trace_id\": \"ae5077744e1f3a4c\"}",
+    "ingestionTime": 1794990015283,
+    "eventId": "11640731908531554562881399761925577272958055751685452641"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794990084888,
+    "message": "{\"time\": \"2026-11-18T08:21:24.888Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 49ms\", \"trace_id\": \"7eec5f628bd89b93\"}",
+    "ingestionTime": 1794990085695,
+    "eventId": "59653671428872158793190526377178580683447352372504577499"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794990112200,
+    "message": "{\"time\": \"2026-11-18T08:21:52.200Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 11ms\", \"trace_id\": \"945bfcd1df7a989d\"}",
+    "ingestionTime": 1794990113017,
+    "eventId": "29887570444603064136239166462432439792763966346066273701"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990088477,
+    "message": "{\"time\": \"2026-11-18T08:21:28.477Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 34ms\", \"trace_id\": \"b69e063c1c11f55f\"}",
+    "ingestionTime": 1794990089106,
+    "eventId": "34243456808772370556855159784834273506431828419538925751"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990144380,
+    "message": "{\"time\": \"2026-11-18T08:22:24.380Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 31ms\", \"trace_id\": \"8a7619759e1372c2\"}",
+    "ingestionTime": 1794990145004,
+    "eventId": "42333178327064864999776182038002998023267583380225057278"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990167358,
+    "message": "{\"time\": \"2026-11-18T08:22:47.358Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 58ms\", \"trace_id\": \"90e840e62ee98482\"}",
+    "ingestionTime": 1794990167893,
+    "eventId": "97761988211162970673235280736253355761605287970251052625"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794990134661,
+    "message": "{\"time\": \"2026-11-18T08:22:14.661Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 30ms\", \"trace_id\": \"3f1ae39d2604a974\"}",
+    "ingestionTime": 1794990135469,
+    "eventId": "90562356978491859705883927265250274765433753751426374478"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990231598,
+    "message": "{\"time\": \"2026-11-18T08:23:51.598Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 6ms\", \"trace_id\": \"89903756584051f3\"}",
+    "ingestionTime": 1794990232157,
+    "eventId": "86534199432045979424050172065922521344322053011163162865"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990203432,
+    "message": "{\"time\": \"2026-11-18T08:23:23.432Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 48ms\", \"trace_id\": \"9146c72b96a0ebe7\"}",
+    "ingestionTime": 1794990204000,
+    "eventId": "46125279963470105560911784087986906971987574221069952585"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794990199699,
+    "message": "{\"time\": \"2026-11-18T08:23:19.699Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 32ms\", \"trace_id\": \"e912de07b36d4535\"}",
+    "ingestionTime": 1794990199914,
+    "eventId": "51870285554426212759668956289438532333312853207265264286"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990262111,
+    "message": "{\"time\": \"2026-11-18T08:24:22.111Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 51ms\", \"trace_id\": \"1cecf6080059ad6a\"}",
+    "ingestionTime": 1794990262357,
+    "eventId": "08573067037307283371806462843177597585594293679290359851"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990286617,
+    "message": "{\"time\": \"2026-11-18T08:24:46.617Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 31ms\", \"trace_id\": \"d53456ae799685ab\"}",
+    "ingestionTime": 1794990286887,
+    "eventId": "88618280524487849673153044426470006387604504249038858791"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990240411,
+    "message": "{\"time\": \"2026-11-18T08:24:00.411Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 47ms\", \"trace_id\": \"7299a2f4f8c59513\"}",
+    "ingestionTime": 1794990241149,
+    "eventId": "58229335241241492597346388915522683535194623099940578398"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794990307630,
+    "message": "{\"time\": \"2026-11-18T08:25:07.630Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 53ms\", \"trace_id\": \"eaea1fdd9dd9f809\"}",
+    "ingestionTime": 1794990308048,
+    "eventId": "56257495991485248163715767835823956555352818930445126617"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794990322455,
+    "message": "{\"time\": \"2026-11-18T08:25:22.455Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 32ms\", \"trace_id\": \"2ada807e4529a9e3\"}",
+    "ingestionTime": 1794990323035,
+    "eventId": "17179789902117731390801390131293427119109834037490839462"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990358738,
+    "message": "{\"time\": \"2026-11-18T08:25:58.738Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 31ms\", \"trace_id\": \"51eb84924d44757e\"}",
+    "ingestionTime": 1794990358939,
+    "eventId": "94020973229860443444306595462829316463780580336597566263"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794990378897,
+    "message": "{\"time\": \"2026-11-18T08:26:18.897Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 41ms\", \"trace_id\": \"e0fa7f5fefcb4491\"}",
+    "ingestionTime": 1794990379547,
+    "eventId": "80383962830142142569421045724284687394555276962035320506"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794990409511,
+    "message": "{\"time\": \"2026-11-18T08:26:49.511Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 49ms\", \"trace_id\": \"56b57dd01b68fca2\"}",
+    "ingestionTime": 1794990409898,
+    "eventId": "55992854821131383423366590694961275755783144643696313093"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794990386328,
+    "message": "{\"time\": \"2026-11-18T08:26:26.328Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 60ms\", \"trace_id\": \"5e56b899daac8b7a\"}",
+    "ingestionTime": 1794990387083,
+    "eventId": "87017470686040219866017014473296414431725510822783167223"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990421945,
+    "message": "{\"time\": \"2026-11-18T08:27:01.945Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 30ms\", \"trace_id\": \"313bd06f068e3fd4\"}",
+    "ingestionTime": 1794990422625,
+    "eventId": "21202944688890568352071257236338785514299512421512114959"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794990452215,
+    "message": "{\"time\": \"2026-11-18T08:27:32.215Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 56ms\", \"trace_id\": \"ee967a8a0aad4abd\"}",
+    "ingestionTime": 1794990452896,
+    "eventId": "74244112785491366083504577151751309221815288141483298582"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794990471544,
+    "message": "{\"time\": \"2026-11-18T08:27:51.544Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 47ms\", \"trace_id\": \"517c638939f9451a\"}",
+    "ingestionTime": 1794990472205,
+    "eventId": "32945459088102151527911747398530401053738142063661108564"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794990501809,
+    "message": "{\"time\": \"2026-11-18T08:28:21.809Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 54ms\", \"trace_id\": \"b3171024e0774757\"}",
+    "ingestionTime": 1794990502107,
+    "eventId": "82297632087069032223967551502586947959251016318254801827"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990497517,
+    "message": "{\"time\": \"2026-11-18T08:28:17.517Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 42ms\", \"trace_id\": \"f3d6d11d60a8bf37\"}",
+    "ingestionTime": 1794990497866,
+    "eventId": "78654429167737515382526614872660487475208255250623114739"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990522611,
+    "message": "{\"time\": \"2026-11-18T08:28:42.611Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 27ms\", \"trace_id\": \"6d43a023ae23da1d\"}",
+    "ingestionTime": 1794990523502,
+    "eventId": "34490698276818917889567940401178213227395086006448004497"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990564302,
+    "message": "{\"time\": \"2026-11-18T08:29:24.302Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 10ms\", \"trace_id\": \"8da7a53f125a5064\"}",
+    "ingestionTime": 1794990564542,
+    "eventId": "06261856814071147748315632710677199520089701302058189584"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794990564372,
+    "message": "{\"time\": \"2026-11-18T08:29:24.372Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 37ms\", \"trace_id\": \"8c954ad7fb04debf\"}",
+    "ingestionTime": 1794990565149,
+    "eventId": "64747774103211789983218064147803723994782576428181803311"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794990574252,
+    "message": "{\"time\": \"2026-11-18T08:29:34.252Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 15ms\", \"trace_id\": \"3686e48cb216ce14\"}",
+    "ingestionTime": 1794990574587,
+    "eventId": "53503411979554012410776315059378591790497251245881539479"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990627239,
+    "message": "{\"time\": \"2026-11-18T08:30:27.239Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 11ms\", \"trace_id\": \"c17cedf93dcba467\"}",
+    "ingestionTime": 1794990627953,
+    "eventId": "93128496995789283966724298543886767285168267323725181925"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990652062,
+    "message": "{\"time\": \"2026-11-18T08:30:52.062Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 43ms\", \"trace_id\": \"e22ad70f1ef0e6e9\"}",
+    "ingestionTime": 1794990652823,
+    "eventId": "36347176526852214551868180831376732503234970620231215097"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794990614683,
+    "message": "{\"time\": \"2026-11-18T08:30:14.683Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 46ms\", \"trace_id\": \"72a95d0cfc6cb0dc\"}",
+    "ingestionTime": 1794990615004,
+    "eventId": "04992424389840064958286544688829318857036868136632977124"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794990715718,
+    "message": "{\"time\": \"2026-11-18T08:31:55.718Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 31ms\", \"trace_id\": \"ae260a8a51467389\"}",
+    "ingestionTime": 1794990716173,
+    "eventId": "22127175834717571568799313631334135026464241230145935889"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794990674117,
+    "message": "{\"time\": \"2026-11-18T08:31:14.117Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 37ms\", \"trace_id\": \"9f6d911144e2282f\"}",
+    "ingestionTime": 1794990674952,
+    "eventId": "26291770297179170416234816893535663734932312987193055393"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794990682583,
+    "message": "{\"time\": \"2026-11-18T08:31:22.583Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 39ms\", \"trace_id\": \"2a50e80b1270e941\"}",
+    "ingestionTime": 1794990682840,
+    "eventId": "05684365329744800598267998874203099011489010116624708797"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794990772951,
+    "message": "{\"time\": \"2026-11-18T08:32:52.951Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 22ms\", \"trace_id\": \"69d6839d0650c615\"}",
+    "ingestionTime": 1794990773751,
+    "eventId": "47661576026871061464258610166950597515654731352831377226"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794990748449,
+    "message": "{\"time\": \"2026-11-18T08:32:28.449Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 9ms\", \"trace_id\": \"404757b1a0561a4c\"}",
+    "ingestionTime": 1794990749119,
+    "eventId": "57431834888147707578017209077632141153035751258280870388"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794990751414,
+    "message": "{\"time\": \"2026-11-18T08:32:31.414Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 35ms\", \"trace_id\": \"a9e22601da3b55ce\"}",
+    "ingestionTime": 1794990752228,
+    "eventId": "48490483751463381068496092884085041884635180836405868363"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990822669,
+    "message": "{\"time\": \"2026-11-18T08:33:42.669Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 23ms\", \"trace_id\": \"2db7d1cf4be6c5fc\"}",
+    "ingestionTime": 1794990823529,
+    "eventId": "12440097958636614561072512056394389302340288532811730075"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990796778,
+    "message": "{\"time\": \"2026-11-18T08:33:16.778Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 40ms\", \"trace_id\": \"1a2081391682a896\"}",
+    "ingestionTime": 1794990797652,
+    "eventId": "24401081920318241966984759995133916542277654327123147534"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794990783756,
+    "message": "{\"time\": \"2026-11-18T08:33:03.756Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 34ms\", \"trace_id\": \"acd18c2f09ada1ac\"}",
+    "ingestionTime": 1794990784470,
+    "eventId": "92614631814121213285882701534286321481203906302666451920"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794990842904,
+    "message": "{\"time\": \"2026-11-18T08:34:02.904Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 55ms\", \"trace_id\": \"90a8fb8081d0b830\"}",
+    "ingestionTime": 1794990843465,
+    "eventId": "33191724152925751910582782306052319621402793778576695023"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794990848643,
+    "message": "{\"time\": \"2026-11-18T08:34:08.643Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 9ms\", \"trace_id\": \"46ee1d3654fd7440\"}",
+    "ingestionTime": 1794990849072,
+    "eventId": "23478284868937816711540486199043116792124661048147673696"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794990898145,
+    "message": "{\"time\": \"2026-11-18T08:34:58.145Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 14ms\", \"trace_id\": \"142f0aa50609aa28\"}",
+    "ingestionTime": 1794990898554,
+    "eventId": "08495516434200241663992920081190030383456372616173348795"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794990926398,
+    "message": "{\"time\": \"2026-11-18T08:35:26.398Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 34ms\", \"trace_id\": \"067a2ca057e70ecd\"}",
+    "ingestionTime": 1794990926641,
+    "eventId": "18045168409389555286099961813650911528403462951234505616"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990902065,
+    "message": "{\"time\": \"2026-11-18T08:35:02.065Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 45ms\", \"trace_id\": \"d880d171eece45ce\"}",
+    "ingestionTime": 1794990902814,
+    "eventId": "17584868166408404126535791883428505351629216707745355980"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794990920384,
+    "message": "{\"time\": \"2026-11-18T08:35:20.384Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 49ms\", \"trace_id\": \"9e803b526a83f9e4\"}",
+    "ingestionTime": 1794990920806,
+    "eventId": "65426864522389367982835165115072978925308917899073955223"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991002367,
+    "message": "{\"time\": \"2026-11-18T08:36:42.367Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 34ms\", \"trace_id\": \"df5a3281b122d86e\"}",
+    "ingestionTime": 1794991002714,
+    "eventId": "88743890202863289109693509320136240747078544133155534053"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991010646,
+    "message": "{\"time\": \"2026-11-18T08:36:50.646Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 28ms\", \"trace_id\": \"81ee085bdb5aae8e\"}",
+    "ingestionTime": 1794991011050,
+    "eventId": "42903141938174550911855778752317107845374304344223800529"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991018659,
+    "message": "{\"time\": \"2026-11-18T08:36:58.659Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 46ms\", \"trace_id\": \"e86d1eba803b6cdb\"}",
+    "ingestionTime": 1794991019300,
+    "eventId": "27855601299773371554820709340802745917528465115086405301"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991053463,
+    "message": "{\"time\": \"2026-11-18T08:37:33.463Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 14ms\", \"trace_id\": \"4185fd4b37637b92\"}",
+    "ingestionTime": 1794991053861,
+    "eventId": "97842393486063823998797413511773358675469020113410145662"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991053609,
+    "message": "{\"time\": \"2026-11-18T08:37:33.609Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 14ms\", \"trace_id\": \"a31ed657beff26bc\"}",
+    "ingestionTime": 1794991054260,
+    "eventId": "23733724609831216616943514547397819539984540966519268985"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991042532,
+    "message": "{\"time\": \"2026-11-18T08:37:22.532Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 60ms\", \"trace_id\": \"4f8a5362a8c115ff\"}",
+    "ingestionTime": 1794991042979,
+    "eventId": "76697117842193876007133072436154225886192537045332852126"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991084650,
+    "message": "{\"time\": \"2026-11-18T08:38:04.650Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 16ms\", \"trace_id\": \"7ce5eaf837ac0c74\"}",
+    "ingestionTime": 1794991084963,
+    "eventId": "71671361401569990046562240197474079316536629508424056634"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991118610,
+    "message": "{\"time\": \"2026-11-18T08:38:38.610Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 19ms\", \"trace_id\": \"bdd7834f676f2c93\"}",
+    "ingestionTime": 1794991119455,
+    "eventId": "18129776649495141554157213194684285335128215560775029448"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991114581,
+    "message": "{\"time\": \"2026-11-18T08:38:34.581Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 9ms\", \"trace_id\": \"bdf4099509acbef6\"}",
+    "ingestionTime": 1794991115210,
+    "eventId": "12362114185524273204646076116474125322117660973944181719"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991194231,
+    "message": "{\"time\": \"2026-11-18T08:39:54.231Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 24ms\", \"trace_id\": \"3a707efccedec55b\"}",
+    "ingestionTime": 1794991194471,
+    "eventId": "76279989712894184758958081499644638538946772558169879922"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991177479,
+    "message": "{\"time\": \"2026-11-18T08:39:37.479Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 9ms\", \"trace_id\": \"bb537300bffce697\"}",
+    "ingestionTime": 1794991178016,
+    "eventId": "72637090685738837185441739930970349162654558398835199722"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991193062,
+    "message": "{\"time\": \"2026-11-18T08:39:53.062Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 31ms\", \"trace_id\": \"cf3d5475bdb8ed79\"}",
+    "ingestionTime": 1794991193451,
+    "eventId": "75122536217390866015887114756837645007303512850285045912"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991219615,
+    "message": "{\"time\": \"2026-11-18T08:40:19.615Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 48ms\", \"trace_id\": \"76c082b985450206\"}",
+    "ingestionTime": 1794991220267,
+    "eventId": "13427912085491818126428093439835997644419606164011810853"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991220068,
+    "message": "{\"time\": \"2026-11-18T08:40:20.068Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 47ms\", \"trace_id\": \"813b5f4687bef6fb\"}",
+    "ingestionTime": 1794991220676,
+    "eventId": "22570587487610534385792772663886581057946966302868102254"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991200122,
+    "message": "{\"time\": \"2026-11-18T08:40:00.122Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 44ms\", \"trace_id\": \"e587cf2d47487e8f\"}",
+    "ingestionTime": 1794991200368,
+    "eventId": "38674634890283876758389538133806358442257751362557460246"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991270099,
+    "message": "{\"time\": \"2026-11-18T08:41:10.099Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 35ms\", \"trace_id\": \"e5f5f09eef581c14\"}",
+    "ingestionTime": 1794991270318,
+    "eventId": "85347055000112402204822276876530082005095014501338223155"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991303268,
+    "message": "{\"time\": \"2026-11-18T08:41:43.268Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 14ms\", \"trace_id\": \"21ad46e73fd83599\"}",
+    "ingestionTime": 1794991304158,
+    "eventId": "50534515710442205525527169938057507992832604283241166666"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991290689,
+    "message": "{\"time\": \"2026-11-18T08:41:30.689Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 11ms\", \"trace_id\": \"16d42e7a9fe02546\"}",
+    "ingestionTime": 1794991291238,
+    "eventId": "18507026074160733916384693090861505997392770974279715621"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991374839,
+    "message": "{\"time\": \"2026-11-18T08:42:54.839Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 55ms\", \"trace_id\": \"36f91310ffb56624\"}",
+    "ingestionTime": 1794991375688,
+    "eventId": "40965791223216963933969368973416118285790629928288501266"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991359136,
+    "message": "{\"time\": \"2026-11-18T08:42:39.136Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 28ms\", \"trace_id\": \"3613a02895475db2\"}",
+    "ingestionTime": 1794991359811,
+    "eventId": "22698960914594416951091939093614068076081703902473508354"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991326848,
+    "message": "{\"time\": \"2026-11-18T08:42:06.848Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 32ms\", \"trace_id\": \"fcf48bc340a0fc87\"}",
+    "ingestionTime": 1794991327456,
+    "eventId": "42715603536660611154992193645467194391270441414178554737"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991427256,
+    "message": "{\"time\": \"2026-11-18T08:43:47.256Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 60ms\", \"trace_id\": \"38f5364a65e78d4c\"}",
+    "ingestionTime": 1794991427686,
+    "eventId": "62810836345267622679055984210389856911376758352175467677"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991413457,
+    "message": "{\"time\": \"2026-11-18T08:43:33.457Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 11ms\", \"trace_id\": \"8d0aa1682c590eed\"}",
+    "ingestionTime": 1794991414273,
+    "eventId": "76778841365449394235893633869481762582906930667265375353"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991420310,
+    "message": "{\"time\": \"2026-11-18T08:43:40.310Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 28ms\", \"trace_id\": \"142e4b4e9d0e77dc\"}",
+    "ingestionTime": 1794991420969,
+    "eventId": "61777188709192919884309358153018996148528702407382102242"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991449085,
+    "message": "{\"time\": \"2026-11-18T08:44:09.085Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 27ms\", \"trace_id\": \"8a03bbec6c958e61\"}",
+    "ingestionTime": 1794991449963,
+    "eventId": "93800511431795199250638757125696926500465704803756724009"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991487300,
+    "message": "{\"time\": \"2026-11-18T08:44:47.300Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 43ms\", \"trace_id\": \"678db98e6fdbd7b9\"}",
+    "ingestionTime": 1794991488076,
+    "eventId": "28882396161409248308597172976822677818509685441397495888"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991477137,
+    "message": "{\"time\": \"2026-11-18T08:44:37.137Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 37ms\", \"trace_id\": \"b3c93fe7ab2e613c\"}",
+    "ingestionTime": 1794991477863,
+    "eventId": "60389425475102112068186904318154352306525431173377761719"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991527631,
+    "message": "{\"time\": \"2026-11-18T08:45:27.631Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 4ms\", \"trace_id\": \"918b3517b83dd3dd\"}",
+    "ingestionTime": 1794991528382,
+    "eventId": "24061472167800341532244919969820784776514202334805990270"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991515928,
+    "message": "{\"time\": \"2026-11-18T08:45:15.928Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 59ms\", \"trace_id\": \"4773b24e0a4c5ff3\"}",
+    "ingestionTime": 1794991516537,
+    "eventId": "52657587039424590667893333579303158118890168983887448715"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991548071,
+    "message": "{\"time\": \"2026-11-18T08:45:48.071Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 28ms\", \"trace_id\": \"ee3693dde7436fab\"}",
+    "ingestionTime": 1794991548539,
+    "eventId": "10619570631822794940267226470434471468417596334524500969"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991612674,
+    "message": "{\"time\": \"2026-11-18T08:46:52.674Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 49ms\", \"trace_id\": \"0dc5b49c4c1d6237\"}",
+    "ingestionTime": 1794991613392,
+    "eventId": "20668068766927852745953132448631936983475028646511184756"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991589524,
+    "message": "{\"time\": \"2026-11-18T08:46:29.524Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 49ms\", \"trace_id\": \"62af8fe01ef9aeac\"}",
+    "ingestionTime": 1794991589815,
+    "eventId": "36138257556301302645037482241758336701633364367226673553"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991579839,
+    "message": "{\"time\": \"2026-11-18T08:46:19.839Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 16ms\", \"trace_id\": \"dfb2f3cc4ddb5fc0\"}",
+    "ingestionTime": 1794991580340,
+    "eventId": "90578931330377471827107729896549381169755384309671559046"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991664450,
+    "message": "{\"time\": \"2026-11-18T08:47:44.450Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 43ms\", \"trace_id\": \"71a55b98d6dcd9ad\"}",
+    "ingestionTime": 1794991664987,
+    "eventId": "03064644308137633095195003660622275306107469678103367056"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991620427,
+    "message": "{\"time\": \"2026-11-18T08:47:00.427Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 48ms\", \"trace_id\": \"8b56851724ed8fd2\"}",
+    "ingestionTime": 1794991621318,
+    "eventId": "06310037464438265519833059405057945944662177434409512405"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991643004,
+    "message": "{\"time\": \"2026-11-18T08:47:23.004Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 41ms\", \"trace_id\": \"dfcae3ad00a07ce1\"}",
+    "ingestionTime": 1794991643355,
+    "eventId": "65066145613238106050014515200255507402702329669295696801"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991684707,
+    "message": "{\"time\": \"2026-11-18T08:48:04.707Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 18ms\", \"trace_id\": \"3ec710da0ce7466b\"}",
+    "ingestionTime": 1794991685497,
+    "eventId": "70603863850998748657101915638465003611114571599554228438"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991700098,
+    "message": "{\"time\": \"2026-11-18T08:48:20.098Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 12ms\", \"trace_id\": \"4b09fb6c4a09bd75\"}",
+    "ingestionTime": 1794991700759,
+    "eventId": "37765544957626608135920738262048091599350573487217194386"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991699898,
+    "message": "{\"time\": \"2026-11-18T08:48:19.898Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 8ms\", \"trace_id\": \"5f38bb2edbeae811\"}",
+    "ingestionTime": 1794991700747,
+    "eventId": "83690633973173440405757907683158894784512234448077891338"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991783437,
+    "message": "{\"time\": \"2026-11-18T08:49:43.437Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 7ms\", \"trace_id\": \"15eedc072b62f461\"}",
+    "ingestionTime": 1794991783887,
+    "eventId": "26630060178836609811158763850894210343575750080708015057"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991783021,
+    "message": "{\"time\": \"2026-11-18T08:49:43.021Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 56ms\", \"trace_id\": \"52d2bff083ec02a5\"}",
+    "ingestionTime": 1794991783561,
+    "eventId": "61211577478929720878428971705612402148560406999049916252"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991740016,
+    "message": "{\"time\": \"2026-11-18T08:49:00.016Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 39ms\", \"trace_id\": \"3047201742d0c428\"}",
+    "ingestionTime": 1794991740745,
+    "eventId": "22599284060403582030980864533135389855543617610553371816"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991851071,
+    "message": "{\"time\": \"2026-11-18T08:50:51.071Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 11ms\", \"trace_id\": \"d2f5bd7c748ed6d5\"}",
+    "ingestionTime": 1794991851833,
+    "eventId": "49835801160201327187688485951119238363016648397785177097"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991827103,
+    "message": "{\"time\": \"2026-11-18T08:50:27.103Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 51ms\", \"trace_id\": \"52a6dc766325ae8e\"}",
+    "ingestionTime": 1794991827431,
+    "eventId": "07795234256144639856815105230042802035542741639095160006"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991832517,
+    "message": "{\"time\": \"2026-11-18T08:50:32.517Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 32ms\", \"trace_id\": \"012fbabea716b6f3\"}",
+    "ingestionTime": 1794991832817,
+    "eventId": "38991821456236331834809507122090086720358365996367276860"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991903882,
+    "message": "{\"time\": \"2026-11-18T08:51:43.882Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 42ms\", \"trace_id\": \"b8776904ee5cb26f\"}",
+    "ingestionTime": 1794991904293,
+    "eventId": "57489372069504968084068739886519862100472419263708557477"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991887922,
+    "message": "{\"time\": \"2026-11-18T08:51:27.922Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 36ms\", \"trace_id\": \"bfdac98dfb7ea94f\"}",
+    "ingestionTime": 1794991888447,
+    "eventId": "69997075645621761888894473432554586816989581976193126603"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991868389,
+    "message": "{\"time\": \"2026-11-18T08:51:08.389Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 18ms\", \"trace_id\": \"c860e0ca825a6cf6\"}",
+    "ingestionTime": 1794991868630,
+    "eventId": "55344903855080224393331552721497282042138837091537194266"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991926396,
+    "message": "{\"time\": \"2026-11-18T08:52:06.396Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 14ms\", \"trace_id\": \"f3dd351cac2a0c6c\"}",
+    "ingestionTime": 1794991926723,
+    "eventId": "70264065579698561115136303368042189293778252480725348413"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991956980,
+    "message": "{\"time\": \"2026-11-18T08:52:36.980Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 8ms\", \"trace_id\": \"60e5d40bf23b9308\"}",
+    "ingestionTime": 1794991957286,
+    "eventId": "66634886326408909750182094386913510280074015150455904663"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991961860,
+    "message": "{\"time\": \"2026-11-18T08:52:41.860Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 21ms\", \"trace_id\": \"ead3f8952999a693\"}",
+    "ingestionTime": 1794991962647,
+    "eventId": "05100720181123572916824604185251028694238781941249923494"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992028102,
+    "message": "{\"time\": \"2026-11-18T08:53:48.102Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 50ms\", \"trace_id\": \"3a0bfb6739ddff6c\"}",
+    "ingestionTime": 1794992028562,
+    "eventId": "13767831978303538240746499501914887129636729032605397856"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992036478,
+    "message": "{\"time\": \"2026-11-18T08:53:56.478Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 13ms\", \"trace_id\": \"574e6c7728ea9126\"}",
+    "ingestionTime": 1794992037348,
+    "eventId": "42540741923284455589623106714611325020122377238841525651"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992018010,
+    "message": "{\"time\": \"2026-11-18T08:53:38.010Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 18ms\", \"trace_id\": \"ef2fe055b015383a\"}",
+    "ingestionTime": 1794992018634,
+    "eventId": "70371943421906205123957848092095553303013601139597296340"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992080610,
+    "message": "{\"time\": \"2026-11-18T08:54:40.610Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 31ms\", \"trace_id\": \"aecc7c882c703289\"}",
+    "ingestionTime": 1794992081193,
+    "eventId": "71729936989968517566596660279830257502565185938298336465"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992055266,
+    "message": "{\"time\": \"2026-11-18T08:54:15.266Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 20ms\", \"trace_id\": \"7bac35ec4b70bf63\"}",
+    "ingestionTime": 1794992055655,
+    "eventId": "11738022643952725862229347326580702809679294117344403605"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992082066,
+    "message": "{\"time\": \"2026-11-18T08:54:42.066Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 59ms\", \"trace_id\": \"95ae610f34fd6e28\"}",
+    "ingestionTime": 1794992082404,
+    "eventId": "94721862258689559444131368992581214653959751760324903844"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992100750,
+    "message": "{\"time\": \"2026-11-18T08:55:00.750Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 60ms\", \"trace_id\": \"a471a61cb067c086\"}",
+    "ingestionTime": 1794992101026,
+    "eventId": "95977281355130582637225684226984981063825415447831863147"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992158126,
+    "message": "{\"time\": \"2026-11-18T08:55:58.126Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 48ms\", \"trace_id\": \"f5c9091f83e88739\"}",
+    "ingestionTime": 1794992158513,
+    "eventId": "54555090915526324518586248535626209615155662743969008768"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992158886,
+    "message": "{\"time\": \"2026-11-18T08:55:58.886Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /health 200 23ms\", \"trace_id\": \"799c7429e779f833\"}",
+    "ingestionTime": 1794992159222,
+    "eventId": "86588657767832986543610938882231954821970199549816663120"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992167865,
+    "message": "{\"time\": \"2026-11-18T08:56:07.865Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 33ms\", \"trace_id\": \"d013d4ba7580b1bb\"}",
+    "ingestionTime": 1794992168709,
+    "eventId": "78684161238053638076051540376688082163175628324889595079"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992202496,
+    "message": "{\"time\": \"2026-11-18T08:56:42.496Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 45ms\", \"trace_id\": \"1002277303ffaadd\"}",
+    "ingestionTime": 1794992203120,
+    "eventId": "13476917601206236988719263616148320086681864248650210691"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992161030,
+    "message": "{\"time\": \"2026-11-18T08:56:01.030Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 47ms\", \"trace_id\": \"2943a56be2e054a3\"}",
+    "ingestionTime": 1794992161662,
+    "eventId": "33562628040801814681487825422609504067657085618367064182"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992260604,
+    "message": "{\"time\": \"2026-11-18T08:57:40.604Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 14ms\", \"trace_id\": \"46696bc3701478e1\"}",
+    "ingestionTime": 1794992261437,
+    "eventId": "42194565408006723901043367418449903693422821638017318727"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992250002,
+    "message": "{\"time\": \"2026-11-18T08:57:30.002Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 10ms\", \"trace_id\": \"8655cfa5a29ec733\"}",
+    "ingestionTime": 1794992250373,
+    "eventId": "32918559044669392958168831064373465654822968248517407612"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992243276,
+    "message": "{\"time\": \"2026-11-18T08:57:23.276Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 4ms\", \"trace_id\": \"6034357f8060c21d\"}",
+    "ingestionTime": 1794992243863,
+    "eventId": "48720169362251434716166091886327329137582866380611545599"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992285426,
+    "message": "{\"time\": \"2026-11-18T08:58:05.426Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 4ms\", \"trace_id\": \"87cad07d4f0d30f4\"}",
+    "ingestionTime": 1794992286047,
+    "eventId": "93020998713248309048203033071592459622714876782508951753"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992338659,
+    "message": "{\"time\": \"2026-11-18T08:58:58.659Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 17ms\", \"trace_id\": \"29e5e2d7aca57ac9\"}",
+    "ingestionTime": 1794992339319,
+    "eventId": "80288109972835847542956788249053031397966060112115823193"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992302731,
+    "message": "{\"time\": \"2026-11-18T08:58:22.731Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/products 200 49ms\", \"trace_id\": \"24063ed0a9d24453\"}",
+    "ingestionTime": 1794992303423,
+    "eventId": "64260120270960323743255516400348545686736237523418411434"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992382319,
+    "message": "{\"time\": \"2026-11-18T08:59:42.319Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 7ms\", \"trace_id\": \"7345c3140f2ec54d\"}",
+    "ingestionTime": 1794992382805,
+    "eventId": "15042471645200477598098640173595246144590109851218004438"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992381813,
+    "message": "{\"time\": \"2026-11-18T08:59:41.813Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/cart 200 51ms\", \"trace_id\": \"ce9f65057ec98ab9\"}",
+    "ingestionTime": 1794992382158,
+    "eventId": "56931188566762306864438318828049030618338642822479581948"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992373271,
+    "message": "{\"time\": \"2026-11-18T08:59:33.271Z\", \"level\": \"INFO\", \"service\": \"payments-service\", \"message\": \"GET /api/orders 200 4ms\", \"trace_id\": \"8799eddfa85fb3cd\"}",
+    "ingestionTime": 1794992373584,
+    "eventId": "39347387094496193564231614748792100340734318769684641554"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991720466,
+    "message": "{\"time\": \"2026-11-18T08:48:40.466Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991720727,
+    "eventId": "88965216061899216844799553686492966092593315505528821220"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991700448,
+    "message": "{\"time\": \"2026-11-18T08:48:20.448Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991701309,
+    "eventId": "62241718221812949190390962773756555025502477073618528726"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991687198,
+    "message": "{\"time\": \"2026-11-18T08:48:07.198Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991687422,
+    "eventId": "37908483446820485997605931046883632659842001232082465814"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991682689,
+    "message": "{\"time\": \"2026-11-18T08:48:02.689Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991683340,
+    "eventId": "12800536171474505609566560339050981438635541287626868236"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991685407,
+    "message": "{\"time\": \"2026-11-18T08:48:05.407Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991686266,
+    "eventId": "84120354550248389596847728099663312289017276532712854297"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991738239,
+    "message": "{\"time\": \"2026-11-18T08:48:58.239Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991738860,
+    "eventId": "13715035987087645468165004851278797218565038139308013254"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991707089,
+    "message": "{\"time\": \"2026-11-18T08:48:27.089Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991707312,
+    "eventId": "03767668573740491180673169480973817603356919395600516022"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991777870,
+    "message": "{\"time\": \"2026-11-18T08:49:37.870Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991778351,
+    "eventId": "21757786884236729139796735534779293105438751758593823346"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991796200,
+    "message": "{\"time\": \"2026-11-18T08:49:56.200Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991796555,
+    "eventId": "01318838201937665937159272156461166579867252145802449987"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991779420,
+    "message": "{\"time\": \"2026-11-18T08:49:39.420Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991779804,
+    "eventId": "43402297222418386510226702852148024493707236458266643315"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991752699,
+    "message": "{\"time\": \"2026-11-18T08:49:12.699Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991753393,
+    "eventId": "91079934323509703569421722886098263407858245862089822532"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991755892,
+    "message": "{\"time\": \"2026-11-18T08:49:15.892Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991756485,
+    "eventId": "17667225600110612140162707479957690624393412604347224643"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991783487,
+    "message": "{\"time\": \"2026-11-18T08:49:43.487Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991784021,
+    "eventId": "90103823496722441194413270415473750811175722025527259552"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991781552,
+    "message": "{\"time\": \"2026-11-18T08:49:41.552Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991781948,
+    "eventId": "92793364190281061065675232760180827470948668795654886673"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991802756,
+    "message": "{\"time\": \"2026-11-18T08:50:02.756Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991803266,
+    "eventId": "17849098653845807328035990714328826209186959918855804770"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991831403,
+    "message": "{\"time\": \"2026-11-18T08:50:31.403Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991831803,
+    "eventId": "12293383514614622430336380002203897108825485814608724448"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991849058,
+    "message": "{\"time\": \"2026-11-18T08:50:49.058Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991849539,
+    "eventId": "66406728145150653108617219764586938689873863599520549999"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991816876,
+    "message": "{\"time\": \"2026-11-18T08:50:16.876Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991817641,
+    "eventId": "55364727703035866502913438934212576211519035912259897464"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991841523,
+    "message": "{\"time\": \"2026-11-18T08:50:41.523Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991842397,
+    "eventId": "68191182401645981144035917238378252026696324979842905143"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991813154,
+    "message": "{\"time\": \"2026-11-18T08:50:13.154Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991814033,
+    "eventId": "63669054475054701785460428311218399822565874841598278479"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991827252,
+    "message": "{\"time\": \"2026-11-18T08:50:27.252Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991827696,
+    "eventId": "73330726468063279201573969266332257921566959758363850650"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991836626,
+    "message": "{\"time\": \"2026-11-18T08:50:36.626Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991836993,
+    "eventId": "64813022822097333194904357298165780717040537639809626503"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991902177,
+    "message": "{\"time\": \"2026-11-18T08:51:42.177Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991902996,
+    "eventId": "90490724914879137995794399669989912776512118147201006853"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991897273,
+    "message": "{\"time\": \"2026-11-18T08:51:37.273Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991898084,
+    "eventId": "72619950169729106258531889536156223331602850164037761336"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991862584,
+    "message": "{\"time\": \"2026-11-18T08:51:02.584Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991863357,
+    "eventId": "71006273735427091176180012311451102367316847121023029657"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991911746,
+    "message": "{\"time\": \"2026-11-18T08:51:51.746Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991912295,
+    "eventId": "38530497033637051661489715412487312191971681768952160212"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991913056,
+    "message": "{\"time\": \"2026-11-18T08:51:53.056Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991913697,
+    "eventId": "86472441779810907113954896654681406122793904618806602761"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991862083,
+    "message": "{\"time\": \"2026-11-18T08:51:02.083Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991862845,
+    "eventId": "89266778770944019707956215700370103703052644338087443752"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991901714,
+    "message": "{\"time\": \"2026-11-18T08:51:41.714Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991901942,
+    "eventId": "01348792814459449196612271309019290815982153965213955783"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991962922,
+    "message": "{\"time\": \"2026-11-18T08:52:42.922Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991963254,
+    "eventId": "77586159812722356523424622480211772928444403965110410171"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991949601,
+    "message": "{\"time\": \"2026-11-18T08:52:29.601Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991950368,
+    "eventId": "47162678830288216996124795966089369283830361072062383737"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991972031,
+    "message": "{\"time\": \"2026-11-18T08:52:52.031Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991972571,
+    "eventId": "61470903188949707447465631099663331936692318820480998203"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991931675,
+    "message": "{\"time\": \"2026-11-18T08:52:11.675Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991931896,
+    "eventId": "59319253692700423629948234474179055177077486151473292713"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794991967386,
+    "message": "{\"time\": \"2026-11-18T08:52:47.386Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991967729,
+    "eventId": "75256293519777664288621219702624517777467795419736049717"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991958989,
+    "message": "{\"time\": \"2026-11-18T08:52:38.989Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991959786,
+    "eventId": "88849247683185937537270748408675496789694223898880783950"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991952544,
+    "message": "{\"time\": \"2026-11-18T08:52:32.544Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991952749,
+    "eventId": "25537710958534325185859982680397887338523642854824322095"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991993916,
+    "message": "{\"time\": \"2026-11-18T08:53:13.916Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991994568,
+    "eventId": "65090994319412792565582212853841396274697016880080506633"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992018035,
+    "message": "{\"time\": \"2026-11-18T08:53:38.035Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992018284,
+    "eventId": "80671095032673661903507232825087251929716320373781555786"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991987804,
+    "message": "{\"time\": \"2026-11-18T08:53:07.804Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991988077,
+    "eventId": "58148638257240183305302764024694923386081613653148764912"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992019019,
+    "message": "{\"time\": \"2026-11-18T08:53:39.019Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992019384,
+    "eventId": "10897224478106931330175313272086189939577185318204022984"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992016785,
+    "message": "{\"time\": \"2026-11-18T08:53:36.785Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992017567,
+    "eventId": "30119622235266724219963905023409965843418390148492269735"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794991997621,
+    "message": "{\"time\": \"2026-11-18T08:53:17.621Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991998107,
+    "eventId": "45944201287225967884773445947636184142948187693051083970"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794991984245,
+    "message": "{\"time\": \"2026-11-18T08:53:04.245Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794991984670,
+    "eventId": "02510840078254333397841867695061325773243636223721114740"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992018104,
+    "message": "{\"time\": \"2026-11-18T08:53:38.104Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992018949,
+    "eventId": "20291757440660601862657702470131141573091127441952059102"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992089767,
+    "message": "{\"time\": \"2026-11-18T08:54:49.767Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992090047,
+    "eventId": "03824285508711049981167396922339384197913425302836514905"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992049836,
+    "message": "{\"time\": \"2026-11-18T08:54:09.836Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992050153,
+    "eventId": "03761687369950880520211029083631190869475451609379890076"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992051697,
+    "message": "{\"time\": \"2026-11-18T08:54:11.697Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992052529,
+    "eventId": "31981111529637778963060341116904172267523426824522251883"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992072887,
+    "message": "{\"time\": \"2026-11-18T08:54:32.887Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992073357,
+    "eventId": "79549074011409928714267473653762475414889742112006290754"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992049066,
+    "message": "{\"time\": \"2026-11-18T08:54:09.066Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992049816,
+    "eventId": "34021265864179440677700820773851971658685192733411469452"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992042930,
+    "message": "{\"time\": \"2026-11-18T08:54:02.930Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992043649,
+    "eventId": "50543231674025513387670000171923337433750804462908600716"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992069512,
+    "message": "{\"time\": \"2026-11-18T08:54:29.512Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992070035,
+    "eventId": "21997966565164089841413600290335758516429834724405947726"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992098383,
+    "message": "{\"time\": \"2026-11-18T08:54:58.383Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992098944,
+    "eventId": "23909282488870344085792438568885910261785583060429893311"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992145837,
+    "message": "{\"time\": \"2026-11-18T08:55:45.837Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992146605,
+    "eventId": "51128943754729280354717883873656812395862102428904139810"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992111359,
+    "message": "{\"time\": \"2026-11-18T08:55:11.359Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992112239,
+    "eventId": "14526286279034114680767596856062158109382723326608026216"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992148650,
+    "message": "{\"time\": \"2026-11-18T08:55:48.650Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992149342,
+    "eventId": "41676748522628894513626966612682008457167949602315552091"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992153769,
+    "message": "{\"time\": \"2026-11-18T08:55:53.769Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992154277,
+    "eventId": "19572788371392571134774013007776634698188592671557800942"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992150633,
+    "message": "{\"time\": \"2026-11-18T08:55:50.633Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992151190,
+    "eventId": "11199173003654135182070388537552333689093583563440809951"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992151189,
+    "message": "{\"time\": \"2026-11-18T08:55:51.189Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992151483,
+    "eventId": "23809155355788015915973800546530574100344950126657474031"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992160932,
+    "message": "{\"time\": \"2026-11-18T08:56:00.932Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992161737,
+    "eventId": "05416350571380615359482016327689158223129459448989546113"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992170004,
+    "message": "{\"time\": \"2026-11-18T08:56:10.004Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992170473,
+    "eventId": "71649844031221196634174703244286780577800573884918363836"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992205669,
+    "message": "{\"time\": \"2026-11-18T08:56:45.669Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992206122,
+    "eventId": "60695622606521193634473990064616648755543191599901724104"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992168009,
+    "message": "{\"time\": \"2026-11-18T08:56:08.009Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992168546,
+    "eventId": "56384939006507839533073219477524889402850135392210829035"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992168932,
+    "message": "{\"time\": \"2026-11-18T08:56:08.932Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992169318,
+    "eventId": "20308113671767219242739890261970350988542828420737084402"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992210442,
+    "message": "{\"time\": \"2026-11-18T08:56:50.442Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992210919,
+    "eventId": "27879275304794814538778091376115429560145232451709288925"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992199688,
+    "message": "{\"time\": \"2026-11-18T08:56:39.688Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992200153,
+    "eventId": "17794541146237594840730645202915155906893622082943155020"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992193773,
+    "message": "{\"time\": \"2026-11-18T08:56:33.773Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992194430,
+    "eventId": "12032080484002916891162543693646836876204998677639968194"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992207656,
+    "message": "{\"time\": \"2026-11-18T08:56:47.656Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992208505,
+    "eventId": "50342136470678541935274529770588434854566868184042346672"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992167142,
+    "message": "{\"time\": \"2026-11-18T08:56:07.142Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992167469,
+    "eventId": "42294447704755738181955403206587172938481733832980520879"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992230904,
+    "message": "{\"time\": \"2026-11-18T08:57:10.904Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992231675,
+    "eventId": "69891604105791395282239616443107646397914482346209144189"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992259266,
+    "message": "{\"time\": \"2026-11-18T08:57:39.266Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992259744,
+    "eventId": "38877310102561458062896517239732222617914459570136063355"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992269750,
+    "message": "{\"time\": \"2026-11-18T08:57:49.750Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992270349,
+    "eventId": "00228432932465261791558566280991730260486959483927173734"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992276053,
+    "message": "{\"time\": \"2026-11-18T08:57:56.053Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992276700,
+    "eventId": "25231961600674014411148693149473577153424136817995338223"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992228827,
+    "message": "{\"time\": \"2026-11-18T08:57:08.827Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992229678,
+    "eventId": "69682594703633628746377057474547129124632595285474571074"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992246133,
+    "message": "{\"time\": \"2026-11-18T08:57:26.133Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992247010,
+    "eventId": "46442479956241756191905027783622880353672751541197237809"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992277889,
+    "message": "{\"time\": \"2026-11-18T08:57:57.889Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992278175,
+    "eventId": "82292820845772466475298361098196566789455226980997589398"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992233274,
+    "message": "{\"time\": \"2026-11-18T08:57:13.274Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992233644,
+    "eventId": "40962996264039801811191766144609496046954956054506220037"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992305102,
+    "message": "{\"time\": \"2026-11-18T08:58:25.102Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992305338,
+    "eventId": "05309330168367584863449508779878905748420980799721955804"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992308931,
+    "message": "{\"time\": \"2026-11-18T08:58:28.931Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992309825,
+    "eventId": "91277546847970443279729853647237759159848836077354317854"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992336362,
+    "message": "{\"time\": \"2026-11-18T08:58:56.362Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992337067,
+    "eventId": "56513857833872375736986873885110045734383596483099509034"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992303861,
+    "message": "{\"time\": \"2026-11-18T08:58:23.861Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992304349,
+    "eventId": "24687097460409846821515483430846193197334179628453043647"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992310669,
+    "message": "{\"time\": \"2026-11-18T08:58:30.669Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992311490,
+    "eventId": "05499145019683007414314553590603319411932522295289438887"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992313673,
+    "message": "{\"time\": \"2026-11-18T08:58:33.673Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992314372,
+    "eventId": "77829715598560742596061112170371440200222113130050678255"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992302541,
+    "message": "{\"time\": \"2026-11-18T08:58:22.541Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992303192,
+    "eventId": "14546198771813156440217132188911236099551778108601304111"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992289238,
+    "message": "{\"time\": \"2026-11-18T08:58:09.238Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992289979,
+    "eventId": "84967061200893314564945207615299605188695630971591252261"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992280044,
+    "message": "{\"time\": \"2026-11-18T08:58:00.044Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992280800,
+    "eventId": "93593160391336245551365504386820557472303710360825388394"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992302341,
+    "message": "{\"time\": \"2026-11-18T08:58:22.341Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992303241,
+    "eventId": "87575068046351540509447159127939504602813094913569576266"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992383396,
+    "message": "{\"time\": \"2026-11-18T08:59:43.396Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992383804,
+    "eventId": "76419120276337176245251143945816866167153841912570183251"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992356276,
+    "message": "{\"time\": \"2026-11-18T08:59:16.276Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992357022,
+    "eventId": "69793589327536761221030250712179902675101240329668105215"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992374766,
+    "message": "{\"time\": \"2026-11-18T08:59:34.766Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992375209,
+    "eventId": "22125015961926123289561433822589403043275897757040776402"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992367360,
+    "message": "{\"time\": \"2026-11-18T08:59:27.360Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992367803,
+    "eventId": "26120798325602856648875632983019557847031354049120540031"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992368230,
+    "message": "{\"time\": \"2026-11-18T08:59:28.230Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992368653,
+    "eventId": "46574245717666793108858522468144754229762388621874590859"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992340317,
+    "message": "{\"time\": \"2026-11-18T08:59:00.317Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992341207,
+    "eventId": "87202382281352548037975873788720655467633894691822379901"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992389671,
+    "message": "{\"time\": \"2026-11-18T08:59:49.671Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992390184,
+    "eventId": "31480433372722337511099287810778218142117223428320358092"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ea9d902823df972d",
+    "timestamp": 1794992374367,
+    "message": "{\"time\": \"2026-11-18T08:59:34.367Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992374922,
+    "eventId": "40516752745556982526376503558115171114499472862858524779"
+   },
+   {
+    "logStreamName": "ecs/payments-service/26cfd7bc2a83f352",
+    "timestamp": 1794992361685,
+    "message": "{\"time\": \"2026-11-18T08:59:21.685Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992361990,
+    "eventId": "50061697002963883923913773562361884064156145266044380028"
+   },
+   {
+    "logStreamName": "ecs/payments-service/ff840493e6dec96a",
+    "timestamp": 1794992371525,
+    "message": "{\"time\": \"2026-11-18T08:59:31.525Z\", \"level\": \"ERROR\", \"service\": \"payments-service\", \"message\": \"java.lang.NullPointerException: Cannot invoke \\\"PaymentRequest.getCurrency()\\\" because \\\"request\\\" is null\", \"exception\": \"java.lang.NullPointerException\", \"stack\": \"at com.acme.payments.PaymentController.charge(PaymentController.java:87)\", \"status\": 500}",
+    "ingestionTime": 1794992372234,
+    "eventId": "43904104414721900537651003876867712117592740456957079677"
+   }
+  ]
+ },
+ "metrics": [
+  {
+   "namespace": "AWS/ApplicationELB",
+   "metric": "HTTPCode_Target_5XX_Count",
+   "dimensions": {
+    "LoadBalancer": "app/prod-alb/50dc6c495c0c9188"
+   },
+   "stat": "Sum",
+   "period": 60,
+   "unit": "Count",
+   "timestamps": [
+    1794987000000,
+    1794987060000,
+    1794987120000,
+    1794987180000,
+    1794987240000,
+    1794987300000,
+    1794987360000,
+    1794987420000,
+    1794987480000,
+    1794987540000,
+    1794987600000,
+    1794987660000,
+    1794987720000,
+    1794987780000,
+    1794987840000,
+    1794987900000,
+    1794987960000,
+    1794988020000,
+    1794988080000,
+    1794988140000,
+    1794988200000,
+    1794988260000,
+    1794988320000,
+    1794988380000,
+    1794988440000,
+    1794988500000,
+    1794988560000,
+    1794988620000,
+    1794988680000,
+    1794988740000,
+    1794988800000,
+    1794988860000,
+    1794988920000,
+    1794988980000,
+    1794989040000,
+    1794989100000,
+    1794989160000,
+    1794989220000,
+    1794989280000,
+    1794989340000,
+    1794989400000,
+    1794989460000,
+    1794989520000,
+    1794989580000,
+    1794989640000,
+    1794989700000,
+    1794989760000,
+    1794989820000,
+    1794989880000,
+    1794989940000,
+    1794990000000,
+    1794990060000,
+    1794990120000,
+    1794990180000,
+    1794990240000,
+    1794990300000,
+    1794990360000,
+    1794990420000,
+    1794990480000,
+    1794990540000,
+    1794990600000,
+    1794990660000,
+    1794990720000,
+    1794990780000,
+    1794990840000,
+    1794990900000,
+    1794990960000,
+    1794991020000,
+    1794991080000,
+    1794991140000,
+    1794991200000,
+    1794991260000,
+    1794991320000,
+    1794991380000,
+    1794991440000,
+    1794991500000,
+    1794991560000,
+    1794991620000,
+    1794991680000,
+    1794991740000,
+    1794991800000,
+    1794991860000,
+    1794991920000,
+    1794991980000,
+    1794992040000,
+    1794992100000,
+    1794992160000,
+    1794992220000,
+    1794992280000,
+    1794992340000,
+    1794992400000
+   ],
+   "values": [
+    0.96,
+    0.81,
+    0.48,
+    1.09,
+    2.13,
+    0.78,
+    0.6,
+    1.8,
+    0.75,
+    0.7,
+    0.13,
+    1.32,
+    0.53,
+    0.51,
+    2.36,
+    0.1,
+    2.39,
+    2.8,
+    0.82,
+    0.27,
+    1.26,
+    2.79,
+    1.96,
+    0.84,
+    2.07,
+    1.16,
+    0.62,
+    1.61,
+    1.84,
+    0.42,
+    2.39,
+    2.02,
+    1.22,
+    2.39,
+    1.8,
+    0.74,
+    2.23,
+    2.9,
+    2.49,
+    1.32,
+    0.56,
+    1.45,
+    1.63,
+    2.27,
+    2.23,
+    1.63,
+    0.53,
+    1.38,
+    2.19,
+    2.18,
+    0.65,
+    0.67,
+    1.07,
+    1.12,
+    0.91,
+    2.16,
+    1.15,
+    1.46,
+    1.51,
+    1.87,
+    2.12,
+    1.13,
+    0.75,
+    2.13,
+    2.47,
+    2.71,
+    2.07,
+    1.16,
+    1.13,
+    0.62,
+    0.82,
+    1.63,
+    0.78,
+    2.31,
+    2.46,
+    0.78,
+    2.74,
+    0.66,
+    186.46,
+    188.23,
+    165.09,
+    191.07,
+    222.25,
+    181.2,
+    211.06,
+    207.63,
+    188.0,
+    199.17,
+    225.64,
+    180.68,
+    229.19
+   ]
+  },
+  {
+   "namespace": "AWS/ECS",
+   "metric": "CPUUtilization",
+   "dimensions": {
+    "ClusterName": "prod-cluster",
+    "ServiceName": "payments-service"
+   },
+   "stat": "Average",
+   "period": 60,
+   "unit": "Percent",
+   "timestamps": [
+    1794987000000,
+    1794987060000,
+    1794987120000,
+    1794987180000,
+    1794987240000,
+    1794987300000,
+    1794987360000,
+    1794987420000,
+    1794987480000,
+    1794987540000,
+    1794987600000,
+    1794987660000,
+    1794987720000,
+    1794987780000,
+    1794987840000,
+    1794987900000,
+    1794987960000,
+    1794988020000,
+    1794988080000,
+    1794988140000,
+    1794988200000,
+    1794988260000,
+    1794988320000,
+    1794988380000,
+    1794988440000,
+    1794988500000,
+    1794988560000,
+    1794988620000,
+    1794988680000,
+    1794988740000,
+    1794988800000,
+    1794988860000,
+    1794988920000,
+    1794988980000,
+    1794989040000,
+    1794989100000,
+    1794989160000,
+    1794989220000,
+    1794989280000,
+    1794989340000,
+    1794989400000,
+    1794989460000,
+    1794989520000,
+    1794989580000,
+    1794989640000,
+    1794989700000,
+    1794989760000,
+    1794989820000,
+    1794989880000,
+    1794989940000,
+    1794990000000,
+    1794990060000,
+    1794990120000,
+    1794990180000,
+    1794990240000,
+    1794990300000,
+    1794990360000,
+    1794990420000,
+    1794990480000,
+    1794990540000,
+    1794990600000,
+    1794990660000,
+    1794990720000,
+    1794990780000,
+    1794990840000,
+    1794990900000,
+    1794990960000,
+    1794991020000,
+    1794991080000,
+    1794991140000,
+    1794991200000,
+    1794991260000,
+    1794991320000,
+    1794991380000,
+    1794991440000,
+    1794991500000,
+    1794991560000,
+    1794991620000,
+    1794991680000,
+    1794991740000,
+    1794991800000,
+    1794991860000,
+    1794991920000,
+    1794991980000,
+    1794992040000,
+    1794992100000,
+    1794992160000,
+    1794992220000,
+    1794992280000,
+    1794992340000,
+    1794992400000
+   ],
+   "values": [
+    27.05,
+    29.72,
+    30.39,
+    31.54,
+    28.76,
+    27.87,
+    27.09,
+    32.7,
+    32.58,
+    29.93,
+    30.42,
+    32.96,
+    32.04,
+    32.63,
+    27.22,
+    31.72,
+    32.93,
+    31.01,
+    31.04,
+    32.07,
+    33.0,
+    29.27,
+    32.67,
+    27.61,
+    29.01,
+    28.54,
+    28.76,
+    32.26,
+    28.33,
+    31.21,
+    31.4,
+    27.15,
+    32.61,
+    30.55,
+    31.77,
+    28.67,
+    32.38,
+    29.41,
+    31.02,
+    31.47,
+    30.4,
+    30.24,
+    30.19,
+    31.53,
+    28.05,
+    30.75,
+    31.84,
+    28.46,
+    27.71,
+    32.75,
+    30.26,
+    28.29,
+    28.84,
+    27.14,
+    31.46,
+    28.07,
+    27.59,
+    30.65,
+    28.19,
+    32.53,
+    30.14,
+    28.83,
+    31.58,
+    29.02,
+    32.65,
+    32.5,
+    32.38,
+    30.5,
+    30.56,
+    28.0,
+    28.72,
+    27.54,
+    27.18,
+    32.22,
+    30.61,
+    30.34,
+    32.6,
+    28.17,
+    32.7,
+    28.05,
+    31.89,
+    32.62,
+    30.33,
+    28.49,
+    30.29,
+    32.09,
+    28.81,
+    32.86,
+    28.21,
+    28.18,
+    32.08
+   ]
+  },
+  {
+   "namespace": "AWS/ECS",
+   "metric": "MemoryUtilization",
+   "dimensions": {
+    "ClusterName": "prod-cluster",
+    "ServiceName": "payments-service"
+   },
+   "stat": "Average",
+   "period": 60,
+   "unit": "Percent",
+   "timestamps": [
+    1794987000000,
+    1794987060000,
+    1794987120000,
+    1794987180000,
+    1794987240000,
+    1794987300000,
+    1794987360000,
+    1794987420000,
+    1794987480000,
+    1794987540000,
+    1794987600000,
+    1794987660000,
+    1794987720000,
+    1794987780000,
+    1794987840000,
+    1794987900000,
+    1794987960000,
+    1794988020000,
+    1794988080000,
+    1794988140000,
+    1794988200000,
+    1794988260000,
+    1794988320000,
+    1794988380000,
+    1794988440000,
+    1794988500000,
+    1794988560000,
+    1794988620000,
+    1794988680000,
+    1794988740000,
+    1794988800000,
+    1794988860000,
+    1794988920000,
+    1794988980000,
+    1794989040000,
+    1794989100000,
+    1794989160000,
+    1794989220000,
+    1794989280000,
+    1794989340000,
+    1794989400000,
+    1794989460000,
+    1794989520000,
+    1794989580000,
+    1794989640000,
+    1794989700000,
+    1794989760000,
+    1794989820000,
+    1794989880000,
+    1794989940000,
+    1794990000000,
+    1794990060000,
+    1794990120000,
+    1794990180000,
+    1794990240000,
+    1794990300000,
+    1794990360000,
+    1794990420000,
+    1794990480000,
+    1794990540000,
+    1794990600000,
+    1794990660000,
+    1794990720000,
+    1794990780000,
+    1794990840000,
+    1794990900000,
+    1794990960000,
+    1794991020000,
+    1794991080000,
+    1794991140000,
+    1794991200000,
+    1794991260000,
+    1794991320000,
+    1794991380000,
+    1794991440000,
+    1794991500000,
+    1794991560000,
+    1794991620000,
+    1794991680000,
+    1794991740000,
+    1794991800000,
+    1794991860000,
+    1794991920000,
+    1794991980000,
+    1794992040000,
+    1794992100000,
+    1794992160000,
+    1794992220000,
+    1794992280000,
+    1794992340000,
+    1794992400000
+   ],
+   "values": [
+    42.59,
+    43.91,
+    44.21,
+    44.42,
+    43.91,
+    44.84,
+    44.06,
+    43.35,
+    42.67,
+    43.53,
+    43.18,
+    44.33,
+    43.19,
+    45.5,
+    43.84,
+    42.53,
+    44.73,
+    43.79,
+    45.73,
+    45.38,
+    45.14,
+    44.22,
+    45.05,
+    43.32,
+    45.97,
+    44.95,
+    42.39,
+    44.82,
+    42.14,
+    43.4,
+    44.38,
+    44.09,
+    42.43,
+    45.37,
+    43.28,
+    42.06,
+    44.58,
+    44.31,
+    42.81,
+    43.24,
+    42.4,
+    45.27,
+    45.78,
+    43.36,
+    42.79,
+    45.5,
+    45.92,
+    45.63,
+    42.77,
+    44.0,
+    45.43,
+    44.92,
+    45.37,
+    44.03,
+    42.4,
+    45.23,
+    42.45,
+    42.96,
+    43.28,
+    43.91,
+    42.78,
+    45.23,
+    42.58,
+    43.01,
+    45.43,
+    45.25,
+    42.99,
+    43.55,
+    44.95,
+    43.16,
+    44.75,
+    42.34,
+    42.01,
+    44.97,
+    44.83,
+    44.22,
+    45.5,
+    44.71,
+    43.53,
+    42.74,
+    43.63,
+    45.65,
+    42.16,
+    44.31,
+    45.97,
+    43.62,
+    45.38,
+    43.49,
+    44.42,
+    45.7,
+    43.99
+   ]
+  }
+ ],
+ "ecs_services": [
+  {
+   "serviceName": "payments-service",
+   "serviceArn": "arn:aws:ecs:us-east-1:123456789012:service/prod-cluster/payments-service",
+   "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/prod-cluster",
+   "status": "ACTIVE",
+   "launchType": "FARGATE",
+   "desiredCount": 3,
+   "runningCount": 3,
+   "pendingCount": 0,
+   "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/payments-service:118",
+   "deployments": [
+    {
+     "id": "ecs-svc/13978381504838886",
+     "status": "PRIMARY",
+     "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/payments-service:118",
+     "desiredCount": 3,
+     "pendingCount": 0,
+     "runningCount": 3,
+     "failedTasks": 0,
+     "rolloutState": "IN_PROGRESS",
+     "createdAt": "2026-11-18T08:48:00.000Z",
+     "updatedAt": "2026-11-18T08:59:00.000Z"
+    },
+    {
+     "id": "ecs-svc/531249102762417727",
+     "status": "ACTIVE",
+     "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/payments-service:117",
+     "desiredCount": 0,
+     "pendingCount": 0,
+     "runningCount": 3,
+     "failedTasks": 0,
+     "rolloutState": "COMPLETED",
+     "createdAt": "2026-11-12T09:00:00.000Z",
+     "updatedAt": "2026-11-18T08:48:00.000Z"
+    }
+   ],
+   "events": [
+    {
+     "id": "da3bde6e75bf6ca8a241c7ce",
+     "createdAt": "2026-11-18T08:49:00.000Z",
+     "message": "(service payments-service) has reached a steady state."
+    },
+    {
+     "id": "7292be59226d59bee361acbaf",
+     "createdAt": "2026-11-18T08:48:00.000Z",
+     "message": "(service payments-service) deployment ecs-svc started: task definition payments-service:118"
+    }
+   ]
+  }
+ ],
+ "rds_instances": [],
+ "ec2_instances": [],
+ "deployments": [
+  {
+   "service": "payments-service",
+   "deploymentId": "d-PAY380XQ",
+   "status": "SUCCEEDED",
+   "createdAt": "2026-11-18T08:48:00.000Z",
+   "taskDefinition": "payments-service:118",
+   "image": "123456789012.dkr.ecr.us-east-1.amazonaws.com/payments-service:v3.8.0",
+   "author": "dev-rohan",
+   "commit": "7f3d9ab",
+   "description": "Refactor PaymentRequest validation and add multi-currency support"
+  },
+  {
+   "service": "payments-service",
+   "deploymentId": "d-PAY372MM",
+   "status": "SUCCEEDED",
+   "createdAt": "2026-11-15T09:00:00.000Z",
+   "taskDefinition": "payments-service:117",
+   "image": "123456789012.dkr.ecr.us-east-1.amazonaws.com/payments-service:v3.7.2",
+   "author": "dev-rohan",
+   "commit": "e41b0c2",
+   "description": "Bump SDK versions"
+  }
+ ]
+}

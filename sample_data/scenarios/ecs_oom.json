@@ -1,0 +1,2819 @@
+{
+ "name": "ecs_oom",
+ "anchor_ms": 1794992400000,
+ "description": "checkout-api on ECS Fargate runs out of memory after a release that enlarged an in-memory cache.",
+ "alarms": [
+  {
+   "AlarmName": "checkout-api-5xx-high",
+   "AlarmArn": "arn:aws:cloudwatch:us-east-1:123456789012:alarm:checkout-api-5xx-high",
+   "AlarmDescription": "Checkout 5xx errors from ALB targets",
+   "StateValue": "ALARM",
+   "StateReason": "Threshold Crossed: 3 datapoints [212.0, 231.0, 240.0] were greater than the threshold (50.0).",
+   "StateUpdatedTimestamp": "2026-11-18T08:58:00.000Z",
+   "MetricName": "HTTPCode_Target_5XX_Count",
+   "Namespace": "AWS/ApplicationELB",
+   "Statistic": "Sum",
+   "Dimensions": [
+    {
+     "Name": "LoadBalancer",
+     "Value": "app/prod-alb/50dc6c495c0c9188"
+    }
+   ],
+   "Period": 60,
+   "EvaluationPeriods": 3,
+   "Threshold": 50,
+   "ComparisonOperator": "GreaterThanThreshold"
+  },
+  {
+   "AlarmName": "checkout-api-memory-high",
+   "AlarmArn": "arn:aws:cloudwatch:us-east-1:123456789012:alarm:checkout-api-memory-high",
+   "AlarmDescription": "ECS memory above 85%",
+   "StateValue": "ALARM",
+   "StateReason": "Threshold Crossed: 3 datapoints [97.2, 98.9, 99.1] were greater than the threshold (85.0).",
+   "StateUpdatedTimestamp": "2026-11-18T08:54:00.000Z",
+   "MetricName": "MemoryUtilization",
+   "Namespace": "AWS/ECS",
+   "Statistic": "Average",
+   "Dimensions": [
+    {
+     "Name": "ClusterName",
+     "Value": "prod-cluster"
+    },
+    {
+     "Name": "ServiceName",
+     "Value": "checkout-api"
+    }
+   ],
+   "Period": 60,
+   "EvaluationPeriods": 3,
+   "Threshold": 85,
+   "ComparisonOperator": "GreaterThanThreshold"
+  },
+  {
+   "AlarmName": "checkout-api-cpu-high",
+   "AlarmArn": "arn:aws:cloudwatch:us-east-1:123456789012:alarm:checkout-api-cpu-high",
+   "AlarmDescription": "",
+   "StateValue": "OK",
+   "StateReason": "Threshold not crossed.",
+   "StateUpdatedTimestamp": "2026-11-18T04:00:00.000Z",
+   "MetricName": "CPUUtilization",
+   "Namespace": "AWS/ECS",
+   "Statistic": "Average",
+   "Dimensions": [
+    {
+     "Name": "ClusterName",
+     "Value": "prod-cluster"
+    },
+    {
+     "Name": "ServiceName",
+     "Value": "checkout-api"
+    }
+   ],
+   "Period": 60,
+   "EvaluationPeriods": 3,
+   "Threshold": 90,
+   "ComparisonOperator": "GreaterThanThreshold"
+  }
+ ],
+ "log_groups": {
+  "/ecs/checkout-api": [
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794987035119,
+    "message": "{\"time\": \"2026-11-18T07:30:35.119Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 41ms\", \"trace_id\": \"e8e25d940ed90475\"}",
+    "ingestionTime": 1794987035838,
+    "eventId": "06851400443832304235578430241818674957247275685350110668"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794987015772,
+    "message": "{\"time\": \"2026-11-18T07:30:15.772Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 7ms\", \"trace_id\": \"90c192cfd3ac94af\"}",
+    "ingestionTime": 1794987016098,
+    "eventId": "92951022690756032506192843438031799164111481909289947229"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794987064054,
+    "message": "{\"time\": \"2026-11-18T07:31:04.054Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 18ms\", \"trace_id\": \"8e81973e0becd7b0\"}",
+    "ingestionTime": 1794987064390,
+    "eventId": "55995051697316601392007809958120786424040411818077967766"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794987080216,
+    "message": "{\"time\": \"2026-11-18T07:31:20.216Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 41ms\", \"trace_id\": \"a38fd547923a7369\"}",
+    "ingestionTime": 1794987080608,
+    "eventId": "55353081176725101831109476413788171781248479294762873347"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794987123906,
+    "message": "{\"time\": \"2026-11-18T07:32:03.906Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 47ms\", \"trace_id\": \"6d76b07e881ed162\"}",
+    "ingestionTime": 1794987124427,
+    "eventId": "29401061119675005585130783414048072562326785963645316880"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794987136280,
+    "message": "{\"time\": \"2026-11-18T07:32:16.280Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 9ms\", \"trace_id\": \"4cdd2055930d6eaf\"}",
+    "ingestionTime": 1794987137017,
+    "eventId": "28240854018405117487867883979974817743232511605045457414"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794987219908,
+    "message": "{\"time\": \"2026-11-18T07:33:39.908Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 36ms\", \"trace_id\": \"2a3af4d46b0a18e8\"}",
+    "ingestionTime": 1794987220458,
+    "eventId": "94354555993896021580164949249256887851894055443798455637"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794987223792,
+    "message": "{\"time\": \"2026-11-18T07:33:43.792Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 25ms\", \"trace_id\": \"59a54a7bb1fee08f\"}",
+    "ingestionTime": 1794987224600,
+    "eventId": "82383799500166191181177887616487211437233304680750519371"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794987246133,
+    "message": "{\"time\": \"2026-11-18T07:34:06.133Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 48ms\", \"trace_id\": \"10a3d6b2aa05e11a\"}",
+    "ingestionTime": 1794987246395,
+    "eventId": "97402566675471542026143590320737577339308576844362367503"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794987284645,
+    "message": "{\"time\": \"2026-11-18T07:34:44.645Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 49ms\", \"trace_id\": \"e315128862c33a4f\"}",
+    "ingestionTime": 1794987285529,
+    "eventId": "16482136387067943736994721412130566431539138186307786301"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794987340037,
+    "message": "{\"time\": \"2026-11-18T07:35:40.037Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 7ms\", \"trace_id\": \"c4aaeac137dc76fb\"}",
+    "ingestionTime": 1794987340531,
+    "eventId": "89921073753105242665645478139045287191743345773439119567"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794987357109,
+    "message": "{\"time\": \"2026-11-18T07:35:57.109Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 14ms\", \"trace_id\": \"66d2287672fdf202\"}",
+    "ingestionTime": 1794987357871,
+    "eventId": "84739350447317373683249003476467517045267869368278087455"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794987396059,
+    "message": "{\"time\": \"2026-11-18T07:36:36.059Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 26ms\", \"trace_id\": \"e25a7605aec6f024\"}",
+    "ingestionTime": 1794987396648,
+    "eventId": "14839301595119606746341639025673679915522441473424219997"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794987375201,
+    "message": "{\"time\": \"2026-11-18T07:36:15.201Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 35ms\", \"trace_id\": \"96d0cc5fd4c28c2e\"}",
+    "ingestionTime": 1794987375587,
+    "eventId": "52432529360833904947014704892536147477645284343611088069"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794987444199,
+    "message": "{\"time\": \"2026-11-18T07:37:24.199Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 48ms\", \"trace_id\": \"83f73f16dbf4a8b2\"}",
+    "ingestionTime": 1794987445031,
+    "eventId": "88225940944547450444239324221657066769485823821065478594"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794987477080,
+    "message": "{\"time\": \"2026-11-18T07:37:57.080Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 29ms\", \"trace_id\": \"1a81682c64e50cad\"}",
+    "ingestionTime": 1794987477773,
+    "eventId": "96575917219130277722160203603147166337170592726243134731"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794987493681,
+    "message": "{\"time\": \"2026-11-18T07:38:13.681Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 11ms\", \"trace_id\": \"99c94309570dc195\"}",
+    "ingestionTime": 1794987493934,
+    "eventId": "09951596350113912752928187856236816082503714253869255840"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794987503829,
+    "message": "{\"time\": \"2026-11-18T07:38:23.829Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 59ms\", \"trace_id\": \"9d33a01c353c631c\"}",
+    "ingestionTime": 1794987504414,
+    "eventId": "59071371213796178054363759644961247255597825735801661341"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794987563865,
+    "message": "{\"time\": \"2026-11-18T07:39:23.865Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 11ms\", \"trace_id\": \"7cf20724d953ee26\"}",
+    "ingestionTime": 1794987564542,
+    "eventId": "10022531219942264642929743856783503607017601017461812328"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794987589130,
+    "message": "{\"time\": \"2026-11-18T07:39:49.130Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 34ms\", \"trace_id\": \"b12aa1f6d42fddbb\"}",
+    "ingestionTime": 1794987589495,
+    "eventId": "51811334945493590576195274284325281484487253544584249282"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794987623707,
+    "message": "{\"time\": \"2026-11-18T07:40:23.707Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 52ms\", \"trace_id\": \"4c4f9b0687322e25\"}",
+    "ingestionTime": 1794987624565,
+    "eventId": "50844215918764363210860117427727587432178722387366436498"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794987624032,
+    "message": "{\"time\": \"2026-11-18T07:40:24.032Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 53ms\", \"trace_id\": \"8857f9a43908f227\"}",
+    "ingestionTime": 1794987624786,
+    "eventId": "60145248820634641660079031839948649900707913455994151968"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794987713183,
+    "message": "{\"time\": \"2026-11-18T07:41:53.183Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 56ms\", \"trace_id\": \"bd68516766934036\"}",
+    "ingestionTime": 1794987713615,
+    "eventId": "02842364528683974786603388203439267532006795527714624305"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794987661830,
+    "message": "{\"time\": \"2026-11-18T07:41:01.830Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 20ms\", \"trace_id\": \"b1491e243192b704\"}",
+    "ingestionTime": 1794987662649,
+    "eventId": "70924183968835084092898176736762812990028504616729979912"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794987742906,
+    "message": "{\"time\": \"2026-11-18T07:42:22.906Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 18ms\", \"trace_id\": \"3a12917c1a26f889\"}",
+    "ingestionTime": 1794987743587,
+    "eventId": "96632939980657781629213059028208902569926935945437468125"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794987759994,
+    "message": "{\"time\": \"2026-11-18T07:42:39.994Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 45ms\", \"trace_id\": \"ccb573d95810d60e\"}",
+    "ingestionTime": 1794987760852,
+    "eventId": "38107475629721105233231213583871817805216611160242260715"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794987831269,
+    "message": "{\"time\": \"2026-11-18T07:43:51.269Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 60ms\", \"trace_id\": \"6f15b6ad2db3997f\"}",
+    "ingestionTime": 1794987832120,
+    "eventId": "70796364009258100342248131597762946672678588830816655609"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794987805941,
+    "message": "{\"time\": \"2026-11-18T07:43:25.941Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 51ms\", \"trace_id\": \"15bd448ff26149ed\"}",
+    "ingestionTime": 1794987806303,
+    "eventId": "57946701572017537626069552511200053970948205886847671327"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794987870497,
+    "message": "{\"time\": \"2026-11-18T07:44:30.497Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 46ms\", \"trace_id\": \"59b44e92effddeea\"}",
+    "ingestionTime": 1794987870856,
+    "eventId": "78400706163696785368830806566827432336062203679028345886"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794987887603,
+    "message": "{\"time\": \"2026-11-18T07:44:47.603Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 31ms\", \"trace_id\": \"df2a8b79fc8e80b3\"}",
+    "ingestionTime": 1794987888002,
+    "eventId": "20869381463176258682139425689413339260378437980665080085"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794987919199,
+    "message": "{\"time\": \"2026-11-18T07:45:19.199Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 20ms\", \"trace_id\": \"6b4468068b5ab3ee\"}",
+    "ingestionTime": 1794987919533,
+    "eventId": "44936299628957363089224374462450080422654070984696885316"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794987943415,
+    "message": "{\"time\": \"2026-11-18T07:45:43.415Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 38ms\", \"trace_id\": \"8604871926debfdb\"}",
+    "ingestionTime": 1794987944137,
+    "eventId": "59686864850240530509084457150935100623427320506093262733"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794987960257,
+    "message": "{\"time\": \"2026-11-18T07:46:00.257Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 13ms\", \"trace_id\": \"9e7d6b377936d536\"}",
+    "ingestionTime": 1794987960580,
+    "eventId": "52053489056468632176420971616027749549383452555249790943"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794987996401,
+    "message": "{\"time\": \"2026-11-18T07:46:36.401Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 60ms\", \"trace_id\": \"0e8bec948f6f915f\"}",
+    "ingestionTime": 1794987996855,
+    "eventId": "49796443233671870814676179893049206292178886591629586520"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794988049633,
+    "message": "{\"time\": \"2026-11-18T07:47:29.633Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 32ms\", \"trace_id\": \"9ccea098535b6a43\"}",
+    "ingestionTime": 1794988050350,
+    "eventId": "44365946246598592412887330764358151097116392681041024704"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794988053302,
+    "message": "{\"time\": \"2026-11-18T07:47:33.302Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 48ms\", \"trace_id\": \"e064a11485f1115b\"}",
+    "ingestionTime": 1794988053767,
+    "eventId": "82386939001269483955223283688271554907544728942954649093"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794988109329,
+    "message": "{\"time\": \"2026-11-18T07:48:29.329Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 11ms\", \"trace_id\": \"712ea6b36471fde4\"}",
+    "ingestionTime": 1794988109852,
+    "eventId": "20860553732095912692496052261746496611653933503500935557"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794988123874,
+    "message": "{\"time\": \"2026-11-18T07:48:43.874Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 53ms\", \"trace_id\": \"f08360852789d059\"}",
+    "ingestionTime": 1794988124732,
+    "eventId": "13461892871716577930993212084609235924393395781395452463"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794988170653,
+    "message": "{\"time\": \"2026-11-18T07:49:30.653Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 29ms\", \"trace_id\": \"7cbd1f5ae28af604\"}",
+    "ingestionTime": 1794988171019,
+    "eventId": "69276012362902622987156243742629684845521068172000114491"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794988168280,
+    "message": "{\"time\": \"2026-11-18T07:49:28.280Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 30ms\", \"trace_id\": \"5b4b1b75321c5296\"}",
+    "ingestionTime": 1794988168806,
+    "eventId": "54341089615674820765760496194845294761686324326044403486"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794988230059,
+    "message": "{\"time\": \"2026-11-18T07:50:30.059Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 28ms\", \"trace_id\": \"84768b8c54dd0ba5\"}",
+    "ingestionTime": 1794988230897,
+    "eventId": "96616682950802090519529722442435133962198754705348419937"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794988251666,
+    "message": "{\"time\": \"2026-11-18T07:50:51.666Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 9ms\", \"trace_id\": \"459c945c43fc0527\"}",
+    "ingestionTime": 1794988251906,
+    "eventId": "12706772789057301361881967419358371425986251951882959350"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794988313724,
+    "message": "{\"time\": \"2026-11-18T07:51:53.724Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 29ms\", \"trace_id\": \"895e8b6b263cfa5e\"}",
+    "ingestionTime": 1794988314451,
+    "eventId": "27370350964952061610180660774731662331669918009200378444"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794988263770,
+    "message": "{\"time\": \"2026-11-18T07:51:03.770Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 8ms\", \"trace_id\": \"f037afc644d82a53\"}",
+    "ingestionTime": 1794988263987,
+    "eventId": "59649866791068854554618363125761716261000934514838118574"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794988376113,
+    "message": "{\"time\": \"2026-11-18T07:52:56.113Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 20ms\", \"trace_id\": \"1f2642aadcded204\"}",
+    "ingestionTime": 1794988376777,
+    "eventId": "90887458135436418189015341225019222441710359147302925122"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794988337554,
+    "message": "{\"time\": \"2026-11-18T07:52:17.554Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 37ms\", \"trace_id\": \"3d0a270bb5a432cf\"}",
+    "ingestionTime": 1794988337866,
+    "eventId": "19789371110421069199945739977843441239852040988894581981"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794988400446,
+    "message": "{\"time\": \"2026-11-18T07:53:20.446Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 22ms\", \"trace_id\": \"8005ce74721888ff\"}",
+    "ingestionTime": 1794988401334,
+    "eventId": "97540176467013755776520777666116142449348436194069502144"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794988396413,
+    "message": "{\"time\": \"2026-11-18T07:53:16.413Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 5ms\", \"trace_id\": \"81728a07bbab27f6\"}",
+    "ingestionTime": 1794988397177,
+    "eventId": "91669503025570885806703382573695870935873097556968970100"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794988469298,
+    "message": "{\"time\": \"2026-11-18T07:54:29.298Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 46ms\", \"trace_id\": \"8bc083117eb86c57\"}",
+    "ingestionTime": 1794988469900,
+    "eventId": "96357487246480255913658056704114727917459252204857091246"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794988455044,
+    "message": "{\"time\": \"2026-11-18T07:54:15.044Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 57ms\", \"trace_id\": \"b4ebf4b6e1c60aa3\"}",
+    "ingestionTime": 1794988455895,
+    "eventId": "05334412259201261814592632206575561475446209698821610670"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794988554852,
+    "message": "{\"time\": \"2026-11-18T07:55:54.852Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 8ms\", \"trace_id\": \"bdaaea00a01d616f\"}",
+    "ingestionTime": 1794988555313,
+    "eventId": "82511421617875375047675448223604078675636247510034744821"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794988524961,
+    "message": "{\"time\": \"2026-11-18T07:55:24.961Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 48ms\", \"trace_id\": \"0b94af3a4b05e1ae\"}",
+    "ingestionTime": 1794988525631,
+    "eventId": "25818804624789001550437403669438890248947303765958146821"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794988583864,
+    "message": "{\"time\": \"2026-11-18T07:56:23.864Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 19ms\", \"trace_id\": \"f735efe608d18011\"}",
+    "ingestionTime": 1794988584380,
+    "eventId": "37429829094998347469901208370227525052520608888439312024"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794988565497,
+    "message": "{\"time\": \"2026-11-18T07:56:05.497Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 36ms\", \"trace_id\": \"33736dcca7f0c99e\"}",
+    "ingestionTime": 1794988565951,
+    "eventId": "80135469511931250125932181584864759281005424225197382348"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794988625882,
+    "message": "{\"time\": \"2026-11-18T07:57:05.882Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 41ms\", \"trace_id\": \"64dbc8d30aaaaf81\"}",
+    "ingestionTime": 1794988626105,
+    "eventId": "57433840089019821535721376663270708925258327822234393255"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794988654680,
+    "message": "{\"time\": \"2026-11-18T07:57:34.680Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 52ms\", \"trace_id\": \"b87e4e2b537d9128\"}",
+    "ingestionTime": 1794988655386,
+    "eventId": "14197255839354098914508430459392286401396823458389899160"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794988682869,
+    "message": "{\"time\": \"2026-11-18T07:58:02.869Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 37ms\", \"trace_id\": \"811e7616c0bbe6ed\"}",
+    "ingestionTime": 1794988683651,
+    "eventId": "67328952623911731893199146696291759338577727456343390298"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794988718277,
+    "message": "{\"time\": \"2026-11-18T07:58:38.277Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 5ms\", \"trace_id\": \"221265400ab77988\"}",
+    "ingestionTime": 1794988719129,
+    "eventId": "44271827819103044757344922728595419299901855575085372203"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794988776603,
+    "message": "{\"time\": \"2026-11-18T07:59:36.603Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 44ms\", \"trace_id\": \"ae4001e3880cb401\"}",
+    "ingestionTime": 1794988777053,
+    "eventId": "06876519827150102619050907709597209816932637508676772975"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794988789038,
+    "message": "{\"time\": \"2026-11-18T07:59:49.038Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 51ms\", \"trace_id\": \"794ec926bc9e28ea\"}",
+    "ingestionTime": 1794988789496,
+    "eventId": "71532971449546827745600521635012037100922722772264220254"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794988849574,
+    "message": "{\"time\": \"2026-11-18T08:00:49.574Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 51ms\", \"trace_id\": \"f9c9c679a661f62c\"}",
+    "ingestionTime": 1794988850245,
+    "eventId": "89298310496119401022236695052371293957447501909993942367"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794988844806,
+    "message": "{\"time\": \"2026-11-18T08:00:44.806Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 43ms\", \"trace_id\": \"a48c1d5ca1feb624\"}",
+    "ingestionTime": 1794988845209,
+    "eventId": "63902303356348454718098116129651160904340345009019892079"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794988908707,
+    "message": "{\"time\": \"2026-11-18T08:01:48.707Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 4ms\", \"trace_id\": \"0f877ae37b7fec4b\"}",
+    "ingestionTime": 1794988909404,
+    "eventId": "21351312271658904936534082740655556306370138205435349683"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794988904283,
+    "message": "{\"time\": \"2026-11-18T08:01:44.283Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 49ms\", \"trace_id\": \"491961a1843baee9\"}",
+    "ingestionTime": 1794988904958,
+    "eventId": "87650205081370116443428776654651479706831273307236798666"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794988955984,
+    "message": "{\"time\": \"2026-11-18T08:02:35.984Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 9ms\", \"trace_id\": \"7912ef4aefae5d4e\"}",
+    "ingestionTime": 1794988956201,
+    "eventId": "94951780321592321656094738813389955301138531172474847033"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794988949455,
+    "message": "{\"time\": \"2026-11-18T08:02:29.455Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 17ms\", \"trace_id\": \"f21201e4eaa3556c\"}",
+    "ingestionTime": 1794988949870,
+    "eventId": "51400215697486149535091216676584832421745261047407301668"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794988997157,
+    "message": "{\"time\": \"2026-11-18T08:03:17.157Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 42ms\", \"trace_id\": \"a1b501d6d1f9bdfe\"}",
+    "ingestionTime": 1794988997877,
+    "eventId": "22694037193017786084755234696148756135363737353943368425"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794989012629,
+    "message": "{\"time\": \"2026-11-18T08:03:32.629Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 5ms\", \"trace_id\": \"00eb4e1128b88073\"}",
+    "ingestionTime": 1794989013332,
+    "eventId": "13800524035104969414179912803533642427940465476602990345"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794989067274,
+    "message": "{\"time\": \"2026-11-18T08:04:27.274Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 24ms\", \"trace_id\": \"d71961891ef3ea44\"}",
+    "ingestionTime": 1794989067813,
+    "eventId": "39061184265888964474396319713438788948778074185835618180"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794989047867,
+    "message": "{\"time\": \"2026-11-18T08:04:07.867Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 51ms\", \"trace_id\": \"40d284064a327e2d\"}",
+    "ingestionTime": 1794989048448,
+    "eventId": "57786279433852667934192317124466024427039645143574666009"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794989105006,
+    "message": "{\"time\": \"2026-11-18T08:05:05.006Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 52ms\", \"trace_id\": \"dab0792946709312\"}",
+    "ingestionTime": 1794989105255,
+    "eventId": "28013840742090435603900427668386529405775876824940142457"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794989141612,
+    "message": "{\"time\": \"2026-11-18T08:05:41.612Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 21ms\", \"trace_id\": \"82ce786f6fad7936\"}",
+    "ingestionTime": 1794989142135,
+    "eventId": "41953366103596394019104156587736715077071992135358214769"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794989217951,
+    "message": "{\"time\": \"2026-11-18T08:06:57.951Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 60ms\", \"trace_id\": \"8ddcf83cf0d1ab56\"}",
+    "ingestionTime": 1794989218713,
+    "eventId": "71828922167722989915190267058496899823724909768635342471"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794989186927,
+    "message": "{\"time\": \"2026-11-18T08:06:26.927Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 45ms\", \"trace_id\": \"4944f2cede962a6d\"}",
+    "ingestionTime": 1794989187624,
+    "eventId": "16748366114881741783692233668817360673883525464082464769"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794989250945,
+    "message": "{\"time\": \"2026-11-18T08:07:30.945Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 22ms\", \"trace_id\": \"41785bc64c3ac6fc\"}",
+    "ingestionTime": 1794989251813,
+    "eventId": "47390354385430575388231357469669501203850621652343353465"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794989256524,
+    "message": "{\"time\": \"2026-11-18T08:07:36.524Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 14ms\", \"trace_id\": \"296259c8a4a915d0\"}",
+    "ingestionTime": 1794989256800,
+    "eventId": "53981754825128395107808450409258577718703690158513267253"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794989294419,
+    "message": "{\"time\": \"2026-11-18T08:08:14.419Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 52ms\", \"trace_id\": \"6d6b987a73309b95\"}",
+    "ingestionTime": 1794989294761,
+    "eventId": "33538871589658397674767336731478115417533958339159631961"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794989316429,
+    "message": "{\"time\": \"2026-11-18T08:08:36.429Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 19ms\", \"trace_id\": \"4223b8aa5e49422a\"}",
+    "ingestionTime": 1794989317212,
+    "eventId": "40485508270613615620672697514842518378731145141801685335"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794989365089,
+    "message": "{\"time\": \"2026-11-18T08:09:25.089Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 28ms\", \"trace_id\": \"56947a7a452e704d\"}",
+    "ingestionTime": 1794989365352,
+    "eventId": "12345665847791410977754991065541842258498894444712328543"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794989385007,
+    "message": "{\"time\": \"2026-11-18T08:09:45.007Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 21ms\", \"trace_id\": \"3f9aa884e59409c1\"}",
+    "ingestionTime": 1794989385600,
+    "eventId": "30602442638327369823519996742188880804512016162788637636"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794989455619,
+    "message": "{\"time\": \"2026-11-18T08:10:55.619Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 6ms\", \"trace_id\": \"b5a290616cd9e62a\"}",
+    "ingestionTime": 1794989456303,
+    "eventId": "38400276029499246098854437983053937287945504984158783485"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794989454105,
+    "message": "{\"time\": \"2026-11-18T08:10:54.105Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 19ms\", \"trace_id\": \"1bea705ec879b663\"}",
+    "ingestionTime": 1794989454534,
+    "eventId": "10679940288167412207419724791475104788673591016321013656"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794989514093,
+    "message": "{\"time\": \"2026-11-18T08:11:54.093Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 39ms\", \"trace_id\": \"0a1fb43bc6e0673a\"}",
+    "ingestionTime": 1794989514294,
+    "eventId": "03686987062021637130463594085721498246890928443211692285"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794989502303,
+    "message": "{\"time\": \"2026-11-18T08:11:42.303Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 44ms\", \"trace_id\": \"873b99034075916e\"}",
+    "ingestionTime": 1794989503154,
+    "eventId": "06900094289564323560328399877301286822660547284486025834"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794989539683,
+    "message": "{\"time\": \"2026-11-18T08:12:19.683Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 20ms\", \"trace_id\": \"ca5d5e7d393cbcdd\"}",
+    "ingestionTime": 1794989540498,
+    "eventId": "45184405752618732803981079676005387529669851663813017552"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794989538258,
+    "message": "{\"time\": \"2026-11-18T08:12:18.258Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 34ms\", \"trace_id\": \"3c19c31586ba22dd\"}",
+    "ingestionTime": 1794989539018,
+    "eventId": "63717485441013204910256744343202679931265447641099483114"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794989600145,
+    "message": "{\"time\": \"2026-11-18T08:13:20.145Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 16ms\", \"trace_id\": \"e2856ec67f914286\"}",
+    "ingestionTime": 1794989601035,
+    "eventId": "65453992760072554929437699860429806057125421839117243201"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794989607808,
+    "message": "{\"time\": \"2026-11-18T08:13:27.808Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 35ms\", \"trace_id\": \"b221713908ba9bd9\"}",
+    "ingestionTime": 1794989608354,
+    "eventId": "19427594232652497415773246813037296141595937245992623926"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794989640442,
+    "message": "{\"time\": \"2026-11-18T08:14:00.442Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 17ms\", \"trace_id\": \"f848a9567ee5e857\"}",
+    "ingestionTime": 1794989640847,
+    "eventId": "45618255779290467380757835702892303891390031603526572636"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794989654512,
+    "message": "{\"time\": \"2026-11-18T08:14:14.512Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 10ms\", \"trace_id\": \"9fa40dd6f3b17af0\"}",
+    "ingestionTime": 1794989655219,
+    "eventId": "40902092672316171179473956470093979916114416970442434339"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794989743600,
+    "message": "{\"time\": \"2026-11-18T08:15:43.600Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 29ms\", \"trace_id\": \"3683d4bc0dea6e4e\"}",
+    "ingestionTime": 1794989743824,
+    "eventId": "69622727159112027848113835936832827510483072405343299744"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794989703941,
+    "message": "{\"time\": \"2026-11-18T08:15:03.941Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 32ms\", \"trace_id\": \"b647e8a8e5ee4c91\"}",
+    "ingestionTime": 1794989704462,
+    "eventId": "16245311119266897399639302177223842680031756278320842987"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794989781577,
+    "message": "{\"time\": \"2026-11-18T08:16:21.577Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 45ms\", \"trace_id\": \"86592243ef95eee8\"}",
+    "ingestionTime": 1794989782255,
+    "eventId": "82301336184637160405227325937309728672587049864478207821"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794989784502,
+    "message": "{\"time\": \"2026-11-18T08:16:24.502Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 14ms\", \"trace_id\": \"00bc22cb1be4a5db\"}",
+    "ingestionTime": 1794989784782,
+    "eventId": "86817482315241141726418139939552826771936078136183186660"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794989828107,
+    "message": "{\"time\": \"2026-11-18T08:17:08.107Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 26ms\", \"trace_id\": \"d252a617c4cba038\"}",
+    "ingestionTime": 1794989828623,
+    "eventId": "69171354066660122761804022399724066113261039067553799542"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794989851028,
+    "message": "{\"time\": \"2026-11-18T08:17:31.028Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 38ms\", \"trace_id\": \"7243d47ceb64c5c4\"}",
+    "ingestionTime": 1794989851425,
+    "eventId": "02970055551906760573108008884557801511087639199364703259"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794989921396,
+    "message": "{\"time\": \"2026-11-18T08:18:41.396Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 55ms\", \"trace_id\": \"c4445aaea01ac23a\"}",
+    "ingestionTime": 1794989922010,
+    "eventId": "78791168319278912007033574391060120552374711420291907901"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794989884063,
+    "message": "{\"time\": \"2026-11-18T08:18:04.063Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 51ms\", \"trace_id\": \"e6077d7910170d2b\"}",
+    "ingestionTime": 1794989884883,
+    "eventId": "93544746586522606067642703991517025897230040978491785938"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794989980434,
+    "message": "{\"time\": \"2026-11-18T08:19:40.434Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 51ms\", \"trace_id\": \"b0882411b77570a4\"}",
+    "ingestionTime": 1794989980958,
+    "eventId": "74114169663220330853965454900180487840912484746433017356"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794989979031,
+    "message": "{\"time\": \"2026-11-18T08:19:39.031Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 56ms\", \"trace_id\": \"1b757b203bdea8c3\"}",
+    "ingestionTime": 1794989979717,
+    "eventId": "37909260736665516122195291396963903397613793654262967370"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794990051760,
+    "message": "{\"time\": \"2026-11-18T08:20:51.760Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 56ms\", \"trace_id\": \"21f91a997e544d56\"}",
+    "ingestionTime": 1794990052468,
+    "eventId": "29749027672352083141217239704653127806637892366591400722"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794990053920,
+    "message": "{\"time\": \"2026-11-18T08:20:53.920Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 24ms\", \"trace_id\": \"51cdf2f9dc7a615d\"}",
+    "ingestionTime": 1794990054591,
+    "eventId": "50205513130081359523557481633470828000797744222590648626"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794990072931,
+    "message": "{\"time\": \"2026-11-18T08:21:12.931Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 19ms\", \"trace_id\": \"109257f76862bf79\"}",
+    "ingestionTime": 1794990073796,
+    "eventId": "15760663137381260065328840738869087955377625566028712676"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794990087954,
+    "message": "{\"time\": \"2026-11-18T08:21:27.954Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 20ms\", \"trace_id\": \"15866ffb9fe5e399\"}",
+    "ingestionTime": 1794990088367,
+    "eventId": "95344924558942274101388089317917684159364574373607319148"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794990149292,
+    "message": "{\"time\": \"2026-11-18T08:22:29.292Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 12ms\", \"trace_id\": \"75ff199d6ab6114f\"}",
+    "ingestionTime": 1794990150127,
+    "eventId": "83072250763558246143395360605689484586544419150487996540"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794990170716,
+    "message": "{\"time\": \"2026-11-18T08:22:50.716Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 22ms\", \"trace_id\": \"911f52dc47868e4a\"}",
+    "ingestionTime": 1794990171190,
+    "eventId": "43096006437885449272402345435170653478250183406525286328"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794990196215,
+    "message": "{\"time\": \"2026-11-18T08:23:16.215Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 19ms\", \"trace_id\": \"4806d26f27401fa0\"}",
+    "ingestionTime": 1794990197007,
+    "eventId": "97339087336478710088707410868953020160820407866877880626"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794990196118,
+    "message": "{\"time\": \"2026-11-18T08:23:16.118Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 45ms\", \"trace_id\": \"fdaf451376c32dcd\"}",
+    "ingestionTime": 1794990196355,
+    "eventId": "22667552523742391340827315286143382057187107882702894391"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794990295086,
+    "message": "{\"time\": \"2026-11-18T08:24:55.086Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 6ms\", \"trace_id\": \"4b2e7245e07b59d8\"}",
+    "ingestionTime": 1794990295524,
+    "eventId": "81202651735909330150181701272332726066919297506150251318"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794990278220,
+    "message": "{\"time\": \"2026-11-18T08:24:38.220Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 27ms\", \"trace_id\": \"ddba8547833e469f\"}",
+    "ingestionTime": 1794990278602,
+    "eventId": "65199038987677109480675748153633326151841457199908462630"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794990300415,
+    "message": "{\"time\": \"2026-11-18T08:25:00.415Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 17ms\", \"trace_id\": \"5e63af1609969e7c\"}",
+    "ingestionTime": 1794990300963,
+    "eventId": "03750175574905278848865091158013759776777474063276755565"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794990339283,
+    "message": "{\"time\": \"2026-11-18T08:25:39.283Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 56ms\", \"trace_id\": \"68b3e3aa53c69b0a\"}",
+    "ingestionTime": 1794990340177,
+    "eventId": "19950175600228337590076754480385216350449892537360376845"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794990362062,
+    "message": "{\"time\": \"2026-11-18T08:26:02.062Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 8ms\", \"trace_id\": \"19f48c75687dd512\"}",
+    "ingestionTime": 1794990362666,
+    "eventId": "08940221136731552045707719023861224942826009535608365807"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794990402798,
+    "message": "{\"time\": \"2026-11-18T08:26:42.798Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 48ms\", \"trace_id\": \"68e7ed23456b312c\"}",
+    "ingestionTime": 1794990403288,
+    "eventId": "30636364233705084488342842961960349724282563053458139246"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794990468846,
+    "message": "{\"time\": \"2026-11-18T08:27:48.846Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 30ms\", \"trace_id\": \"dd3f400604a99e63\"}",
+    "ingestionTime": 1794990469418,
+    "eventId": "19975617898698556593790650910332626390521482663784384033"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794990420385,
+    "message": "{\"time\": \"2026-11-18T08:27:00.385Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 31ms\", \"trace_id\": \"d203acfe1d10e931\"}",
+    "ingestionTime": 1794990420677,
+    "eventId": "75820963508390764286351266049561833084453082788855144899"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794990490652,
+    "message": "{\"time\": \"2026-11-18T08:28:10.652Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 7ms\", \"trace_id\": \"247aabb58d323d9e\"}",
+    "ingestionTime": 1794990491508,
+    "eventId": "61024668481620958420805719358835843302397112461080966084"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794990504303,
+    "message": "{\"time\": \"2026-11-18T08:28:24.303Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 26ms\", \"trace_id\": \"296cb08c4886058b\"}",
+    "ingestionTime": 1794990505036,
+    "eventId": "48109046475242643664461455289845512643706188256928997136"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794990589385,
+    "message": "{\"time\": \"2026-11-18T08:29:49.385Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 12ms\", \"trace_id\": \"f16d68f3d658c99a\"}",
+    "ingestionTime": 1794990589629,
+    "eventId": "59597619524653062335871293153877141568370473470112132027"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794990581704,
+    "message": "{\"time\": \"2026-11-18T08:29:41.704Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 49ms\", \"trace_id\": \"b02ef5f79ececbff\"}",
+    "ingestionTime": 1794990582068,
+    "eventId": "39671729179195526005938467635561683244718033998793428274"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794990640286,
+    "message": "{\"time\": \"2026-11-18T08:30:40.286Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 15ms\", \"trace_id\": \"37d7d19090bfd792\"}",
+    "ingestionTime": 1794990640528,
+    "eventId": "35230985337125712706695154985905281082337247558431521264"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794990608064,
+    "message": "{\"time\": \"2026-11-18T08:30:08.064Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 50ms\", \"trace_id\": \"e5b5206ed0ce6bc4\"}",
+    "ingestionTime": 1794990608461,
+    "eventId": "65934427121347378462546404483317833360916668166250526534"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794990662498,
+    "message": "{\"time\": \"2026-11-18T08:31:02.498Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 28ms\", \"trace_id\": \"74aaf340997a20be\"}",
+    "ingestionTime": 1794990663261,
+    "eventId": "41200528623305778129714489613712833961732432762460746214"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794990680198,
+    "message": "{\"time\": \"2026-11-18T08:31:20.198Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 28ms\", \"trace_id\": \"5e113423a8a9ea62\"}",
+    "ingestionTime": 1794990680855,
+    "eventId": "60700737503604331093251858959177983659194396150514484119"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794990752079,
+    "message": "{\"time\": \"2026-11-18T08:32:32.079Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 32ms\", \"trace_id\": \"9e5af2a4c379023e\"}",
+    "ingestionTime": 1794990752748,
+    "eventId": "10501990360056444599163774986865023802753377942922318520"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794990724398,
+    "message": "{\"time\": \"2026-11-18T08:32:04.398Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 31ms\", \"trace_id\": \"177a83345d866b34\"}",
+    "ingestionTime": 1794990725050,
+    "eventId": "62421560738240383710342722482723405146434154539289186215"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794990788537,
+    "message": "{\"time\": \"2026-11-18T08:33:08.537Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 53ms\", \"trace_id\": \"82f0779db86bb4d6\"}",
+    "ingestionTime": 1794990788818,
+    "eventId": "64021107544058161554026127111760349895104357139793333861"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794990831396,
+    "message": "{\"time\": \"2026-11-18T08:33:51.396Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 58ms\", \"trace_id\": \"ff01fe8010fe52d4\"}",
+    "ingestionTime": 1794990832224,
+    "eventId": "12909004333654569619970339196495187196675881738760217072"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794990898044,
+    "message": "{\"time\": \"2026-11-18T08:34:58.044Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 55ms\", \"trace_id\": \"cb8389fbea81ad63\"}",
+    "ingestionTime": 1794990898413,
+    "eventId": "06425810879059413563164493437809974715228740604108634506"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794990894593,
+    "message": "{\"time\": \"2026-11-18T08:34:54.593Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 14ms\", \"trace_id\": \"e58376fb52e71cf8\"}",
+    "ingestionTime": 1794990895421,
+    "eventId": "24928076579936219526016062515658634773645923900264409625"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794990932913,
+    "message": "{\"time\": \"2026-11-18T08:35:32.913Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 41ms\", \"trace_id\": \"9da968f2434b4b94\"}",
+    "ingestionTime": 1794990933631,
+    "eventId": "17859960980898002621051927899661333394924620090689597761"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794990926441,
+    "message": "{\"time\": \"2026-11-18T08:35:26.441Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 47ms\", \"trace_id\": \"e539cb1653ec4b93\"}",
+    "ingestionTime": 1794990927026,
+    "eventId": "75351283144777489799394271942282255749428047246324313513"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794990994781,
+    "message": "{\"time\": \"2026-11-18T08:36:34.781Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 59ms\", \"trace_id\": \"8e2048dc73fa5648\"}",
+    "ingestionTime": 1794990995514,
+    "eventId": "24719185555468936851135938957509454420655922158063435309"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794990995107,
+    "message": "{\"time\": \"2026-11-18T08:36:35.107Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 20ms\", \"trace_id\": \"fd914b0e60307b75\"}",
+    "ingestionTime": 1794990995684,
+    "eventId": "07982269995115252429851830963374825680818239872049210889"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991048985,
+    "message": "{\"time\": \"2026-11-18T08:37:28.985Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 43ms\", \"trace_id\": \"f53e2c38be5c3931\"}",
+    "ingestionTime": 1794991049234,
+    "eventId": "62696264979752048499691316604401441403968605283973843025"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991077035,
+    "message": "{\"time\": \"2026-11-18T08:37:57.035Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 51ms\", \"trace_id\": \"38bd3c6908a6ab0f\"}",
+    "ingestionTime": 1794991077387,
+    "eventId": "50283310818707946854325913629763990961523710964069637564"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991103861,
+    "message": "{\"time\": \"2026-11-18T08:38:23.861Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 35ms\", \"trace_id\": \"9cce12d53a2db00a\"}",
+    "ingestionTime": 1794991104729,
+    "eventId": "34814628634428986732590053886372187146941402688149741471"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991099905,
+    "message": "{\"time\": \"2026-11-18T08:38:19.905Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 38ms\", \"trace_id\": \"69c9fef039690919\"}",
+    "ingestionTime": 1794991100702,
+    "eventId": "61194832276766978546724811653349693028735559029656944190"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991194294,
+    "message": "{\"time\": \"2026-11-18T08:39:54.294Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 12ms\", \"trace_id\": \"efc46c08039cd862\"}",
+    "ingestionTime": 1794991194743,
+    "eventId": "62595463390204145206689103027238926635556028065265806575"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991149482,
+    "message": "{\"time\": \"2026-11-18T08:39:09.482Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 55ms\", \"trace_id\": \"f7962f8343a538c4\"}",
+    "ingestionTime": 1794991149693,
+    "eventId": "34360531782500198808288455407945432408969178717827797644"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991238975,
+    "message": "{\"time\": \"2026-11-18T08:40:38.975Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 19ms\", \"trace_id\": \"e74c00f42a43f047\"}",
+    "ingestionTime": 1794991239175,
+    "eventId": "18209271866832100064783388553001097402516205303404672733"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991215575,
+    "message": "{\"time\": \"2026-11-18T08:40:15.575Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 53ms\", \"trace_id\": \"0329602a1adbe533\"}",
+    "ingestionTime": 1794991216402,
+    "eventId": "40524406533709622694815333433334239999654234899635325305"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991273075,
+    "message": "{\"time\": \"2026-11-18T08:41:13.075Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 36ms\", \"trace_id\": \"10530be24f33b0ee\"}",
+    "ingestionTime": 1794991273582,
+    "eventId": "76793884071819602701692592369325214180829823858217265707"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991291321,
+    "message": "{\"time\": \"2026-11-18T08:41:31.321Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 58ms\", \"trace_id\": \"bec49ab46fc820d2\"}",
+    "ingestionTime": 1794991291997,
+    "eventId": "22160955654914649977951360165715154170920112548067556887"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991326899,
+    "message": "{\"time\": \"2026-11-18T08:42:06.899Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 45ms\", \"trace_id\": \"1f8e652109eff2b4\"}",
+    "ingestionTime": 1794991327442,
+    "eventId": "82910055364213602444839065666225785409487397009700325167"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991337255,
+    "message": "{\"time\": \"2026-11-18T08:42:17.255Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 44ms\", \"trace_id\": \"ade256558dc508c6\"}",
+    "ingestionTime": 1794991337901,
+    "eventId": "26020180504517044446314718433740268496870124794699071092"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991399373,
+    "message": "{\"time\": \"2026-11-18T08:43:19.373Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 60ms\", \"trace_id\": \"03e5f68481e6d6c8\"}",
+    "ingestionTime": 1794991399746,
+    "eventId": "19888249826129452131608725439487949736629974878141252864"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991390432,
+    "message": "{\"time\": \"2026-11-18T08:43:10.432Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 60ms\", \"trace_id\": \"541c18d563825046\"}",
+    "ingestionTime": 1794991391247,
+    "eventId": "90397905089192120948420567672436158100799895097891756290"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991485406,
+    "message": "{\"time\": \"2026-11-18T08:44:45.406Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 57ms\", \"trace_id\": \"b2971b7787d69991\"}",
+    "ingestionTime": 1794991485612,
+    "eventId": "22933830676474130145452201709389473986564152417055054986"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991477377,
+    "message": "{\"time\": \"2026-11-18T08:44:37.377Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 29ms\", \"trace_id\": \"95d856759f6428ef\"}",
+    "ingestionTime": 1794991477656,
+    "eventId": "02638593642638878414762516297789456574117391434825940784"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991507333,
+    "message": "{\"time\": \"2026-11-18T08:45:07.333Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 26ms\", \"trace_id\": \"244fbafcfa376a6e\"}",
+    "ingestionTime": 1794991507562,
+    "eventId": "62170586712200617094008486841905357944276756703897654891"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991502794,
+    "message": "{\"time\": \"2026-11-18T08:45:02.794Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 8ms\", \"trace_id\": \"972939b0db437386\"}",
+    "ingestionTime": 1794991503366,
+    "eventId": "87416508836636276747072968401789700074673491482901880764"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991603526,
+    "message": "{\"time\": \"2026-11-18T08:46:43.526Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 10ms\", \"trace_id\": \"34aa4a203f1fb241\"}",
+    "ingestionTime": 1794991603934,
+    "eventId": "89361537057317977891244378649850313784180937781198589000"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991613216,
+    "message": "{\"time\": \"2026-11-18T08:46:53.216Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 34ms\", \"trace_id\": \"21f5986819918b8a\"}",
+    "ingestionTime": 1794991613516,
+    "eventId": "31301049687645800371169380655837657560055148820142382674"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991642053,
+    "message": "{\"time\": \"2026-11-18T08:47:22.053Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 5ms\", \"trace_id\": \"41b73d5459d4a28c\"}",
+    "ingestionTime": 1794991642542,
+    "eventId": "31466738105368670880163089044908802755256100381920622593"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991670412,
+    "message": "{\"time\": \"2026-11-18T08:47:50.412Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 43ms\", \"trace_id\": \"07ee64febee33d4a\"}",
+    "ingestionTime": 1794991671034,
+    "eventId": "34012246012331063688490758961934311479893505555384230798"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991710732,
+    "message": "{\"time\": \"2026-11-18T08:48:30.732Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 49ms\", \"trace_id\": \"d3eca751dcbbb757\"}",
+    "ingestionTime": 1794991711025,
+    "eventId": "00127411427037966829294171310741972891562727744656973049"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991714311,
+    "message": "{\"time\": \"2026-11-18T08:48:34.311Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 52ms\", \"trace_id\": \"fa556835c021fa1b\"}",
+    "ingestionTime": 1794991714566,
+    "eventId": "68185796929847708925158852910733181821444817093117466803"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991792217,
+    "message": "{\"time\": \"2026-11-18T08:49:52.217Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 41ms\", \"trace_id\": \"f50b7e1d58e1290d\"}",
+    "ingestionTime": 1794991792944,
+    "eventId": "79958598612370000817034927500145569598830764848328281212"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991754071,
+    "message": "{\"time\": \"2026-11-18T08:49:14.071Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 14ms\", \"trace_id\": \"f04f62941c23edee\"}",
+    "ingestionTime": 1794991754922,
+    "eventId": "68377092147868030850804653524135078380987420654042980705"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991836782,
+    "message": "{\"time\": \"2026-11-18T08:50:36.782Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 26ms\", \"trace_id\": \"66b9aaf9185ba663\"}",
+    "ingestionTime": 1794991837386,
+    "eventId": "87138802901176980518435867390063899897301242700123585854"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991842327,
+    "message": "{\"time\": \"2026-11-18T08:50:42.327Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 17ms\", \"trace_id\": \"4360c66a4d9aa696\"}",
+    "ingestionTime": 1794991842965,
+    "eventId": "96354481177479802824566118268025895056067859228583662127"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991917932,
+    "message": "{\"time\": \"2026-11-18T08:51:57.932Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 12ms\", \"trace_id\": \"98162c6788134e5e\"}",
+    "ingestionTime": 1794991918751,
+    "eventId": "51171343926042281833405649918345543837964842399880702154"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991870179,
+    "message": "{\"time\": \"2026-11-18T08:51:10.179Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 14ms\", \"trace_id\": \"7055114e76917752\"}",
+    "ingestionTime": 1794991870642,
+    "eventId": "63035924028342948353472544325531593549788986632306980951"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991978007,
+    "message": "{\"time\": \"2026-11-18T08:52:58.007Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 21ms\", \"trace_id\": \"c1364fe54d2f9bba\"}",
+    "ingestionTime": 1794991978839,
+    "eventId": "70927314959225954701671970904378820234651541284240719493"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991941401,
+    "message": "{\"time\": \"2026-11-18T08:52:21.401Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 19ms\", \"trace_id\": \"f4aedd0253fcba58\"}",
+    "ingestionTime": 1794991941794,
+    "eventId": "09985160405031127904078632382900625614400153431693681443"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991990787,
+    "message": "{\"time\": \"2026-11-18T08:53:10.787Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 28ms\", \"trace_id\": \"fbdc773b26a55215\"}",
+    "ingestionTime": 1794991991138,
+    "eventId": "26856241961882968338146078227575287817840266092511872090"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991992857,
+    "message": "{\"time\": \"2026-11-18T08:53:12.857Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/products 200 21ms\", \"trace_id\": \"e29f9ecb34d982fb\"}",
+    "ingestionTime": 1794991993454,
+    "eventId": "77581475802190847925120271943657811859682281135733422330"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794992068608,
+    "message": "{\"time\": \"2026-11-18T08:54:28.608Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 33ms\", \"trace_id\": \"244dd37f05a97aab\"}",
+    "ingestionTime": 1794992069071,
+    "eventId": "23763170034944315753398005344285172459339470202129393809"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992095895,
+    "message": "{\"time\": \"2026-11-18T08:54:55.895Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 58ms\", \"trace_id\": \"aafb37173a8335f8\"}",
+    "ingestionTime": 1794992096763,
+    "eventId": "57255146106520937719828195166589018537289452511180930533"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992155865,
+    "message": "{\"time\": \"2026-11-18T08:55:55.865Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 45ms\", \"trace_id\": \"7432f79d1fcc9634\"}",
+    "ingestionTime": 1794992156507,
+    "eventId": "87756257639005370870238505565499212418837306341937230880"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992127497,
+    "message": "{\"time\": \"2026-11-18T08:55:27.497Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 49ms\", \"trace_id\": \"a12e6df3b66f47ac\"}",
+    "ingestionTime": 1794992127857,
+    "eventId": "01927982933700015411506655703982227628660846636722028339"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992200735,
+    "message": "{\"time\": \"2026-11-18T08:56:40.735Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 45ms\", \"trace_id\": \"c736c45253fb51b9\"}",
+    "ingestionTime": 1794992200945,
+    "eventId": "10433722996382167793274032155836403219984814382239606070"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992162499,
+    "message": "{\"time\": \"2026-11-18T08:56:02.499Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 14ms\", \"trace_id\": \"c823802fb759efcf\"}",
+    "ingestionTime": 1794992162903,
+    "eventId": "44801311942455438588855933674231834044748326630912137661"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992255457,
+    "message": "{\"time\": \"2026-11-18T08:57:35.457Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 36ms\", \"trace_id\": \"a3a6a0a9041f8d71\"}",
+    "ingestionTime": 1794992256035,
+    "eventId": "44813562794921981056741860903041189048363633198442044626"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992233768,
+    "message": "{\"time\": \"2026-11-18T08:57:13.768Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 36ms\", \"trace_id\": \"eec4e799c3406a1a\"}",
+    "ingestionTime": 1794992234093,
+    "eventId": "05553107937993985980770317348848318050785383803808823526"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992296545,
+    "message": "{\"time\": \"2026-11-18T08:58:16.545Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 29ms\", \"trace_id\": \"03682cec0fbeb716\"}",
+    "ingestionTime": 1794992296821,
+    "eventId": "66192440533868407686062014601973421705884991335380302048"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794992303076,
+    "message": "{\"time\": \"2026-11-18T08:58:23.076Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/orders 200 18ms\", \"trace_id\": \"bdd104d74db1df93\"}",
+    "ingestionTime": 1794992303686,
+    "eventId": "97513818578381069647223728698858394011920678655461644177"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992392526,
+    "message": "{\"time\": \"2026-11-18T08:59:52.526Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /health 200 17ms\", \"trace_id\": \"2119c05c2a1edb8c\"}",
+    "ingestionTime": 1794992392796,
+    "eventId": "62986722586158274369229075239634655052584790412440380217"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992376834,
+    "message": "{\"time\": \"2026-11-18T08:59:36.834Z\", \"level\": \"INFO\", \"service\": \"checkout-api\", \"message\": \"GET /api/cart 200 26ms\", \"trace_id\": \"a3882a8aaa8173cf\"}",
+    "ingestionTime": 1794992377457,
+    "eventId": "63713321394290135405783235755101475190949760788359116189"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794990908202,
+    "message": "{\"time\": \"2026-11-18T08:35:08.202Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794990908637,
+    "eventId": "96401674343058268647070510128803448559245459088855133779"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794990987925,
+    "message": "{\"time\": \"2026-11-18T08:36:27.925Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794990988412,
+    "eventId": "47034132389328673343972600573879978842979439590227863681"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991051779,
+    "message": "{\"time\": \"2026-11-18T08:37:31.779Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (4s)\", \"status\": 503}",
+    "ingestionTime": 1794991052654,
+    "eventId": "83803767065050150852003597564183457563778890914173464211"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991105238,
+    "message": "{\"time\": \"2026-11-18T08:38:25.238Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1994, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991105770,
+    "eventId": "33852234576890222741483164332206988018984062972964814367"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991181494,
+    "message": "{\"time\": \"2026-11-18T08:39:41.494Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (8s)\", \"status\": 503}",
+    "ingestionTime": 1794991181767,
+    "eventId": "56737851111686531241218055962442623308522131004916025326"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991149354,
+    "message": "{\"time\": \"2026-11-18T08:39:09.354Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1965, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991149908,
+    "eventId": "77647194485946974315122612111735340556440874972936551534"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991235030,
+    "message": "{\"time\": \"2026-11-18T08:40:35.030Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (24s)\", \"status\": 503}",
+    "ingestionTime": 1794991235852,
+    "eventId": "87674686561339134588711156475732863227686333743372965448"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991235946,
+    "message": "{\"time\": \"2026-11-18T08:40:35.946Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 2027, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991236364,
+    "eventId": "65833900188190377103983608140060676270463495435196708465"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991317847,
+    "message": "{\"time\": \"2026-11-18T08:41:57.847Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794991318317,
+    "eventId": "48360823877625251968321130383009988343676224612120008090"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991296516,
+    "message": "{\"time\": \"2026-11-18T08:41:36.516Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794991296863,
+    "eventId": "52918194752224910404936417733445042694107793564464239866"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991359295,
+    "message": "{\"time\": \"2026-11-18T08:42:39.295Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1932, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991359974,
+    "eventId": "82442461586187383697425601668196057493751398291621645911"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991350524,
+    "message": "{\"time\": \"2026-11-18T08:42:30.524Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794991351416,
+    "eventId": "63410648918109032226822489638218738594739623533436808321"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991321869,
+    "message": "{\"time\": \"2026-11-18T08:42:01.869Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794991322767,
+    "eventId": "96286096681781968615742802425667460559030592171827656818"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991386158,
+    "message": "{\"time\": \"2026-11-18T08:43:06.158Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794991386505,
+    "eventId": "12446471849216435830883751035204038203534442573941537100"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991402190,
+    "message": "{\"time\": \"2026-11-18T08:43:22.190Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (13s)\", \"status\": 503}",
+    "ingestionTime": 1794991402739,
+    "eventId": "89481279235221722426369035143779992760987768100413441913"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991393810,
+    "message": "{\"time\": \"2026-11-18T08:43:13.810Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794991394442,
+    "eventId": "28725863333883563247769185029019297186844710892797887751"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991463276,
+    "message": "{\"time\": \"2026-11-18T08:44:23.276Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1978, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991463754,
+    "eventId": "64198974961539377245604536992974099141505908488594431129"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991472256,
+    "message": "{\"time\": \"2026-11-18T08:44:32.256Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1931, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991472762,
+    "eventId": "76915636458139003072993024627722151534298583658350016818"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991442624,
+    "message": "{\"time\": \"2026-11-18T08:44:02.624Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (30s)\", \"status\": 503}",
+    "ingestionTime": 1794991443239,
+    "eventId": "10641699540017267768305297578009589532645363279483332682"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991500407,
+    "message": "{\"time\": \"2026-11-18T08:45:00.407Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1971, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991501230,
+    "eventId": "89235100582213261199020737538194357175305773333542831485"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991535628,
+    "message": "{\"time\": \"2026-11-18T08:45:35.628Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794991536469,
+    "eventId": "66790251962349610949468898839962687127746283747786858581"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991505439,
+    "message": "{\"time\": \"2026-11-18T08:45:05.439Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 2012, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991506107,
+    "eventId": "17781671940316390404789508433817195802274599075182686790"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991556964,
+    "message": "{\"time\": \"2026-11-18T08:45:56.964Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794991557267,
+    "eventId": "85517867433890729212229568535814203579155610453361644931"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991613910,
+    "message": "{\"time\": \"2026-11-18T08:46:53.910Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (19s)\", \"status\": 503}",
+    "ingestionTime": 1794991614374,
+    "eventId": "31236141096618776557977835853580075528148352542037347907"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991561336,
+    "message": "{\"time\": \"2026-11-18T08:46:01.336Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794991562128,
+    "eventId": "51212717927892026361397534458867060254152028574475967003"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991562580,
+    "message": "{\"time\": \"2026-11-18T08:46:02.580Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (15s)\", \"status\": 503}",
+    "ingestionTime": 1794991563369,
+    "eventId": "01385909947885325472872729423147775948305778795714588876"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991604562,
+    "message": "{\"time\": \"2026-11-18T08:46:44.562Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794991605437,
+    "eventId": "53826665993652582392904348867594344396024804400814141845"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991626687,
+    "message": "{\"time\": \"2026-11-18T08:47:06.687Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794991627104,
+    "eventId": "00469142649644134713156469154105341237232326195077534990"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991620611,
+    "message": "{\"time\": \"2026-11-18T08:47:00.611Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (29s)\", \"status\": 503}",
+    "ingestionTime": 1794991620901,
+    "eventId": "01743570682147793615849140740911836241099664952615955181"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991638051,
+    "message": "{\"time\": \"2026-11-18T08:47:18.051Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794991638442,
+    "eventId": "69984981817277516659984596365511084496756329560571433997"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991665537,
+    "message": "{\"time\": \"2026-11-18T08:47:45.537Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (4s)\", \"status\": 503}",
+    "ingestionTime": 1794991666037,
+    "eventId": "65668415851440660498710941140767841291510519331275240055"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991738327,
+    "message": "{\"time\": \"2026-11-18T08:48:58.327Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (3s)\", \"status\": 503}",
+    "ingestionTime": 1794991738559,
+    "eventId": "67345384030017394082831805621905290244363701163878198406"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991733565,
+    "message": "{\"time\": \"2026-11-18T08:48:53.565Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1929, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991734379,
+    "eventId": "59725466474643087603323238631501116329045615476440221702"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991683917,
+    "message": "{\"time\": \"2026-11-18T08:48:03.917Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1997, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991684566,
+    "eventId": "78204917488365520893872320494626416379904492541015552576"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991687648,
+    "message": "{\"time\": \"2026-11-18T08:48:07.648Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (7s)\", \"status\": 503}",
+    "ingestionTime": 1794991688492,
+    "eventId": "77114417766525903370440143477543065407511953021960844058"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991709671,
+    "message": "{\"time\": \"2026-11-18T08:48:29.671Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (20s)\", \"status\": 503}",
+    "ingestionTime": 1794991710212,
+    "eventId": "63844697860108555305547272825509163902818487798651811224"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991786089,
+    "message": "{\"time\": \"2026-11-18T08:49:46.089Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (25s)\", \"status\": 503}",
+    "ingestionTime": 1794991786304,
+    "eventId": "57344093985520727167230651745670167779771810617989484711"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991768086,
+    "message": "{\"time\": \"2026-11-18T08:49:28.086Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 2025, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991768671,
+    "eventId": "44260381296860869688909615896690877971218740473913828322"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991758566,
+    "message": "{\"time\": \"2026-11-18T08:49:18.566Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1918, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991759198,
+    "eventId": "87039378904946680816882910795662503240967335523219900398"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991791320,
+    "message": "{\"time\": \"2026-11-18T08:49:51.320Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1886, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991792105,
+    "eventId": "79153556031499233326359889799591325687189645003719817811"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991775903,
+    "message": "{\"time\": \"2026-11-18T08:49:35.903Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1871, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991776655,
+    "eventId": "77256426651865327644121212634495862113215281504137878099"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991849164,
+    "message": "{\"time\": \"2026-11-18T08:50:49.164Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1864, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991850057,
+    "eventId": "24984298768438966388897055465438332891663132459888752767"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991838429,
+    "message": "{\"time\": \"2026-11-18T08:50:38.429Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (16s)\", \"status\": 503}",
+    "ingestionTime": 1794991839182,
+    "eventId": "06142854736905805994403819973866155152006428263563104849"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991815261,
+    "message": "{\"time\": \"2026-11-18T08:50:15.261Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794991815726,
+    "eventId": "49644880221550778264150493691339182322281398927436907794"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991838622,
+    "message": "{\"time\": \"2026-11-18T08:50:38.622Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1899, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991838916,
+    "eventId": "56676934643851535967245547083657181559815140911549114886"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991836990,
+    "message": "{\"time\": \"2026-11-18T08:50:36.990Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1982, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991837342,
+    "eventId": "36685777380755021016085485929643946736879642982436689283"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991916778,
+    "message": "{\"time\": \"2026-11-18T08:51:56.778Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1968, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991917061,
+    "eventId": "27516074743561459978245639008080867268055727473990157661"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991894043,
+    "message": "{\"time\": \"2026-11-18T08:51:34.043Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1902, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991894822,
+    "eventId": "90772317885211129614580460259303432614913120711762455738"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991911065,
+    "message": "{\"time\": \"2026-11-18T08:51:51.065Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1964, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991911872,
+    "eventId": "82754436586111040192248852401318435421636741880390542399"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991862481,
+    "message": "{\"time\": \"2026-11-18T08:51:02.481Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1896, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991863068,
+    "eventId": "36253528134702200745554648957536947758402670490729218320"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991917060,
+    "message": "{\"time\": \"2026-11-18T08:51:57.060Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1866, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991917872,
+    "eventId": "94087537696821128186905202458357527773690906722146496676"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991865895,
+    "message": "{\"time\": \"2026-11-18T08:51:05.895Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1909, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991866751,
+    "eventId": "38556929177359128829254593580563104544014848062694099168"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991931971,
+    "message": "{\"time\": \"2026-11-18T08:52:11.971Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (13s)\", \"status\": 503}",
+    "ingestionTime": 1794991932411,
+    "eventId": "92363008633909816981065876325955473924888073636270904694"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794991936768,
+    "message": "{\"time\": \"2026-11-18T08:52:16.768Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1991, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991936996,
+    "eventId": "50347680274156502035520999859903790419539434082932091264"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991966504,
+    "message": "{\"time\": \"2026-11-18T08:52:46.504Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1887, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991967029,
+    "eventId": "73385533572119968554171351579211467159254852362102404042"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991939581,
+    "message": "{\"time\": \"2026-11-18T08:52:19.581Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (5s)\", \"status\": 503}",
+    "ingestionTime": 1794991940263,
+    "eventId": "36778240203865538844407933567831835907256511198319628583"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991951543,
+    "message": "{\"time\": \"2026-11-18T08:52:31.543Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1911, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991951889,
+    "eventId": "70345390635785461020768243467553239119648534944279394072"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991932786,
+    "message": "{\"time\": \"2026-11-18T08:52:12.786Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1906, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991933065,
+    "eventId": "73470365282730117564026784582287718355163769858145458660"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794991989159,
+    "message": "{\"time\": \"2026-11-18T08:53:09.159Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (14s)\", \"status\": 503}",
+    "ingestionTime": 1794991989381,
+    "eventId": "31637138131902829575641466411558677531487680521792448004"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992033940,
+    "message": "{\"time\": \"2026-11-18T08:53:53.940Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 2010, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992034514,
+    "eventId": "17677854746034746971837784455203351880546250929388416934"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992026774,
+    "message": "{\"time\": \"2026-11-18T08:53:46.774Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794992027122,
+    "eventId": "40387429157621725728646893489804832625634216531273476011"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794991996171,
+    "message": "{\"time\": \"2026-11-18T08:53:16.171Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1996, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794991996674,
+    "eventId": "10714016381097038087780135364355490543411374004621172569"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992000844,
+    "message": "{\"time\": \"2026-11-18T08:53:20.844Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (5s)\", \"status\": 503}",
+    "ingestionTime": 1794992001201,
+    "eventId": "77248032801629839109359295703469490690596572052157035743"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992023796,
+    "message": "{\"time\": \"2026-11-18T08:53:43.796Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794992024289,
+    "eventId": "35728474045047456837730418954531827245179683155403287922"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794992068315,
+    "message": "{\"time\": \"2026-11-18T08:54:28.315Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (9s)\", \"status\": 503}",
+    "ingestionTime": 1794992068614,
+    "eventId": "05637853877174738562993425967336811241469884921139990450"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794992094547,
+    "message": "{\"time\": \"2026-11-18T08:54:54.547Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 2013, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992094763,
+    "eventId": "13745227804390021796895854811095201471886844919632762870"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794992069032,
+    "message": "{\"time\": \"2026-11-18T08:54:29.032Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (18s)\", \"status\": 503}",
+    "ingestionTime": 1794992069525,
+    "eventId": "40108772669510220691509944896119873713893563775308656837"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794992054304,
+    "message": "{\"time\": \"2026-11-18T08:54:14.304Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794992054645,
+    "eventId": "69795319071462285566087787729789109943911716797712642285"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992051509,
+    "message": "{\"time\": \"2026-11-18T08:54:11.509Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794992051798,
+    "eventId": "26862901040313429873092987161688751031054289057427935954"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992051489,
+    "message": "{\"time\": \"2026-11-18T08:54:11.489Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 2021, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992052332,
+    "eventId": "00984362570436609140856976203287800845247523956552102746"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992044305,
+    "message": "{\"time\": \"2026-11-18T08:54:04.305Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (3s)\", \"status\": 503}",
+    "ingestionTime": 1794992045035,
+    "eventId": "62690687205280721560103852075960196456911974034636706409"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992156656,
+    "message": "{\"time\": \"2026-11-18T08:55:56.656Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1954, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992157344,
+    "eventId": "18247942969751974866021978768031866577665710420773487587"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794992136905,
+    "message": "{\"time\": \"2026-11-18T08:55:36.905Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 2029, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992137485,
+    "eventId": "50984090533370330236906926338265482960203706017738780788"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794992129213,
+    "message": "{\"time\": \"2026-11-18T08:55:29.213Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 2032, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992129663,
+    "eventId": "76416294303840197746341653603265860585326696893713512656"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992146608,
+    "message": "{\"time\": \"2026-11-18T08:55:46.608Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794992146870,
+    "eventId": "48530190371502304098518033653472833727310284701011442038"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794992129257,
+    "message": "{\"time\": \"2026-11-18T08:55:29.257Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1987, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992129594,
+    "eventId": "60719100131985099632167751392179653460947635767939419083"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992111953,
+    "message": "{\"time\": \"2026-11-18T08:55:11.953Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1914, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992112721,
+    "eventId": "90852384549579436024928107936861055727113523437985921982"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992145807,
+    "message": "{\"time\": \"2026-11-18T08:55:45.807Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 2003, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992146659,
+    "eventId": "43568219814209371570085890142486024304772814489833987053"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794992166741,
+    "message": "{\"time\": \"2026-11-18T08:56:06.741Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (24s)\", \"status\": 503}",
+    "ingestionTime": 1794992167124,
+    "eventId": "57465109514464283463496675886965082844344346830938590548"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794992192817,
+    "message": "{\"time\": \"2026-11-18T08:56:32.817Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1881, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992193432,
+    "eventId": "84455485610487679366376734268709370942651200995399993016"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992174878,
+    "message": "{\"time\": \"2026-11-18T08:56:14.878Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794992175551,
+    "eventId": "01815338236955844512813675706098125531263369798238586145"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992201614,
+    "message": "{\"time\": \"2026-11-18T08:56:41.614Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794992202425,
+    "eventId": "95185557576790049803344041638164579940264074007373418793"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794992163405,
+    "message": "{\"time\": \"2026-11-18T08:56:03.405Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1911, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992163948,
+    "eventId": "78893208174040800491637922680213633853722981297224999209"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992181012,
+    "message": "{\"time\": \"2026-11-18T08:56:21.012Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (3s)\", \"status\": 503}",
+    "ingestionTime": 1794992181544,
+    "eventId": "34663318445095222899133030957101608691810333299334883259"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992176337,
+    "message": "{\"time\": \"2026-11-18T08:56:16.337Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794992176548,
+    "eventId": "31812178864644769405598467055577098179781844420342278624"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992248379,
+    "message": "{\"time\": \"2026-11-18T08:57:28.379Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1855, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992248809,
+    "eventId": "97835057453296742237485967210499130042353836344071956549"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794992249735,
+    "message": "{\"time\": \"2026-11-18T08:57:29.735Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (30s)\", \"status\": 503}",
+    "ingestionTime": 1794992249976,
+    "eventId": "90030246280964801397968611948578301115823729332567455292"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794992264462,
+    "message": "{\"time\": \"2026-11-18T08:57:44.462Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794992264698,
+    "eventId": "01340478370173419404511765536034570498426433262240579607"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992248422,
+    "message": "{\"time\": \"2026-11-18T08:57:28.422Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (11s)\", \"status\": 503}",
+    "ingestionTime": 1794992248737,
+    "eventId": "05918058755981434942943591752566955066341994881746958018"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794992258947,
+    "message": "{\"time\": \"2026-11-18T08:57:38.947Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 2001, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992259693,
+    "eventId": "12884663488532959276721734386081196163752258873236567109"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794992278011,
+    "message": "{\"time\": \"2026-11-18T08:57:58.011Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (20s)\", \"status\": 503}",
+    "ingestionTime": 1794992278506,
+    "eventId": "53582380858830418374788016870523627391791843771528524918"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992238819,
+    "message": "{\"time\": \"2026-11-18T08:57:18.819Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794992239602,
+    "eventId": "69671889877165519832494361449002473410743389184818140258"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992244039,
+    "message": "{\"time\": \"2026-11-18T08:57:24.039Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (11s)\", \"status\": 503}",
+    "ingestionTime": 1794992244866,
+    "eventId": "23760245994027685677135443352732495045504572674087895779"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992301867,
+    "message": "{\"time\": \"2026-11-18T08:58:21.867Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1989, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992302459,
+    "eventId": "34588096402502228282556422022667749717657172120790636021"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992290636,
+    "message": "{\"time\": \"2026-11-18T08:58:10.636Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1933, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992291339,
+    "eventId": "28982973518225916549218918287993876002565428257224261296"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794992283729,
+    "message": "{\"time\": \"2026-11-18T08:58:03.729Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1867, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992284549,
+    "eventId": "50706780398312137674027310487325381144885600958324391486"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992305420,
+    "message": "{\"time\": \"2026-11-18T08:58:25.420Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1877, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992306153,
+    "eventId": "91601581918935971873406086270898059017753399020434525256"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992290126,
+    "message": "{\"time\": \"2026-11-18T08:58:10.126Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1940, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992290469,
+    "eventId": "27143313643115635656344286617406715771506176764001081268"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794992333817,
+    "message": "{\"time\": \"2026-11-18T08:58:53.817Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794992334503,
+    "eventId": "89713973477580503387845133157052965358832309002440303311"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992326104,
+    "message": "{\"time\": \"2026-11-18T08:58:46.104Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1876, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992326308,
+    "eventId": "48832240941264242845754844672246714428899087871953151111"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992306050,
+    "message": "{\"time\": \"2026-11-18T08:58:26.050Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1921, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992306886,
+    "eventId": "67934268056266032376086698139455468019185068094560811321"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794992370009,
+    "message": "{\"time\": \"2026-11-18T08:59:30.009Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"java.lang.OutOfMemoryError: Java heap space\", \"exception\": \"java.lang.OutOfMemoryError\", \"stack\": \"at com.acme.checkout.cache.ProductCache.load(ProductCache.java:142)\"}",
+    "ingestionTime": 1794992370508,
+    "eventId": "37711738525941724457012871855045192022528898499664882710"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/0c5c7fd0a6a3a450",
+    "timestamp": 1794992382480,
+    "message": "{\"time\": \"2026-11-18T08:59:42.480Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 2040, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992383191,
+    "eventId": "29819442526579859945295625857632285511284869229381409578"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992392622,
+    "message": "{\"time\": \"2026-11-18T08:59:52.622Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1946, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992393417,
+    "eventId": "31764773978720440410379258475318871777696037945110183314"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992395272,
+    "message": "{\"time\": \"2026-11-18T08:59:55.272Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (8s)\", \"status\": 503}",
+    "ingestionTime": 1794992395908,
+    "eventId": "04653105566286176215019658873193504969508078271429424908"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992356813,
+    "message": "{\"time\": \"2026-11-18T08:59:16.813Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1987, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992357332,
+    "eventId": "80982088550572316056227950461998574416012409137331379263"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/d23f0824128b2f33",
+    "timestamp": 1794992373899,
+    "message": "{\"time\": \"2026-11-18T08:59:33.899Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1941, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992374140,
+    "eventId": "01018024965856522040281932853783668231195053642687158938"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794992384333,
+    "message": "{\"time\": \"2026-11-18T08:59:44.333Z\", \"level\": \"WARN\", \"service\": \"checkout-api\", \"message\": \"GC overhead: heap usage above 92%, full GC took 4.8s\", \"heap_used_mb\": 1875, \"heap_max_mb\": 2048}",
+    "ingestionTime": 1794992384952,
+    "eventId": "91058417499303184106614998124411434401865264650033673034"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/6513270e269e0d37",
+    "timestamp": 1794992377621,
+    "message": "{\"time\": \"2026-11-18T08:59:37.621Z\", \"level\": \"ERROR\", \"service\": \"checkout-api\", \"message\": \"upstream request failed: 503 Service Unavailable (15s)\", \"status\": 503}",
+    "ingestionTime": 1794992378319,
+    "eventId": "97699588122670700206154801923940582820389215825682362057"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991320000,
+    "message": "Task stopped: Essential container in task exited, exit code 137 (OOMKilled). Container killed due to memory usage",
+    "ingestionTime": 1794991320801,
+    "eventId": "09047146470001418529609620355501454876746664366051503437"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991560000,
+    "message": "Task stopped: Essential container in task exited, exit code 137 (OOMKilled). Container killed due to memory usage",
+    "ingestionTime": 1794991560374,
+    "eventId": "81016718185358044035624003951566186078608372737507001246"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794991860000,
+    "message": "Task stopped: Essential container in task exited, exit code 137 (OOMKilled). Container killed due to memory usage",
+    "ingestionTime": 1794991860518,
+    "eventId": "28925723106025691653322515132146956681234296438865352124"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794992100000,
+    "message": "Task stopped: Essential container in task exited, exit code 137 (OOMKilled). Container killed due to memory usage",
+    "ingestionTime": 1794992100551,
+    "eventId": "95265920425624651196679329242752254050222413437203373725"
+   },
+   {
+    "logStreamName": "ecs/checkout-api/f2a74de452e6b438",
+    "timestamp": 1794992280000,
+    "message": "Task stopped: Essential container in task exited, exit code 137 (OOMKilled). Container killed due to memory usage",
+    "ingestionTime": 1794992280630,
+    "eventId": "50178184126806050693431907761421322514892813583657196070"
+   }
+  ]
+ },
+ "metrics": [
+  {
+   "namespace": "AWS/ECS",
+   "metric": "MemoryUtilization",
+   "dimensions": {
+    "ClusterName": "prod-cluster",
+    "ServiceName": "checkout-api"
+   },
+   "stat": "Average",
+   "period": 60,
+   "unit": "Percent",
+   "timestamps": [
+    1794987000000,
+    1794987060000,
+    1794987120000,
+    1794987180000,
+    1794987240000,
+    1794987300000,
+    1794987360000,
+    1794987420000,
+    1794987480000,
+    1794987540000,
+    1794987600000,
+    1794987660000,
+    1794987720000,
+    1794987780000,
+    1794987840000,
+    1794987900000,
+    1794987960000,
+    1794988020000,
+    1794988080000,
+    1794988140000,
+    1794988200000,
+    1794988260000,
+    1794988320000,
+    1794988380000,
+    1794988440000,
+    1794988500000,
+    1794988560000,
+    1794988620000,
+    1794988680000,
+    1794988740000,
+    1794988800000,
+    1794988860000,
+    1794988920000,
+    1794988980000,
+    1794989040000,
+    1794989100000,
+    1794989160000,
+    1794989220000,
+    1794989280000,
+    1794989340000,
+    1794989400000,
+    1794989460000,
+    1794989520000,
+    1794989580000,
+    1794989640000,
+    1794989700000,
+    1794989760000,
+    1794989820000,
+    1794989880000,
+    1794989940000,
+    1794990000000,
+    1794990060000,
+    1794990120000,
+    1794990180000,
+    1794990240000,
+    1794990300000,
+    1794990360000,
+    1794990420000,
+    1794990480000,
+    1794990540000,
+    1794990600000,
+    1794990660000,
+    1794990720000,
+    1794990780000,
+    1794990840000,
+    1794990900000,
+    1794990960000,
+    1794991020000,
+    1794991080000,
+    1794991140000,
+    1794991200000,
+    1794991260000,
+    1794991320000,
+    1794991380000,
+    1794991440000,
+    1794991500000,
+    1794991560000,
+    1794991620000,
+    1794991680000,
+    1794991740000,
+    1794991800000,
+    1794991860000,
+    1794991920000,
+    1794991980000,
+    1794992040000,
+    1794992100000,
+    1794992160000,
+    1794992220000,
+    1794992280000,
+    1794992340000,
+    1794992400000
+   ],
+   "values": [
+    51.12,
+    53.18,
+    51.74,
+    50.68,
+    52.19,
+    50.82,
+    52.21,
+    52.39,
+    52.67,
+    52.58,
+    50.53,
+    50.51,
+    52.63,
+    52.16,
+    53.25,
+    51.69,
+    50.8,
+    50.55,
+    50.59,
+    51.03,
+    52.81,
+    52.2,
+    53.11,
+    53.19,
+    52.04,
+    50.93,
+    51.1,
+    52.31,
+    50.94,
+    52.06,
+    52.03,
+    50.59,
+    50.73,
+    53.34,
+    51.97,
+    51.9,
+    51.79,
+    52.9,
+    52.45,
+    52.55,
+    52.24,
+    50.93,
+    51.21,
+    51.33,
+    50.6,
+    52.39,
+    53.08,
+    53.34,
+    50.69,
+    51.07,
+    52.37,
+    50.56,
+    51.16,
+    51.69,
+    52.79,
+    50.63,
+    50.66,
+    51.21,
+    51.17,
+    50.98,
+    52.26,
+    51.02,
+    50.52,
+    53.1,
+    51.87,
+    53.89,
+    55.53,
+    59.57,
+    61.98,
+    61.38,
+    65.35,
+    67.48,
+    69.35,
+    70.97,
+    73.06,
+    76.14,
+    76.2,
+    80.88,
+    80.67,
+    83.06,
+    85.82,
+    86.84,
+    91.6,
+    92.28,
+    94.32,
+    96.37,
+    100.11,
+    98.51,
+    99.45,
+    100.38,
+    98.77
+   ]
+  },
+  {
+   "namespace": "AWS/ECS",
+   "metric": "CPUUtilization",
+   "dimensions": {
+    "ClusterName": "prod-cluster",
+    "ServiceName": "checkout-api"
+   },
+   "stat": "Average",
+   "period": 60,
+   "unit": "Percent",
+   "timestamps": [
+    1794987000000,
+    1794987060000,
+    1794987120000,
+    1794987180000,
+    1794987240000,
+    1794987300000,
+    1794987360000,
+    1794987420000,
+    1794987480000,
+    1794987540000,
+    1794987600000,
+    1794987660000,
+    1794987720000,
+    1794987780000,
+    1794987840000,
+    1794987900000,
+    1794987960000,
+    1794988020000,
+    1794988080000,
+    1794988140000,
+    1794988200000,
+    1794988260000,
+    1794988320000,
+    1794988380000,
+    1794988440000,
+    1794988500000,
+    1794988560000,
+    1794988620000,
+    1794988680000,
+    1794988740000,
+    1794988800000,
+    1794988860000,
+    1794988920000,
+    1794988980000,
+    1794989040000,
+    1794989100000,
+    1794989160000,
+    1794989220000,
+    1794989280000,
+    1794989340000,
+    1794989400000,
+    1794989460000,
+    1794989520000,
+    1794989580000,
+    1794989640000,
+    1794989700000,
+    1794989760000,
+    1794989820000,
+    1794989880000,
+    1794989940000,
+    1794990000000,
+    1794990060000,
+    1794990120000,
+    1794990180000,
+    1794990240000,
+    1794990300000,
+    1794990360000,
+    1794990420000,
+    1794990480000,
+    1794990540000,
+    1794990600000,
+    1794990660000,
+    1794990720000,
+    1794990780000,
+    1794990840000,
+    1794990900000,
+    1794990960000,
+    1794991020000,
+    1794991080000,
+    1794991140000,
+    1794991200000,
+    1794991260000,
+    1794991320000,
+    1794991380000,
+    1794991440000,
+    1794991500000,
+    1794991560000,
+    1794991620000,
+    1794991680000,
+    1794991740000,
+    1794991800000,
+    1794991860000,
+    1794991920000,
+    1794991980000,
+    1794992040000,
+    1794992100000,
+    1794992160000,
+    1794992220000,
+    1794992280000,
+    1794992340000,
+    1794992400000
+   ],
+   "values": [
+    37.48,
+    35.32,
+    34.32,
+    34.8,
+    34.07,
+    34.61,
+    33.67,
+    32.15,
+    36.83,
+    33.45,
+    32.78,
+    33.18,
+    35.27,
+    36.72,
+    35.33,
+    34.8,
+    36.77,
+    33.44,
+    34.21,
+    33.3,
+    34.43,
+    35.78,
+    35.48,
+    33.78,
+    34.86,
+    33.23,
+    37.15,
+    36.05,
+    37.65,
+    37.99,
+    35.58,
+    34.64,
+    37.94,
+    35.21,
+    34.42,
+    35.06,
+    32.75,
+    36.5,
+    36.07,
+    32.55,
+    37.11,
+    36.42,
+    36.59,
+    32.17,
+    36.31,
+    32.87,
+    32.09,
+    36.26,
+    36.17,
+    36.66,
+    33.39,
+    33.13,
+    37.35,
+    32.41,
+    37.48,
+    36.83,
+    36.55,
+    33.16,
+    36.31,
+    32.53,
+    33.73,
+    36.9,
+    34.39,
+    34.14,
+    37.07,
+    36.74,
+    39.68,
+    41.64,
+    45.0,
+    47.39,
+    44.79,
+    47.88,
+    52.43,
+    53.74,
+    56.93,
+    53.65,
+    59.68,
+    60.18,
+    65.36,
+    63.72,
+    68.71,
+    65.81,
+    68.93,
+    70.76,
+    74.74,
+    74.36,
+    79.06,
+    77.43,
+    78.65,
+    77.58,
+    79.54
+   ]
+  },
+  {
+   "namespace": "AWS/ApplicationELB",
+   "metric": "HTTPCode_Target_5XX_Count",
+   "dimensions": {
+    "LoadBalancer": "app/prod-alb/50dc6c495c0c9188"
+   },
+   "stat": "Sum",
+   "period": 60,
+   "unit": "Count",
+   "timestamps": [
+    1794987000000,
+    1794987060000,
+    1794987120000,
+    1794987180000,
+    1794987240000,
+    1794987300000,
+    1794987360000,
+    1794987420000,
+    1794987480000,
+    1794987540000,
+    1794987600000,
+    1794987660000,
+    1794987720000,
+    1794987780000,
+    1794987840000,
+    1794987900000,
+    1794987960000,
+    1794988020000,
+    1794988080000,
+    1794988140000,
+    1794988200000,
+    1794988260000,
+    1794988320000,
+    1794988380000,
+    1794988440000,
+    1794988500000,
+    1794988560000,
+    1794988620000,
+    1794988680000,
+    1794988740000,
+    1794988800000,
+    1794988860000,
+    1794988920000,
+    1794988980000,
+    1794989040000,
+    1794989100000,
+    1794989160000,
+    1794989220000,
+    1794989280000,
+    1794989340000,
+    1794989400000,
+    1794989460000,
+    1794989520000,
+    1794989580000,
+    1794989640000,
+    1794989700000,
+    1794989760000,
+    1794989820000,
+    1794989880000,
+    1794989940000,
+    1794990000000,
+    1794990060000,
+    1794990120000,
+    1794990180000,
+    1794990240000,
+    1794990300000,
+    1794990360000,
+    1794990420000,
+    1794990480000,
+    1794990540000,
+    1794990600000,
+    1794990660000,
+    1794990720000,
+    1794990780000,
+    1794990840000,
+    1794990900000,
+    1794990960000,
+    1794991020000,
+    1794991080000,
+    1794991140000,
+    1794991200000,
+    1794991260000,
+    1794991320000,
+    1794991380000,
+    1794991440000,
+    1794991500000,
+    1794991560000,
+    1794991620000,
+    1794991680000,
+    1794991740000,
+    1794991800000,
+    1794991860000,
+    1794991920000,
+    1794991980000,
+    1794992040000,
+    1794992100000,
+    1794992160000,
+    1794992220000,
+    1794992280000,
+    1794992340000,
+    1794992400000
+   ],
+   "values": [
+    0.0,
+    2.86,
+    0.63,
+    1.55,
+    5.3,
+    0.77,
+    0.0,
+    0.0,
+    0.25,
+    5.11,
+    2.04,
+    0.9,
+    5.23,
+    0.0,
+    3.16,
+    1.87,
+    4.81,
+    4.5,
+    1.02,
+    2.35,
+    5.69,
+    2.17,
+    0.0,
+    0.0,
+    3.33,
+    0.0,
+    4.96,
+    0.0,
+    2.93,
+    5.98,
+    1.38,
+    0.0,
+    0.33,
+    0.0,
+    5.4,
+    0.0,
+    0.0,
+    0.04,
+    2.26,
+    4.07,
+    1.51,
+    0.1,
+    2.12,
+    0.0,
+    2.08,
+    4.16,
+    3.34,
+    0.0,
+    0.0,
+    5.43,
+    3.9,
+    0.71,
+    0.0,
+    0.0,
+    3.37,
+    0.0,
+    0.0,
+    5.56,
+    0.0,
+    0.0,
+    0.0,
+    1.64,
+    0.0,
+    2.23,
+    0.0,
+    0.0,
+    2.47,
+    5.5,
+    25.16,
+    29.88,
+    47.41,
+    59.52,
+    64.17,
+    82.49,
+    92.48,
+    99.75,
+    115.84,
+    121.13,
+    136.24,
+    153.87,
+    162.12,
+    167.29,
+    188.61,
+    198.36,
+    204.59,
+    213.62,
+    230.85,
+    234.15,
+    239.84,
+    234.52,
+    244.75
+   ]
+  }
+ ],
+ "ecs_services": [
+  {
+   "serviceName": "checkout-api",
+   "serviceArn": "arn:aws:ecs:us-east-1:123456789012:service/prod-cluster/checkout-api",
+   "clusterArn": "arn:aws:ecs:us-east-1:123456789012:cluster/prod-cluster",
+   "status": "ACTIVE",
+   "launchType": "FARGATE",
+   "desiredCount": 4,
+   "runningCount": 2,
+   "pendingCount": 2,
+   "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/checkout-api:42",
+   "deployments": [
+    {
+     "id": "ecs-svc/227255933641466086",
+     "status": "PRIMARY",
+     "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/checkout-api:42",
+     "desiredCount": 4,
+     "pendingCount": 2,
+     "runningCount": 2,
+     "failedTasks": 5,
+     "rolloutState": "IN_PROGRESS",
+     "createdAt": "2026-11-18T08:35:00.000Z",
+     "updatedAt": "2026-11-18T08:59:00.000Z"
+    },
+    {
+     "id": "ecs-svc/808917216200227311",
+     "status": "ACTIVE",
+     "taskDefinition": "arn:aws:ecs:us-east-1:123456789012:task-definition/checkout-api:41",
+     "desiredCount": 0,
+     "pendingCount": 0,
+     "runningCount": 2,
+     "failedTasks": 0,
+     "rolloutState": "COMPLETED",
+     "createdAt": "2026-11-12T09:00:00.000Z",
+     "updatedAt": "2026-11-18T08:35:00.000Z"
+    }
+   ],
+   "events": [
+    {
+     "id": "1f67fa00172b150d14f152945",
+     "createdAt": "2026-11-18T08:58:00.000Z",
+     "message": "(service checkout-api) has started 2 tasks: (task 9f3a1c) (task 7be201)."
+    },
+    {
+     "id": "771f0456f531082d0294c3d89",
+     "createdAt": "2026-11-18T08:56:00.000Z",
+     "message": "(service checkout-api) (task 5c11de) stopped: Essential container in task exited (exit code 137: OutOfMemoryError)"
+    },
+    {
+     "id": "24a1d0c725cebfc5791b626d3",
+     "createdAt": "2026-11-18T08:51:00.000Z",
+     "message": "(service checkout-api) has stopped 2 running tasks: (task 1ab9f0) (task 66d3e1)."
+    },
+    {
+     "id": "bab24821262afca8eba6514",
+     "createdAt": "2026-11-18T08:35:00.000Z",
+     "message": "(service checkout-api) deployment ecs-svc started: task definition checkout-api:42"
+    }
+   ]
+  }
+ ],
+ "rds_instances": [],
+ "ec2_instances": [],
+ "deployments": [
+  {
+   "service": "checkout-api",
+   "deploymentId": "d-8K2LQ9ZPA",
+   "status": "SUCCEEDED",
+   "createdAt": "2026-11-18T08:35:00.000Z",
+   "taskDefinition": "checkout-api:42",
+   "image": "123456789012.dkr.ecr.us-east-1.amazonaws.com/checkout-api:v2.14.0",
+   "author": "dev-priya",
+   "commit": "a91c3e7",
+   "description": "Increase product cache size to hold full catalog in memory (heap 2GB, task memory 2GB)"
+  },
+  {
+   "service": "checkout-api",
+   "deploymentId": "d-3NQ7H1XKB",
+   "status": "SUCCEEDED",
+   "createdAt": "2026-11-12T09:00:00.000Z",
+   "taskDefinition": "checkout-api:41",
+   "image": "123456789012.dkr.ecr.us-east-1.amazonaws.com/checkout-api:v2.13.2",
+   "author": "dev-arjun",
+   "commit": "5be02d4",
+   "description": "Fix coupon rounding bug"
+  }
+ ]
+}

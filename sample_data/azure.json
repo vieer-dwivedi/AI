@@ -1,0 +1,22 @@
+{
+  "alerts": [
+    {"id": "az-alert-1", "name": "aks-prod-pod-restarts-high", "severity": "Sev2", "state": "Fired",
+     "resource": "aks-prod-eastus", "description": "Container restart count > 5 in 10 min for deployment cart-svc",
+     "fired_at": "2026-11-18T08:58:00Z"}
+  ],
+  "aks_pods": {
+    "default": [
+      {"name": "cart-svc-7d9c6b5f4-abcde", "status": "CrashLoopBackOff", "restarts": 14,
+       "last_state": "OOMKilled", "node": "aks-nodepool1-1234"},
+      {"name": "cart-svc-7d9c6b5f4-fghij", "status": "CrashLoopBackOff", "restarts": 12,
+       "last_state": "OOMKilled", "node": "aks-nodepool1-5678"},
+      {"name": "web-frontend-5c8d7f6b9-klmno", "status": "Running", "restarts": 0,
+       "last_state": "-", "node": "aks-nodepool1-1234"}
+    ]
+  },
+  "logs": [
+    "2026-11-18T08:55:01Z cart-svc container exited with code 137 (OOMKilled)",
+    "2026-11-18T08:56:12Z cart-svc Back-off restarting failed container",
+    "2026-11-18T08:57:30Z cart-svc memory limit 256Mi exceeded"
+  ]
+}

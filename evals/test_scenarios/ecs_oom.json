@@ -1,0 +1,12 @@
+{
+  "scenario": "ecs_oom",
+  "expect": {
+    "severity_in": ["P1", "P2"],
+    "root_cause_category": "memory_exhaustion",
+    "trigger_contains": "d-8K2LQ9ZPA",
+    "root_cause_keywords_any": ["oom", "memory"],
+    "runbook": "ecs-oom-killed.md",
+    "action_types_include": ["rollback_deployment"],
+    "similar_incident_id": "INC-2031"
+  }
+}
