@@ -1,0 +1,24 @@
+# --- LLM / agent ---
+langchain
+langchain-google-genai
+langgraph
+langchain-mcp-adapters
+python-dotenv
+
+# --- KP MCP server (mcp/kp) ---
+# Needs only `mcp` (brings pydantic) and `pyswisseph`, both listed below. PyJHora is NOT used by the KP server.
+# Moshier fallback is used when no Swiss Ephemeris data files are present (about 1" planets, 3" Moon: fine for KP).
+
+# --- Dasha MCP server ---
+mcp
+PyJHora
+# PyJHora's wheel declares no dependencies; these are what its core (non-GUI) code imports
+pyswisseph
+numpy
+python-dateutil
+pytz
+geopy
+timezonefinder
+requests
+certifi
+geocoder
