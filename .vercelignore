@@ -1,0 +1,10 @@
+.venv
+.env
+__pycache__
+history
+jobs
+out
+variants
+applications.json
+smoke_test.py
+progress.md

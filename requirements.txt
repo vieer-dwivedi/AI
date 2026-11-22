@@ -1,0 +1,8 @@
+mcp>=1.2,<2
+pydantic>=2
+httpx
+beautifulsoup4
+pypdf
+reportlab
+playwright
+uvicorn
