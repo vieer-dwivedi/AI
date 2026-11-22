@@ -693,7 +693,23 @@ class SecretPathGate:
         async with mgr.run():
             await mgr.handle_request(dict(scope, path="/mcp", raw_path=b"/mcp"), receive, send)
 
-app = SecretPathGate(mcp, SECRET) if SECRET else None   # ASGI app: Vercel (api/index.py) and local (python run.py)
+async def _config_error_app(scope, receive, send):
+    """Always-valid ASGI app used when RESUME_SECRET is missing/too short, so the host can start and show what to fix."""
+    if scope["type"] == "lifespan":
+        while True:
+            m = await receive()
+            if m["type"] == "lifespan.startup":
+                await send({"type": "lifespan.startup.complete"})
+            elif m["type"] == "lifespan.shutdown":
+                return await send({"type": "lifespan.shutdown.complete"})
+    if scope["type"] == "http":
+        body = b"Server is running but RESUME_SECRET is missing or shorter than 16 characters. Add it in Vercel -> Settings -> Environment Variables (Production), then redeploy."
+        await send({"type": "http.response.start", "status": 500,
+                    "headers": [(b"content-type", b"text/plain"), (b"content-length", str(len(body)).encode())]})
+        await send({"type": "http.response.body", "body": body})
+
+# ASGI app: Vercel (api/index.py, or auto-detected server:app) and local (python run.py). Never None.
+app = SecretPathGate(mcp, SECRET) if len(SECRET) >= 16 else _config_error_app
 
 if __name__ == "__main__":
     mcp.run()   # stdio (Claude Desktop / Claude Code local)
