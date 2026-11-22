@@ -21,7 +21,7 @@ User says `apply <link>` -> use ONLY the `resume-studio` MCP:
 - [ ] Deploy: import repo in Vercel, Root Directory = `resume_mcp`; add Upstash Redis (Storage tab); env vars `RESUME_SECRET`, `GMAIL_ADDRESS`, `GMAIL_APP_PASSWORD` (+ optional `BROWSER_WS_ENDPOINT`)
 - [ ] Connector URL: `https://<project>.vercel.app/<RESUME_SECRET>/mcp`; check `https://<project>.vercel.app/healthz` -> `ok redis`
 - [ ] Form tools on Vercel need `BROWSER_WS_ENDPOINT` (remote Chromium, e.g. Browserless/Browserbase). Without it they return a clear error; email route is unaffected
-- [ ] If Vercel reports the bundle > 250 MB, remove `playwright` from requirements.txt (form tools off)
+- [x] `playwright` removed from requirements.txt (form tools off on Vercel; email route unaffected)
 - [ ] Keep the GitHub repo PRIVATE (master_resume.json + profile_answers.json are deployed)
 
 ## Done
