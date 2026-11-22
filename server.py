@@ -665,6 +665,8 @@ class SecretPathGate:
         if scope["type"] != "http":
             return
         path = scope.get("path", "")
+        if path in ("", "/"):
+            return await self._respond(send, 200, b"ok")
         if path == "/healthz":
             return await self._respond(send, 200, ("ok " + __import__("store").info()["backend"]).encode())
         dl = path.split("/", 3)
