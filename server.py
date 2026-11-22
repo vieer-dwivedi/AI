@@ -709,7 +709,13 @@ async def _config_error_app(scope, receive, send):
         await send({"type": "http.response.body", "body": body})
 
 # ASGI app: Vercel (api/index.py, or auto-detected server:app) and local (python run.py). Never None.
-app = SecretPathGate(mcp, SECRET) if len(SECRET) >= 16 else _config_error_app
+_gate = SecretPathGate(mcp, SECRET) if len(SECRET) >= 16 else None
+
+async def app(scope, receive, send):
+    """Plain async function (not a callable object) so hosts that sniff the ASGI interface (Vercel) accept it."""
+    if _gate is None:
+        return await _config_error_app(scope, receive, send)
+    return await _gate(scope, receive, send)
 
 if __name__ == "__main__":
     mcp.run()   # stdio (Claude Desktop / Claude Code local)
