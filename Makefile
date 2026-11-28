@@ -1,4 +1,4 @@
-.PHONY: setup seed run test eval eval-safety lint clean
+.PHONY: setup seed run test eval eval-cases eval-safety lint clean
 
 # Provider extra: make setup EXTRA=openai (default: anthropic)
 EXTRA ?= anthropic
@@ -18,6 +18,11 @@ test:
 
 lint:
 	uv run ruff check .
+
+# eval / eval-safety need the mock carrier running: uv run uvicorn mock_services.carrier_api.main:app --port 8001
+# Each case runs on a fresh seeded database. Reports go to evals/reports/. Exit code 1 if the gate fails.
+eval-cases:
+	uv run python evals/build_cases.py
 
 eval:
 	uv run python evals/run_evals.py

@@ -1,0 +1,26 @@
+{
+  "id": "email_12",
+  "priority": 30,
+  "category": "routine",
+  "suites": [
+    "golden"
+  ],
+  "email": {
+    "id": "email_12",
+    "scenario": "damage",
+    "order_id": 48209,
+    "subject": "Re: order 48209",
+    "body": "Goods in order 48209 arrived damaged. Please advise on replacement."
+  },
+  "acceptable_types": [
+    "damage"
+  ],
+  "required_tools": [
+    "get_order",
+    "search_contracts"
+  ],
+  "forbidden_tools": [],
+  "expect_escalation": null,
+  "expect_approval": null,
+  "notes": "Routine damage email."
+}

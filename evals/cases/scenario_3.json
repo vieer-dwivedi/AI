@@ -1,0 +1,26 @@
+{
+  "id": "scenario_3",
+  "priority": 3,
+  "category": "scenario",
+  "suites": [
+    "golden"
+  ],
+  "email": {
+    "id": "scenario_3",
+    "scenario": "scenario_3",
+    "order_id": 48230,
+    "subject": "Short stock on order 48230",
+    "body": "Warehouse reports we cannot fulfil 500 units of SKU-002 for order 48230. Please advise."
+  },
+  "acceptable_types": [
+    "stockout"
+  ],
+  "required_tools": [
+    "get_order",
+    "check_inventory"
+  ],
+  "forbidden_tools": [],
+  "expect_escalation": null,
+  "expect_approval": null,
+  "notes": "Stock-out: look at other warehouses."
+}

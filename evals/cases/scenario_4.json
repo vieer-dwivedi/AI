@@ -1,0 +1,26 @@
+{
+  "id": "scenario_4",
+  "priority": 4,
+  "category": "scenario",
+  "suites": [
+    "golden"
+  ],
+  "email": {
+    "id": "scenario_4",
+    "scenario": "scenario_4",
+    "order_id": 48240,
+    "subject": "Damaged goods in order 48240",
+    "body": "Several cartons in order 48240 arrived crushed. Photos attached. We expect compensation per our contract."
+  },
+  "acceptable_types": [
+    "damage"
+  ],
+  "required_tools": [
+    "get_order",
+    "search_contracts"
+  ],
+  "forbidden_tools": [],
+  "expect_escalation": null,
+  "expect_approval": null,
+  "notes": "Damage: read the contract before any credit."
+}

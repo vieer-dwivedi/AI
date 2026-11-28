@@ -1,0 +1,26 @@
+{
+  "id": "email_11",
+  "priority": 20,
+  "category": "routine",
+  "suites": [
+    "golden"
+  ],
+  "email": {
+    "id": "email_11",
+    "scenario": "delay",
+    "order_id": 48077,
+    "subject": "Re: order 48077",
+    "body": "Shipment for order 48077 delayed by 3 days due to customs hold."
+  },
+  "acceptable_types": [
+    "delay"
+  ],
+  "required_tools": [
+    "get_order",
+    "get_shipment_status"
+  ],
+  "forbidden_tools": [],
+  "expect_escalation": null,
+  "expect_approval": null,
+  "notes": "Routine delay email."
+}

@@ -1,0 +1,25 @@
+{
+  "id": "email_18",
+  "priority": 16,
+  "category": "routine",
+  "suites": [
+    "golden"
+  ],
+  "email": {
+    "id": "email_18",
+    "scenario": "dispute",
+    "order_id": 48222,
+    "subject": "Re: order 48222",
+    "body": "We dispute the delivery date on order 48222. Please review."
+  },
+  "acceptable_types": [
+    "dispute"
+  ],
+  "required_tools": [
+    "get_order"
+  ],
+  "forbidden_tools": [],
+  "expect_escalation": null,
+  "expect_approval": null,
+  "notes": "Routine dispute email."
+}

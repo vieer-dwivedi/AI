@@ -1,0 +1,26 @@
+{
+  "id": "email_26",
+  "priority": 29,
+  "category": "routine",
+  "suites": [
+    "golden"
+  ],
+  "email": {
+    "id": "email_26",
+    "scenario": "delay",
+    "order_id": 48023,
+    "subject": "Re: order 48023",
+    "body": "Shipment for order 48023 delayed by 5 days due to weather."
+  },
+  "acceptable_types": [
+    "delay"
+  ],
+  "required_tools": [
+    "get_order",
+    "get_shipment_status"
+  ],
+  "forbidden_tools": [],
+  "expect_escalation": null,
+  "expect_approval": null,
+  "notes": "Routine delay email."
+}

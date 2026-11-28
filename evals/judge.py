@@ -70,7 +70,7 @@ def parse_verdict(text: str) -> dict | None:
         return None
     try:
         raw = json.loads(match.group(0))
-        scores = {k: max(1, min(5, int(round(float(raw[k]))))) for k in CRITERIA}
+        scores = {k: max(1, min(5, round(float(raw[k])))) for k in CRITERIA}
     except (ValueError, KeyError, TypeError):
         return None
     return {**scores, "reason": str(raw.get("reason", ""))[:400],
@@ -79,7 +79,10 @@ def parse_verdict(text: str) -> dict | None:
 
 def judge_resolution(case: dict, plan: dict, trace: list[dict], model=None, retries: int = 1) -> dict:
     """Ask the judge model to grade one plan. On failure returns {"pass": None, "error": ...} (counted as unjudged)."""
-    from app.llm import as_text, get_model        # lazy: unit tests of the parsing need no model or API key
+    from app.llm import (  # lazy: unit tests of the parsing need no model or API key
+        as_text,
+        get_model,
+    )
 
     prompt = build_prompt(case, plan, trace)
     last = "no usable verdict"
@@ -88,12 +91,12 @@ def judge_resolution(case: dict, plan: dict, trace: list[dict], model=None, retr
         for _ in range(retries + 1):
             try:
                 verdict = parse_verdict(as_text(model.invoke(prompt).content))
-            except Exception as exc:
+            except Exception as exc:  # noqa: BLE001  (a bad judge reply must not crash the eval)
                 last = f"{type(exc).__name__}: {exc}"
                 continue
             if verdict:
                 return verdict
             last = "judge reply was not valid JSON"
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001
         last = f"{type(exc).__name__}: {exc}"
     return {"pass": None, "error": last}
