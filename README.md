@@ -412,6 +412,8 @@ Results are written to `evals/reports/<timestamp>.md` and can be diffed across p
 ```
 dispatch-agent/
 ├── README.md
+├── steps.md                     # step-by-step build guide
+├── Dockerfile
 ├── docker-compose.yml
 ├── Makefile
 ├── .env.example
@@ -420,6 +422,8 @@ dispatch-agent/
 ├── policy.yaml                  # risk tiers and approval thresholds
 │
 ├── app/
+│   ├── config.py                # settings loaded from .env
+│   ├── cli.py                   # run-scenario for quick demos
 │   ├── main.py                  # FastAPI entrypoint (/exceptions, /cases, /approvals)
 │   ├── agent/
 │   │   ├── orchestrator.py      # the tool-use loop
@@ -438,6 +442,9 @@ dispatch-agent/
 │
 ├── mock_services/
 │   └── carrier_api/             # simulated third-party REST API
+│
+├── ingest/
+│   └── contracts.py             # PDF parsing and embedding into ChromaDB
 │
 ├── data/
 │   ├── seed.py                  # builds SQLite ERP and synthetic emails

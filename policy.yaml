@@ -1,0 +1,27 @@
+# Risk tiers and approval thresholds (Step 8).
+# NOTE: evaluate with a safe evaluator (e.g. simpleeval). Never use eval().
+tools:
+  draft_customer_email:
+    tier: low
+  add_case_note:
+    tier: low
+  update_order_status:
+    tier: medium
+  create_reship_order:
+    tier: high
+    require_approval: always
+  book_expedited_freight:
+    tier: high
+    require_approval_if: "args.cost_inr > 50000"
+  issue_credit_note:
+    tier: high
+    require_approval_if: "args.amount_inr > 25000"
+  send_email:
+    tier: medium
+    require_approval_if: "customer.tier == 1"
+
+global:
+  default_for_unknown_tool: deny
+  max_steps: 15
+  max_cost_usd_per_case: 0.75
+  min_confidence_auto_close: 0.8

@@ -1,0 +1,33 @@
+services:
+  api:
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    env_file: .env
+    environment:
+      CARRIER_API_URL: http://carrier:8001
+    volumes:
+      - ./data:/srv/data
+      - ./traces:/srv/traces
+    ports:
+      - "8000:8000"
+    depends_on:
+      - carrier
+
+  carrier:
+    build: .
+    command: uvicorn mock_services.carrier_api.main:app --host 0.0.0.0 --port 8001
+    ports:
+      - "8001:8001"
+
+  console:
+    build: .
+    command: streamlit run ui/console.py --server.port 8501 --server.address 0.0.0.0
+    env_file: .env
+    environment:
+      API_URL: http://api:8000
+    volumes:
+      - ./traces:/srv/traces
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api

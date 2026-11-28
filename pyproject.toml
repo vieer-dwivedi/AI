@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dispatch-agent"
+version = "0.1.0"
+description = "Forward Deployed Engineering demo: agentic AI for shipment exception resolution"
+requires-python = ">=3.11"
+dependencies = [
+  "anthropic",
+  "mcp",
+  "fastapi",
+  "uvicorn",
+  "pydantic>=2",
+  "pydantic-settings",
+  "sqlalchemy",
+  "httpx",
+  "chromadb",
+  "sentence-transformers",
+  "pdfplumber",
+  "reportlab",
+  "streamlit",
+  "simpleeval",
+  "pyyaml",
+  "opentelemetry-api",
+  "opentelemetry-sdk",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
+[tool.setuptools.packages.find]
+include = ["app*", "mock_services*", "ingest*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
