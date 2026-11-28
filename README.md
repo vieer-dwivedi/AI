@@ -2,6 +2,8 @@
 
 > **An AI agent that resolves shipment exceptions end to end: it reads the messy emails, checks the ERP, consults the contract, proposes a fix, and asks a human before spending money.**
 
+> 📘 **Want to build it yourself?** Follow the step-by-step guide in **[steps.md](steps.md)**.
+
 This repository is a **reference demo of the Forward Deployed Engineer (FDE) approach** applied to an agentic AI system. It shows what an FDE actually does on a customer engagement: discover a real workflow, wire AI into the customer's existing systems, add guardrails, measure the outcome, and hand over something the customer's team can run.
 
 ---
