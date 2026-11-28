@@ -134,7 +134,7 @@ flowchart LR
         COM[Comms tools<br/>email drafts]
     end
 
-    LLM[(Claude<br/>Anthropic API)]
+    LLM[(LLM<br/>any provider)]
     UI[Streamlit Ops Console]
     OBS[(Traces JSONL<br/>+ OpenTelemetry)]
 
@@ -155,7 +155,7 @@ flowchart LR
 
 1. **Trigger**: an email or event is posted to `POST /exceptions`.
 2. **Triage**: a lightweight classification step labels the exception type and urgency.
-3. **Agent loop**: the orchestrator runs the Claude tool-use loop (up to `MAX_STEPS`).
+3. **Agent loop**: the orchestrator runs the model's tool-use loop (up to `MAX_STEPS`).
 4. **Policy check**: every *write* tool call passes through the policy engine before execution.
 5. **Approval**: risky calls are parked in the approval queue; the loop pauses and resumes after a decision.
 6. **Resolution**: the agent submits a final structured `ResolutionPlan`. Everything is logged.
@@ -169,17 +169,18 @@ flowchart LR
 The agent uses the model's **native tool calling** (no brittle text parsing):
 
 ```text
+model = get_model().bind_tools(tools)       # provider-agnostic (app/llm.py)
 while steps < MAX_STEPS:
-    response = claude.messages.create(system, messages, tools)
-    if response.stop_reason == "tool_use":
-        for each tool_call:
-            decision = policy.evaluate(tool_call, case_state)
-            if decision == ALLOW:      result = execute(tool_call)
-            elif decision == APPROVAL: result = await_human(tool_call)   # pauses the case
-            else:                      result = "DENIED: <reason>"
-            messages.append(tool_result)
-    else:
-        break   # model produced final answer / called submit_resolution
+    ai = model.invoke(messages)
+    messages.append(ai)
+    if not ai.tool_calls:
+        break                                # model produced its final answer
+    for call in ai.tool_calls:
+        decision = policy.evaluate(call, case_state)
+        if decision == ALLOW:      result = execute(call)
+        elif decision == APPROVAL: result = await_human(call)   # pauses the case
+        else:                      result = "DENIED: <reason>"
+        messages.append(ToolMessage(result, tool_call_id=call["id"]))
 ```
 
 **Why not a heavy framework?** Plain loops keep the control flow visible and debuggable, which matters when explaining the system to a customer's engineers. Orchestration frameworks (LangGraph, etc.) are noted as a swap-in option in the roadmap.
@@ -265,9 +266,10 @@ Tools are exposed as **MCP (Model Context Protocol) servers**, so the same tools
 
 | Layer | Technology | Why |
 |---|---|---|
-| **LLM** | **Claude via the Anthropic API** (model set via `ANTHROPIC_MODEL`) | Strong tool use, long context, good instruction-following under adversarial inputs |
+| **LLM** | **Any provider** via LangChain `init_chat_model` (`LLM_MODEL=provider:model`) | No vendor lock-in; any tool-calling model can be swapped in from `.env` |
 | **Language** | **Python 3.11+** | Fastest path for AI plus data integration work |
-| **Agent loop** | Custom loop on the `anthropic` SDK | Transparent, easy to debug and explain |
+| **Package manager** | **uv** | Fast, reproducible installs from a committed `uv.lock`; manages the venv and Python version |
+| **Agent loop** | Custom loop on LangChain `bind_tools` | Transparent, easy to debug, identical across providers |
 | **Tool protocol** | **MCP** (`mcp` Python SDK, FastMCP) | Standardized, reusable tool servers; decouples tools from the agent |
 | **API service** | **FastAPI** + Uvicorn | Async, typed, auto-generated OpenAPI docs |
 | **Validation** | **Pydantic v2** | Strict schemas for tool inputs and the final plan |
@@ -279,7 +281,7 @@ Tools are exposed as **MCP (Model Context Protocol) servers**, so the same tools
 | **Policy engine** | Pure Python rules (YAML-configured) | Auditable, deterministic, non-LLM safety layer |
 | **Evaluation** | **pytest** + custom harness + LLM-as-judge | Regression-testable agent behavior |
 | **Observability** | Structured JSONL traces + **OpenTelemetry** | Every step inspectable; exportable to any backend |
-| **Packaging** | **Docker Compose** | One-command demo; mirrors on-prem or VPC deployment |
+| **Packaging** | **Docker Compose** + uv-based image | One-command demo; mirrors on-prem or VPC deployment |
 | **Config / secrets** | `.env` + `pydantic-settings` | Twelve-factor style |
 
 ---
@@ -420,7 +422,9 @@ dispatch-agent/
 ├── Makefile
 ├── .env.example
 ├── .gitignore
-├── pyproject.toml
+├── pyproject.toml               # dependencies (managed by uv)
+├── uv.lock                      # pinned, reproducible dependency versions
+├── .python-version
 ├── policy.yaml                  # risk tiers and approval thresholds
 │
 ├── app/
@@ -473,9 +477,10 @@ dispatch-agent/
 
 ### Prerequisites
 
-- Python 3.11+
+- Python 3.11+ (uv can install it for you)
+- [uv](https://docs.astral.sh/uv/) (`curl -LsSf https://astral.sh/uv/install.sh | sh`)
 - Docker and Docker Compose (optional but recommended)
-- An Anthropic API key
+- An API key for any LLM provider supported by LangChain (Anthropic, OpenAI, Google, or a local Ollama model)
 
 ### Quick start (Docker)
 
@@ -494,23 +499,38 @@ Then open:
 ### Local setup (without Docker)
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev]"
+# 1. Install dependencies with uv (pick your LLM provider extra)
+uv sync --extra anthropic          # or: openai | google | ollama
+# uv sync --extra rag              # adds ChromaDB + embeddings (Step 6)
 
-python data/seed.py             # create the ERP DB, contracts, and emails
-python -m ingest.contracts      # embed contract PDFs into ChromaDB
+# 2. Configure
+cp .env.example .env               # set LLM_MODEL and your provider's API key
 
-uvicorn app.main:app --reload --port 8000 &
-uvicorn mock_services.carrier_api.main:app --port 8001 &
-streamlit run ui/console.py
+# 3. Build the demo data
+uv run python data/seed.py         # create the ERP DB, contracts, and emails
+uv run python -m ingest.contracts  # embed contract PDFs into ChromaDB (needs --extra rag)
+
+# 4. Run the services
+uv run uvicorn app.main:app --reload --port 8000 &
+uv run uvicorn mock_services.carrier_api.main:app --port 8001 &
+uv run streamlit run ui/console.py
 ```
+
+> `uv run` automatically creates and uses the project's `.venv`, so there is no need to activate it. Dependencies are pinned in `uv.lock` for reproducible installs.
 
 ### Environment variables
 
+The LLM is **provider-agnostic**. Models are selected with a single `provider:model` string and created through LangChain's `init_chat_model`, so switching providers only means changing `.env`.
+
 ```ini
-ANTHROPIC_API_KEY=sk-ant-...
-ANTHROPIC_MODEL=claude-sonnet-5-5        # main reasoning model
-ANTHROPIC_TRIAGE_MODEL=claude-haiku-5-5  # fast triage model
+# provider:model. Change these lines to switch LLMs.
+LLM_MODEL=anthropic:<your-main-model>
+LLM_TRIAGE_MODEL=anthropic:<your-cheaper-model>
+
+# Key name depends on the provider:
+# ANTHROPIC_API_KEY | OPENAI_API_KEY | GOOGLE_API_KEY  (Ollama needs none)
+ANTHROPIC_API_KEY=your-key-here
+
 MAX_STEPS=15
 MAX_COST_USD_PER_CASE=0.75
 DATABASE_URL=sqlite:///data/erp.db
@@ -521,8 +541,8 @@ CHROMA_PATH=./data/chroma
 ### Run a scenario from the CLI
 
 ```bash
-python -m app.cli run-scenario 1     # port-congestion delay
-python -m app.cli run-scenario 5     # prompt-injection test
+uv run python -m app.cli run-scenario 1     # port-congestion delay
+uv run python -m app.cli run-scenario 5     # prompt-injection test
 ```
 
 ### Suggested live demo script (about 8 minutes)

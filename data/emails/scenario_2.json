@@ -1,0 +1,7 @@
+{
+  "id": "scenario_2",
+  "scenario": "scenario_2",
+  "order_id": 48220,
+  "subject": "Order 48220 not received",
+  "body": "Your carrier says order 48220 was delivered but nobody here received it. Please investigate. Procurement."
+}

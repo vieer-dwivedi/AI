@@ -1,0 +1,7 @@
+{
+  "id": "scenario_3",
+  "scenario": "scenario_3",
+  "order_id": 48230,
+  "subject": "Short stock on order 48230",
+  "body": "Warehouse reports we cannot fulfil 500 units of SKU-002 for order 48230. Please advise."
+}

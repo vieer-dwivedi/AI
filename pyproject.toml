@@ -1,24 +1,22 @@
-[build-system]
-requires = ["setuptools>=68"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "dispatch-agent"
 version = "0.1.0"
 description = "Forward Deployed Engineering demo: agentic AI for shipment exception resolution"
+readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-  "anthropic",
-  "mcp",
+  # LLM layer (provider-agnostic via init_chat_model)
+  "langchain",
+  "langchain-core",
+  "python-dotenv",
+  # Tooling and services
+  "mcp<2",
   "fastapi",
   "uvicorn",
   "pydantic>=2",
   "pydantic-settings",
   "sqlalchemy",
   "httpx",
-  "chromadb",
-  "sentence-transformers",
-  "pdfplumber",
   "reportlab",
   "streamlit",
   "simpleeval",
@@ -28,10 +26,21 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+# Pick the provider(s) you use:  uv sync --extra anthropic
+anthropic = ["langchain-anthropic"]
+openai = ["langchain-openai"]
+google = ["langchain-google-genai"]
+ollama = ["langchain-ollama"]
+# Contract RAG (Step 6) pulls in large packages, so it is opt-in:  uv sync --extra rag
+rag = ["chromadb", "sentence-transformers", "pdfplumber"]
+
+[dependency-groups]
 dev = ["pytest", "ruff"]
 
-[tool.setuptools.packages.find]
-include = ["app*", "mock_services*", "ingest*"]
+[tool.uv]
+# This is an application, not a library: no build step, run from the project root.
+package = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]

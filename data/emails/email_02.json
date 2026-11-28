@@ -1,0 +1,7 @@
+{
+  "id": "email_02",
+  "scenario": "delay",
+  "order_id": 48241,
+  "subject": "Re: order 48241",
+  "body": "Shipment for order 48241 delayed by 3 days due to port congestion."
+}

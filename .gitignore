@@ -44,7 +44,6 @@ pip-delete-this-directory.txt
 venv/
 env/
 ENV/
-.python-version
 
 # --- Testing, coverage, linting caches ---------------------------------------
 .pytest_cache/

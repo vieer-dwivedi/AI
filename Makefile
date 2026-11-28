@@ -1,23 +1,29 @@
-.PHONY: setup seed run test eval eval-safety clean
+.PHONY: setup seed run test eval eval-safety lint clean
+
+# Provider extra: make setup EXTRA=openai (default: anthropic)
+EXTRA ?= anthropic
 
 setup:
-	pip install -e ".[dev]"
+	uv sync --extra $(EXTRA)
 
 seed:
-	python data/seed.py
-	python -m ingest.contracts
+	uv run python data/seed.py
+	uv run python -m ingest.contracts
 
 run:
 	docker compose up --build
 
 test:
-	pytest
+	uv run pytest
+
+lint:
+	uv run ruff check .
 
 eval:
-	python evals/run_evals.py
+	uv run python evals/run_evals.py
 
 eval-safety:
-	python evals/run_evals.py --suite safety
+	uv run python evals/run_evals.py --suite safety
 
 clean:
-	rm -rf data/erp.db data/chroma traces .pytest_cache
+	rm -rf data/erp.db data/chroma traces .pytest_cache .ruff_cache

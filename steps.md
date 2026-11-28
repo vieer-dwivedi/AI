@@ -57,49 +57,44 @@ Each step has the same shape:
 
 **Do**
 
-1. Install Python 3.11+, Git, and (optional) Docker.
-2. Get an Anthropic API key from the Anthropic Console.
-3. Create and activate a virtual environment:
+1. Install Git and (optional) Docker.
+2. Install **uv**, the project's package and environment manager:
    ```bash
-   python -m venv .venv
-   source .venv/bin/activate
+   curl -LsSf https://astral.sh/uv/install.sh | sh
    ```
+3. Get an API key for the LLM provider you want to use (Anthropic, OpenAI, Google, or none for local Ollama).
 4. Confirm `.gitignore` is in place so `.env`, databases, and traces never get committed.
 
-**Done when:** `python --version` prints 3.11 or higher and `git status` shows no `.env` or `.venv` files.
+**Done when:** `uv --version` prints a version and `git status` shows no `.env` or `.venv` files.
 
 ---
 
 ## Step 1: Config and environment
 
-**Goal:** one place for every setting, loaded from the environment.
+**Goal:** one place for every setting, and one place that creates the LLM, so no code is tied to a specific vendor.
 
-**Files:** `pyproject.toml`, `.env.example`, `app/config.py`
+**Files:** `pyproject.toml`, `.env.example`, `app/config.py`, `app/llm.py`, `app/check.py`
 
 **Do**
 
-1. Install dependencies: `pip install -e ".[dev]"`.
-2. Copy the example env file: `cp .env.example .env`, then add your `ANTHROPIC_API_KEY`.
-3. In `app/config.py`, create a `Settings` class using `pydantic-settings` that reads: API key, model names, `MAX_STEPS`, `MAX_COST_USD_PER_CASE`, database URL, carrier API URL, and Chroma path.
+1. Install dependencies with uv, choosing your provider extra:
+   ```bash
+   uv sync --extra anthropic     # or: openai | google | ollama
+   ```
+2. Copy the example env file and set your model and key:
+   ```bash
+   cp .env.example .env
+   ```
+   ```ini
+   LLM_MODEL=anthropic:<your-main-model>        # provider:model
+   LLM_TRIAGE_MODEL=anthropic:<your-cheaper-model>
+   ANTHROPIC_API_KEY=your-key-here              # key name depends on provider
+   ```
+3. In `app/config.py`, create a `Settings` class (`pydantic-settings`) that reads `llm_model`, `llm_triage_model`, `max_steps`, `max_cost_usd_per_case`, `database_url`, `carrier_api_url`, and `chroma_path`. There is **no API key field**, because each provider package reads its own key from the environment.
+4. In `app/llm.py`, add a `get_model(kind)` factory built on LangChain's `init_chat_model`. Every other module calls `get_model()` and never imports a vendor SDK.
+5. In `app/check.py`, call `get_model().invoke(...)` to prove the setup works.
 
-```python
-from pydantic_settings import BaseSettings, SettingsConfigDict
-
-class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
-    anthropic_api_key: str
-    anthropic_model: str = "claude-sonnet-5-5"
-    anthropic_triage_model: str = "claude-haiku-5-5"
-    max_steps: int = 15
-    max_cost_usd_per_case: float = 0.75
-    database_url: str = "sqlite:///data/erp.db"
-    carrier_api_url: str = "http://localhost:8001"
-    chroma_path: str = "./data/chroma"
-
-settings = Settings()
-```
-
-**Done when:** `python -c "from app.config import settings; print(settings.anthropic_model)"` prints the model name.
+**Done when:** `uv run python -m app.check` prints the model's reply. Change only `LLM_MODEL` in `.env` to another provider and the same command still works.
 
 ---
 
@@ -119,7 +114,7 @@ settings = Settings()
 6. Write `data/playbook.md`: the company's informal rules (for example "Tier-1 delays over 3 days: always consider air freight").
 7. **Plant the 6 demo scenarios** from the README as specific orders and emails, so they behave predictably.
 
-**Done when:** `python data/seed.py` creates `data/erp.db`, and `sqlite3 data/erp.db "select count(*) from orders;"` returns about 400.
+**Done when:** `uv run python data/seed.py` creates `data/erp.db`, and `sqlite3 data/erp.db "select count(*) from orders;"` returns about 400.
 
 ---
 
@@ -137,7 +132,7 @@ settings = Settings()
 2. Add realism: random 100-400 ms latency, occasional `503` errors, and one "unknown tracking ID" case (for Scenario 6).
 3. Make output deterministic where scenarios need it.
 
-**Done when:** `uvicorn mock_services.carrier_api.main:app --port 8001` runs and `curl localhost:8001/shipments/TRK-48213` returns JSON.
+**Done when:** `uv run uvicorn mock_services.carrier_api.main:app --port 8001` runs and `curl localhost:8001/shipments/TRK-48213` returns JSON.
 
 ---
 
@@ -161,7 +156,7 @@ settings = Settings()
    ```
 4. Add unit tests in `tests/test_erp_tools.py`, including edge cases (zero delay, delay inside grace period, cap reached).
 
-**Done when:** `pytest tests/test_erp_tools.py` passes.
+**Done when:** `uv run pytest tests/test_erp_tools.py` passes.
 
 ---
 
@@ -189,6 +184,7 @@ settings = Settings()
 
 **Do**
 
+0. Install the RAG packages (large, so opt-in): `uv sync --extra anthropic --extra rag`.
 1. Extract text from each contract PDF with `pdfplumber`.
 2. **Chunk by clause** (split on clause numbers like `7.2`) rather than by fixed size, which keeps each clause intact.
 3. Embed and store in ChromaDB with metadata: `customer_id`, `contract_id`, `clause_no`.
@@ -237,7 +233,7 @@ settings = Settings()
 4. Rules to cover: monetary thresholds, customer tier, unknown tools (default deny), step and cost budgets.
 5. Test every rule in `tests/test_policy.py`. This is the most important test file in the project.
 
-**Done when:** `pytest tests/test_policy.py` passes, including "unknown tool is denied" and "₹60,000 expedite needs approval".
+**Done when:** `uv run pytest tests/test_policy.py` passes, including "unknown tool is denied" and "₹60,000 expedite needs approval".
 
 ---
 
@@ -250,25 +246,19 @@ settings = Settings()
 **Do**
 
 1. **Triage first.** A single cheap call with the small model classifies exception type and urgency.
-2. **Build the main loop** with the `anthropic` SDK's tool use:
+2. **Build the main loop** with `bind_tools`, which works the same on every provider:
    ```python
+   model = get_model().bind_tools(tools)        # app/llm.py
+   messages = [SystemMessage(SYSTEM_PROMPT), HumanMessage(first_message)]
    for step in range(settings.max_steps):
-       resp = client.messages.create(
-           model=settings.anthropic_model,
-           system=SYSTEM_PROMPT,
-           messages=messages,
-           tools=tool_schemas,
-           max_tokens=2048,
-       )
-       messages.append({"role": "assistant", "content": resp.content})
-       if resp.stop_reason != "tool_use":
+       ai = model.invoke(messages)
+       messages.append(ai)
+       if not ai.tool_calls:
            break
-       results = []
-       for block in resp.content:
-           if block.type == "tool_use":
-               decision = policy.evaluate(block.name, block.input, case)
-               results.append(run_or_park(block, decision))   # execute, queue approval, or deny
-       messages.append({"role": "user", "content": results})
+       for call in ai.tool_calls:               # {"name", "args", "id"}
+           decision = policy.evaluate(call["name"], call["args"], case)
+           result = run_or_park(call, decision) # execute, queue approval, or deny
+           messages.append(ToolMessage(result, tool_call_id=call["id"]))
    ```
 3. **Wrap emails as untrusted data** in the first user message:
    ```text
@@ -281,7 +271,7 @@ settings = Settings()
 5. **Pause and resume.** When a call needs approval, persist the loop state and return. After approval, resume from the saved messages.
 6. **Budget checks** every iteration: steps, tokens, and estimated cost. Stop and escalate if exceeded.
 
-**Done when:** `python -m app.cli run-scenario 1` produces a valid `ResolutionPlan` that cites the contract clause and the freight quote.
+**Done when:** `uv run python -m app.cli run-scenario 1` produces a valid `ResolutionPlan` that cites the contract clause and the freight quote.
 
 ---
 
@@ -366,7 +356,8 @@ settings = Settings()
 **Do**
 
 1. One image for the app. Compose services: `api` (8000), `carrier` (8001), `console` (8501).
-2. Mount `data/` as a volume and pass secrets through `env_file: .env`. Never bake the API key into the image.
+2. The Dockerfile installs from `uv.lock` (`uv sync --frozen`). Choose the provider at build time: `docker compose build --build-arg LLM_EXTRA=openai`.
+3. Mount `data/` as a volume and pass secrets through `env_file: .env`. Never bake the API key into the image (`.dockerignore` excludes `.env`).
 3. Add Makefile targets: `setup`, `seed`, `run`, `test`, `eval`, `eval-safety`, `clean`.
 
 **Done when:** `docker compose up --build` starts all three services and the console loads at http://localhost:8501.
